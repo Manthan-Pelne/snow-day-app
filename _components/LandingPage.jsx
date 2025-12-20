@@ -1,108 +1,140 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import { getWeatherData, searchLocations } from "@/actions/weather";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Loader2, MapPin } from "lucide-react";
+import React, { useState, useEffect} from "react";
 
 const LandingPage = () => {
+
   const [query, setQuery] = useState("");
   const [weather, setWeather] = useState(null);
   const [loading, setLoading] = useState(false);
   const [locationName, setLocationName] = useState("");
+  const [suggestions, setSuggestions] = useState([])
+  const [isTyping, setIsTyping] = useState(false);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
-    if (!query) return;
+const [lockSuggestions, setLockSuggestions] = useState(false);
+
+  useEffect(() => {
+    // 1. Guard: Don't fetch if query is too short or if we just selected a city
+    if (query.length < 3 || lockSuggestions) {
+      if (!lockSuggestions) setSuggestions([]);
+      setLockSuggestions(false); // Reset lock for next manual type
+      return;
+    }
+
+    setIsTyping(true)
+    const delayDebounceFn = setTimeout(async()=>{
+      const result = await searchLocations(query)
+      setSuggestions(result || [])
+      setIsTyping(false)
+    }, 500)
+
+    return()=> clearTimeout(delayDebounceFn)
+  }, [query])
+
+
+const handleSearch = async (e, manualCity = null) => {
+    if (e) e.preventDefault();
+    const targetCity = manualCity || query;
+    if (!targetCity) return;
 
     setLoading(true);
-    try {
-      const geoRes = await fetch(
-        `https://geocoding-api.open-meteo.com/v1/search?name=${query}&count=1&language=en&format=json`
-      );
-      const geoData = await geoRes.json();
-      if (!geoData.results) {
-        alert("Location not found");
-        setLoading(false);
-        return;
-      }
+    setSuggestions([]); // Clear suggestions on search
+    
+    const result = await getWeatherData(targetCity);
 
-      const { latitude, longitude, name, admin1 } = geoData.results[0];
-      setLocationName(`${name}${admin1 ? ", " + admin1 : ""}`);
-
-      const res = await fetch(
-        `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation,snowfall,wind_speed_10m&timezone=auto`
-      );
-      const data = await res.json();
-
-      // 1. Process HOURLY data (Next 24 hours only)
-      const hourlyData = data.hourly.time.slice(0, 24).map((time, i) => ({
-        time: new Date(time).toLocaleTimeString([], {
-          hour: "2-digit",
-          minute: "2-digit",
-        }),
-        temp: data.hourly.temperature_2m[i].toFixed(1),
-        snowAmount: data.hourly.snowfall[i], // Getting the actual amount
-        isSnowing: data.hourly.snowfall[i] > 0,
-      }));
-
-      // 2. Process DAILY data (7 Days)
-      const dailyData = [];
-      for (let i = 0; i < 7; i++) {
-        const start = i * 24;
-        const daySnow = data.hourly.snowfall.slice(start, start + 24);
-        const dayTemp = data.hourly.temperature_2m.slice(start, start + 24);
-        const snowChance = Math.round(
-          (daySnow.filter((v) => v > 0).length / 24) * 100
-        );
-
-        dailyData.push({
-          date: data.hourly.time[start],
-          snowChance,
-          tempMax: Math.max(...dayTemp).toFixed(1),
-          precip: data.hourly.precipitation
-            .slice(start, start + 24)
-            .reduce((a, b) => a + b, 0)
-            .toFixed(1),
-          wind: (
-            data.hourly.wind_speed_10m
-              .slice(start, start + 24)
-              .reduce((a, b) => a + b, 0) / 24
-          ).toFixed(1),
-        });
-      }
-
-      setWeather({ hourly: hourlyData, daily: dailyData });
-    } catch (err) {
-      console.error(err);
-    } finally {
-      setLoading(false);
+    if (result.success) {
+      setWeather(result.weather);
+      setLocationName(result.locationName);
+    } else {
+      alert(result.error || "Something went wrong");
     }
+    setLoading(false);
   };
 
   return (
     <section className="max-w-screen-2xl mx-auto h-screen">
+      <div className=" max-w-7xl m-auto overflow-hidden  rounded-[35px] shadow-xl  p-12 mt-12 bg-linear-to-tl from-black via-[#050550] to-black">
+        <div className=" mb-20 flex flex-col md:flex-row justify-between gap-10 ">
+          <div className="relative z-50">
+            <div className="absolute top-30 -z-1 right-1/2 opacity-50">
+              <div className="relative flex  items-center justify-center rounded-xl">
+                <div className="absolute h-24 w-24 opacity-70 rounded-full  border border-white"></div>
+                <div className="absolute h-44 w-44 rounded-full opacity-80 border  border-white"></div>
+                <div className="absolute h-64 w-64 opacity-95 rounded-full border border-white"></div>
+              </div>
+            </div>
+            <h1 className="text-[100px] z-50 font-extrabold  text-white">
+              Snow Day
+            </h1>
+            <div className="flex  justify-between items-center gap-3">
+              <p className="text-white/60 w-1/2 bg-white/10 m-auto mr-8 p-4 border border-white/20 rounded-lg backdrop-blur-lg">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex
+                laudantium consequatur vero consectetur, est tempora placeat ad
+                maiores voluptates perferendis?
+              </p>
+              <span className=" border-dashed border-white text-[100px] font-extrabold  text-white">
+                Predictor
+              </span>
+            </div>
+          </div>
+          <div className="w-1/2">
+          <img src="/snoww.png" className="w-50 m-auto" alt="" />
+          </div>
+        </div>
 
-      <div className=" max-w-7xl m-auto  rounded-xl shadow-lg  p-12 mt-12 bg-linear-to-tl from-black via-[#050550] to-black">
-                
-                  <div className='text-center mb-10'>
-                    <h1 className="text-6xl font-extrabold mb-5 text-white">Snow Day Predictor</h1>
-                    <p className="text-white/40 w-1/2 m-auto">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ex laudantium consequatur vero consectetur, est tempora placeat ad maiores voluptates perferendis?</p>
-                  </div>
-         
         <div className="max-w-6xl tracking-wider mx-auto">
           {/* Search Bar */}
           <form
             onSubmit={handleSearch}
-            className="flex gap-2 mb-1 max-w-md mx-auto"
+            className="flex gap-2 mb-1 w-[600px] mx-auto"
           >
-            <input
-              type="text"
-              placeholder="Enter city or Zip Code..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 bg-[gray]/20 placeholder:text-white/60 text-white backdrop-blur-2xl border border-white/20 rounded-xl px-4 py-3 outline-none focus:border-blue-500 transition-all"
-            />
-            <button className="bg-[#111177] text-white cursor-pointer hover:bg-blue-500 px-6 py-3 rounded-xl font-bold transition-all">
-              {loading ? "..." : "Search"}
-            </button>
+           <div className="relative flex-1">
+                <Input
+                  type="text"
+                  placeholder="Enter city or Zip Code..."
+                  value={query}
+                  onChange={(e) => setQuery(e.target.value)}
+                  className="flex-1 bg-gray-500/20 placeholder:text-white/60 text-white backdrop-blur-2xl border border-white/20 rounded-md h-14 outline-none focus:border-blue-500 transition-all"
+                />
+                {isTyping && (
+                  <div className="absolute right-3 top-4">
+                    <Loader2 className="w-5 h-5 animate-spin text-white/40" />
+                  </div>
+                )}
+              </div>
+            <Button className="bg-blue-700 h-14 w-[150px] text-white text-lg cursor-pointer border-[8px] border-blue-800 hover:bg-blue-600 px-6 py-3 rounded-lg font-bold transition-all">
+              {loading ? <Loader2 className="w-5 animate-spin"/> : "Search"}
+            </Button>
           </form>
+
+          {/* DEBOUNCED SUGGESTIONS DROPDOWN */}
+       {suggestions.length > 0 && (
+              <div className=" w-[600px] m-auto mt-2 bg-blue-900/10 border border-white/20 rounded-xl backdrop-blur-xl overflow-hidden z-[100] shadow-2xl">
+                {suggestions.map((loc, i) => (
+                  <button
+                    key={i}
+                    type="button" // Important: prevents form submission
+                    onClick={() => {
+                      setLockSuggestions(true); // LOCK: Prevent useEffect from firing
+                      setQuery(loc.name);
+                      setSuggestions([]);
+                      handleSearch(null, loc.name); 
+                    }}
+                    className="w-full cursor-pointer flex items-center gap-3 p-4 text-left text-white hover:bg-blue-600/50 transition-colors border-b border-white/10 last:border-0"
+                  >
+                    <MapPin className="w-4 h-4 text-blue-400" />
+                    <div>
+                      <p className="font-bold">{loc.name}</p>
+                      <p className="text-xs text-white/50">{loc.admin1}, {loc.country}</p>
+                    </div>
+                  </button>
+                ))}
+              </div>
+            )}
+          
 
           {weather && (
             <div className="space-y-12 mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
@@ -115,7 +147,7 @@ const LandingPage = () => {
 
               {/* HOURLY SECTION */}
               <section>
-                <h3 className="text-sm border w-max  text-white p-2 font-bold uppercase tracking-widest mb-4 ml-2">
+                <h3 className="text-sm border w-max rounded-lg  text-white p-2 font-bold uppercase tracking-widest mb-4 ml-2">
                   Hourly (Next 24h)
                 </h3>
                 <div
@@ -125,7 +157,7 @@ const LandingPage = () => {
                   {weather.hourly.map((h, i) => (
                     <div
                       key={i}
-                      className="min-w-[100px] bg-white/20 border border-white/20 rounded-xl p-4 text-center backdrop-blur-md flex flex-col items-center gap-2"
+                      className="min-w-25 bg-white/20 border border-white/20 rounded-xl p-4 text-center backdrop-blur-md flex flex-col items-center gap-2"
                     >
                       <p className="text-xs text-white font-semibold opacity-70">
                         {h.time}
@@ -159,7 +191,7 @@ const LandingPage = () => {
 
               {/* 7-DAY SECTION */}
               <section>
-                <h3 className="text-sm font-bold uppercase tracking-widest border w-max  p-2 text-white border-white mb-4 ml-2">
+                <h3 className="text-sm rounded-lg font-bold uppercase tracking-widest border w-max  p-2 text-white border-white mb-4 ml-2">
                   7-Day Forecast
                 </h3>
                 <div className="grid grid-cols-1 gap-3">
@@ -193,12 +225,12 @@ const LandingPage = () => {
                           <p className="opacity-40 uppercase">Max Temp</p>
                           <p className="font-bold text-sm">{d.tempMax}°C</p>
                         </div>
-                        <div className="h-[1px] bg-white/10" />
+                        <div className="h-px bg-white/10" />
                         <div>
                           <p className="opacity-40 uppercase">Precip</p>
                           <p className="font-bold text-sm">{d.precip} mm</p>
                         </div>
-                        <div className="h-[1px] bg-white/10" />
+                        <div className="h-px bg-white/10" />
                         <div>
                           <p className="opacity-40 uppercase">Wind Avg</p>
                           <p className="font-bold text-sm">{d.wind} km/h</p>
