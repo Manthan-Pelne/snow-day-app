@@ -5,14 +5,30 @@
 export async function searchLocations(query) {
   if (!query || query.trim().length < 3) return [];
 
+// This log ALWAYS runs because the Server Action is called
+  console.log(`\n🔍 Checking for: "${query}"`);
+  const startTime = Date.now();
+
   try {
     const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(query.trim())}&count=5&language=en&format=json`;
     
     const response = await fetch(url, {
-      next: { revalidate: 86400 }, // Cache coordinates for 24 hours
+      next: { revalidate: 604800 }, // Cache coordinates for 7 days
     });
 
+ // --- THE LOGIC ---
+    // 1. If duration < 20ms: It's 100% CACHE. No internet is that fast.
+    // 2. If duration > 100ms: It's 100% API HIT.
+    
     const data = await response.json();
+    const duration = Date.now() - startTime;
+    
+    if (duration < 20) {
+      console.log(`✅ CACHE HIT: Returned in ${duration}ms (No API call made)`);
+    } else {
+      console.log(`🌐 API HIT: Fetched from Open-Meteo in ${duration}ms`);
+    }
+
     
     // Return only what the UI needs for the suggestion dropdown
     return (data.results || []).map((loc) => ({
@@ -37,7 +53,7 @@ export async function getWeatherData(query) {
     // 1. Geocoding
     const geoRes = await fetch(
       `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleanQuery)}&count=1&language=en&format=json`,{
-        next: {revalidate: 86400} //caching location coordinates for next 24 hours
+        next: {revalidate: 604800} //caching location coordinates for next 7 days
       }
     );
     const geoData = await geoRes.json();

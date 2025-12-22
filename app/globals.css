@@ -1,7 +1,17 @@
 @import "tailwindcss";
 
 
-@custom-variant dark (&:is(.dark *));
+/* This line replaces the old 'darkMode: class' setting */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  /* You can define custom variables here if needed */
+}
+
+/* Optional: Add a smooth transition for theme switching */
+body {
+  @apply transition-colors duration-300;
+}
 
 @theme inline {
   --radius-sm: calc(var(--radius) - 4px);

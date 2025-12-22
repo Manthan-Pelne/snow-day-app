@@ -19,6 +19,7 @@ const [lockSuggestions, setLockSuggestions] = useState(false);
   useEffect(() => {
     // 1. Guard: Don't fetch if query is too short or if we just selected a city
     if (query.length < 3 || lockSuggestions) {
+      setIsTyping(false)
       if (!lockSuggestions) setSuggestions([]);
       setLockSuggestions(false); // Reset lock for next manual type
       return;
@@ -56,7 +57,7 @@ const handleSearch = async (e, manualCity = null) => {
 
   return (
     <section className="max-w-screen-2xl mx-auto h-screen">
-      <div className=" max-w-7xl m-auto overflow-hidden  rounded-[35px] shadow-xl  p-12 mt-12 bg-linear-to-tl from-black via-[#050550] to-black">
+      <div className=" max-w-7xl m-auto overflow-hidden  rounded-[35px] shadow-xl  p-12 mt-12 dark:border-4 dark:border-[#070750] bg-linear-to-tl from-black via-[#050550] to-black">
         <div className=" mb-20 flex flex-col md:flex-row justify-between gap-10 ">
           <div className="relative z-50">
             <div className="absolute top-30 -z-1 right-1/2 opacity-50">
@@ -66,7 +67,7 @@ const handleSearch = async (e, manualCity = null) => {
                 <div className="absolute h-64 w-64 opacity-95 rounded-full border border-white"></div>
               </div>
             </div>
-            <h1 className="text-[100px] z-50 font-extrabold  text-white">
+            <h1 className="text-[100px] z-50 font-extrabold  text-white dark:text-blue-200">
               Snow Day
             </h1>
             <div className="flex  justify-between items-center gap-3">
