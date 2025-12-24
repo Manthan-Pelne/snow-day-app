@@ -22,11 +22,12 @@ const Header = () => {
       </Link>
 
       <div className="flex items-center gap-16 font-bold h-12">
+        
         <Link href="/about-us">Home</Link>
         <Link href="/about-us">About Us</Link>
         <Link href="/about-us">Contact Us</Link>
         <Link href="/about-us">FAQs</Link>
-        
+  
         <ThemeToggle/>
     
       </div>
