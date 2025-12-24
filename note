@@ -1,0 +1,27 @@
+shadcn classes 
+
+// for background 
+bg-background
+bg-card
+bg-popover
+bg-secondary
+bg-muted
+bg-accent
+
+// for Text colors
+text-foreground
+text-card-foreground
+text-muted-foreground
+text-primary
+text-primary-foreground
+
+// for border 
+border
+border-border
+
+// for radius
+rounded-sm
+rounded-md
+rounded-lg
+rounded-xl
+rounded-2xl

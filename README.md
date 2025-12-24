@@ -1,36 +1,48 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🚀 Next.js 16 Starter Template
 
-## Getting Started
+A modern **Next.js 16 starter template** built with a **shadcn-style theme system**, supporting **Dark & Light modes**, reusable **Header & Footer**, and essential website sections like **About Us** and **Contact Us** — all designed for rapid development and clean scalability.
 
-First, run the development server:
+This template is ideal for developers who want a solid foundation with a professional UI and minimal setup.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+---
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## ✨ What’s Included
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+- ⚡ **Next.js 16 (App Router)**
+- 🎨 **Custom shadcn-style theme system**
+- 🌗 **Dark & Light mode support**
+- 🧩 **Single `global.css` file for all theme configuration**
+- 🧭 **Reusable Header & Footer**
+- 📄 About Us & Contact Us sections
+- 🎯 CSS variables for consistent theming
+- ✨ Smooth theme transition animations
+- 📱 Fully responsive layout
+- 🛠 Easy to extend and customize
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+---
 
-## Learn More
+## 🎨 Theme System (Single global.css)
 
-To learn more about Next.js, take a look at the following resources:
+This project uses a **shadcn-inspired design system** implemented entirely inside **one `global.css` file**.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+### Light Theme
+- Light blue based color palette
+- Clean white background
+- Soft borders and accents
+- High readability
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Dark Theme
+- Black + blue mixed palette
+- Modern dark UI
+- Smooth contrast and muted highlights
 
-## Deploy on Vercel
+Theme switching is handled using the `.dark` class on the root element, allowing instant mode switching without reloads.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### Example usage
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+```tsx
+<div className="bg-background text-foreground">
+  <button className="bg-primary text-primary-foreground">
+    Button
+  </button>
+</div>
