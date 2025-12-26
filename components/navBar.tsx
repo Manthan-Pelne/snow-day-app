@@ -24,7 +24,7 @@ export default function Navbar({
   const pathname = usePathname()
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex items-center gap-12">
       {navItems.map((item) => {
         const isActive = pathname === item.href
 

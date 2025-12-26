@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Github } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="bg-linear-to-b from-background to-muted/30 pt-10">
+    <footer className="bg-linear-to-b from-[blue]/20 to-muted/30 pt-10 mt-30">
       <div className="mx-auto grid max-w-7xl grid-cols-3 gap-5 px-6 md:grid-cols-5 md:gap-12 md:px-12">
         
         {/* Brand */}

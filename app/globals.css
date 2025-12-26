@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin 'lightswind/plugin'; /* <-- Add this line */
 
 /* Dark mode using class */
 @custom-variant dark (&:where(.dark, .dark *));
