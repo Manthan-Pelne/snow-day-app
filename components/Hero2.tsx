@@ -4,20 +4,21 @@ import dynamic from 'next/dynamic';
 import React from "react";
 import Image from "next/image";
 import { Thermometer, Snowflake, Wind } from "lucide-react";
-import Search from "@/components/inputSection"
-import GridPattern from "@/components/GridPattern"
-import {SearchBox} from "@/components/searchbox"
-const Snowfall = dynamic(() => import('@/components/snowfall'));
+import {MeteorsDemo} from "./hero-card"
+import Search from "./inputSection"
+import GridPattern from "./GridPattern"
+import {PlaceholdersAndVanishInputDemo} from "./searchbox"
+const Snowfall = dynamic(() => import('./snowfall'));
 import { BorderBeam } from "@/components/lightswind/border-beam"; 
 
-const page = () => {
+
+const SnowDayHero = () => {
   return (
     <>
-     <div className="pt-20 max-w-7xl mx-auto">
-    <div className="absolute top-0 left-0"> <Snowfall /></div>
+        <div className="absolute top-0 left-0"> <Snowfall /></div>
         <div className=" w-full relative overflow-hidden text-foreground ">
             {/* Mobile Cloud */}
-            <div className="mt-10">
+            <div className="hidden">
             <div className="max-w-3xl mx-auto text-center pt-5">
               <div className="space-y-1">
                     <h1 className="text-8xl font-medium tracking-tighter">
@@ -34,8 +35,7 @@ const page = () => {
                     the chances of a snow day in your area.
                   </p>
             </div>
-            <div className="min-w-2xl w-full grid place-content-center relative">
-               <div className="flex justify-center w-full absolute top-0">
+            <div className="flex justify-center w-full ">
               <Image
                 width={500}
                 height={180}
@@ -43,20 +43,13 @@ const page = () => {
                 src="/cloud3.png"
                 alt="Snow Cloud"
               />
-              </div>
-                <div className="w-full h-[180px] flex place-content-center z-20">
-                  <SearchBox/>
-                </div>
             </div>
-           
-
-           
             </div>
 
           <div className="relative z-10 p-6 md:p-10  flex flex-col justify-between">
 
             {/* HERO CONTENT */}
-            <main className="grid grid-cols-5 gap-8 items-center hidden">
+            <main className="grid grid-cols-5 gap-8 items-center">
 
               {/* LEFT SECTION */}
               <div className="col-span-2 space-y-6">
@@ -186,9 +179,8 @@ const page = () => {
                     </div> */}
           </div>
         </div>
-        </div>
     </>
-  )
-}
+  );
+};
 
-export default page
+export default SnowDayHero;

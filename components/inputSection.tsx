@@ -26,7 +26,7 @@ const getStatusMessage = (chance: number): string => {
   return "☀️ Clear skies. See you in class!";
 };
 
-const Hero: React.FC = () => {
+const Search: React.FC = () => {
   // --- STATE ---
   const [query, setQuery] = useState<string>("");
   const [weather, setWeather] = useState<SnowDayResult["weather"] | null>(null);
@@ -76,68 +76,10 @@ const Hero: React.FC = () => {
   };
 
   return (
-    <div className="w-full relative pb-10  bg-linear-to-tl from-white via-[#f1fffd] to-white dark:from-black dark:via-[#030359] dark:to-black pt-20">
-      <SparkleParticles className="absolute h-full w-full "/>
-    <div className="max-w-7xl m-auto  pt-14">
-      {/* Hero Text Section */}
-      <div className="mb-10  flex flex-col md:flex-row items-center justify-between gap-10">
-        <div className="relative z-50  w-2/3">
-          <div className="absolute top-30 -z-1 left-30 opacity-50 dark:opacity-65">
-            <div className="relative flex items-center justify-center rounded-xl">
-              <div className="absolute h-24 w-24 opacity-70 rounded-full border border-blue-800 dark:border-blue-100"></div>
-              <div className="absolute h-44 w-44 rounded-full opacity-80 border border-blue-600 dark:border-blue-200"></div>
-              <div className="absolute h-64 w-64 opacity-95 rounded-full border border-blue-400 dark:border-blue-200"></div>
-            </div>
-          </div>
-          <h1 className="text-[80px] z-50 font-extrabold text-[#141452] drop-shadow-xl dark:text-white">
-            Snow Day
-          </h1>
-         
-            <p className="text-black/50 dark:text-[#c9c1c1] ml-40 shadow-lg w-[400px]  bg-[blue]/5 border font-semibold border-[#bdc0c5] dark:border-[blue] m-auto p-4 rounded-lg backdrop-blur-lg">
-              Check your school closing probability with our specialized algorithm. 
-              We calculate snow totals and freeze factors to give you the most accurate prediction.
-            </p>
-         
-            <h1 className="border-dashed ml-72 border-white text-[80px] font-extrabold drop-shadow-xl text-[#141452] dark:text-white">
-              Predictor
-            </h1>
-        </div>
 
-
- {/* The Mobile Frame */}
-<div className="relative flex-1 flex justify-center items-center [perspective:1000px]">
-  
-  {/* The Mobile Frame with 3D Tilt */}
-  <div className="relative z-20 w-[280px] h-[420px] bg-[#141452] rounded-[3rem] p-3 border-[8px] border-[#5d5d82] shadow-xl overflow-hidden 
-    transform transition-transform duration-700
-    rotate-x-[20deg] rotate-y-[-15deg] rotate-z-[5deg] hover:rotate-x-0 hover:rotate-y-0 hover:scale-105"
-    style={{
-      transformStyle: 'preserve-3d',
-      transform: 'rotateX(10deg) rotateY(-15deg) rotateZ(5deg)'
-    }}
-  >
-    {/* Speaker/Notch */}
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-800 rounded-b-2xl z-30" />
-    
-    {/* Inner Screen */}
-    <div className="w-full h-full rounded-[2rem] overflow-hidden bg-white">
-      <img 
-        src="calc.png" 
-        alt="Weather Calculator App"
-        className="w-full h-full object-cover"
-      />
-    </div>
-  </div>
-
-  {/* Optional: Add a subtle shadow underneath to anchor the 3D look */}
-  <div className="absolute -bottom-10 w-48 h-10 bg-black/20 blur-3xl rounded-[100%] scale-x-150 -z-10" />
-</div>
-      
-      </div>
-
-      <div className="max-w-6xl tracking-wider mx-auto mb-20">
+      <div className="">
         {/* Search Bar */}
-        <form onSubmit={handleSearch} className="flex gap-2 mb-1 w-[600px] mx-auto bg-[gray]/10 shadow border border-[#d2d2ef] dark:border-[blue] rounded-xl py-2 px-2">
+        <form onSubmit={handleSearch} className="flex gap-2">
           <div className="relative flex-1">
             <Input
               type="text"
@@ -291,9 +233,7 @@ const Hero: React.FC = () => {
         )}
       </div>
 
-    </div>
-    </div>
   );
 };
 
-export default Hero;
+export default Search;

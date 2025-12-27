@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/themeProvider"
-import Header from "@/components/header"
+import Header2 from "@/components/Header2"
+import Header3 from "@/components/header3"
 import Footer from "@/components/footer"
 import "./globals.css";
 
@@ -28,14 +29,22 @@ export default function RootLayout({
   return (
      <html lang="en" suppressHydrationWarning>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased bg-white`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <Providers>
-        <Header/>
+        {/* <Header2/> */}
+        <Header3/>
         <div>
-        {children}
+          
+          {/* <div className="bg-[repeating-linear-gradient(45deg,_#00000066_0px,_#00000066_1px,_transparent_1px,_transparent_6px)] blur-[2px] dark:blur-[2px] dark:bg-[repeating-linear-gradient(45deg,_#ffffff66_0px,_#ffffff66_1px,_transparent_1px,_transparent_6px)] fixed h-full opacity-50 pointer-events-none right-0 top-0 w-full z-0"></div> */}
+          <div className="lighgredient">
+            <div className="flex dark:hidden lightgredient2"></div>
+            <div className="hidden dark:flex lightgredient3"></div>
+             </div>
+          {children}
+
         </div>
-        <Footer/>
+        {/* <Footer/> */}
         </Providers>
       </body>
     </html>

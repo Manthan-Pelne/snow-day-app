@@ -1,39 +1,65 @@
-"use client";
+"use client"
 
-import { useTheme } from 'next-themes';
-import React, { useEffect, useState } from 'react';
+import * as React from "react"
+import { Moon, Sun } from "lucide-react"
+import { useTheme } from "next-themes"
+import { Button } from "@/components/ui/button"
+import { motion, AnimatePresence } from "framer-motion"
 
-const ThemeToggle: React.FC = () => {
-  const { theme, setTheme } = useTheme();
-  const [mounted, setMounted] = useState<boolean>(false);
+export function ThemeToggle() {
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = React.useState(false)
 
-  // UseEffect ensures the component is only rendered on the client
-  // to avoid hydration mismatch between server and client HTML.
-  useEffect(() => {
-    setMounted(true);
-  }, []);
+  React.useEffect(() => {
+    setMounted(true)
+  }, [])
 
-  if (!mounted) return null;
+  if (!mounted) return null
+
+  const isDark = theme === "dark"
 
   return (
-    <div>
-      <label className="relative inline-flex items-center cursor-pointer">
-        <input 
-          type="checkbox" 
-          className="sr-only peer" 
-          checked={theme === "dark"}
-          onChange={() => setTheme(theme === "dark" ? "light" : "dark")}
-        />
-        <div className="group peer ring-0 bg-[#dcdcdc] rounded-full outline-none duration-300 
-          after:duration-300 w-20 h-10 shadow-md border-2 border-[#6d6d6f] 
-          peer-checked:bg-[#0c0c65] after:content-['🔆'] after:rounded-full 
-          after:absolute after:bg-[black] after:h-8 after:w-8 after:top-1 
-          after:left-1 after:flex after:justify-center after:items-center 
-          peer-checked:after:translate-x-10 peer-checked:after:content-['🌙']">
-        </div>
-      </label>
-    </div>
-  );
-};
+    <motion.div
+      whileHover={{ scale: 1.1 }}
+      whileTap={{ scale: 0.9 }}
+      className="relative grid place-content-center"
+    >
+      <Button
+        variant="outline"
+        size="icon"
+        onClick={() => setTheme(isDark ? "light" : "dark")}
+        className="
+          relative overflow-hidden rounded-full
+          transition-colors cursor-pointer
+        "
+      >
+        <AnimatePresence mode="wait">
+          {isDark ? (
+            <motion.span
+              key="moon"
+              initial={{ opacity: 0, rotate: -90, scale: 0.5 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: 90, scale: 0.5 }}
+              transition={{ duration: 0.25 }}
+              className="absolute"
+            >
+              <Moon className="h-5 w-5" />
+            </motion.span>
+          ) : (
+            <motion.span
+              key="sun"
+              initial={{ opacity: 0, rotate: 90, scale: 0.5 }}
+              animate={{ opacity: 1, rotate: 0, scale: 1 }}
+              exit={{ opacity: 0, rotate: -90, scale: 0.5 }}
+              transition={{ duration: 0.25 }}
+              className="absolute">
+              <Sun className="h-5 w-5" />
+            </motion.span>
+          )}
+        </AnimatePresence>
 
-export default ThemeToggle;
+        <span className="sr-only">Toggle theme</span>
+      </Button>
+    </motion.div>
+  )
+}
