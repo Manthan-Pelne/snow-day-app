@@ -1,34 +1,86 @@
+"use client";
 import Link from "next/link"
-import Image from "next/image"
+import React, { useEffect, useState } from "react";
+import { ThemeToggle } from "@/components/theme-toggle";
 
+const Header = () => {
+  const [currentTime, setCurrentTime] = useState<Date | null>(null);
 
-import NavBar from "./navBar"
-import  ThemeToggle  from "@/components/theme-toggle"
+  useEffect(() => {
+    setCurrentTime(new Date());
 
-export default function Header() {
+    const interval = setInterval(() => {
+      setCurrentTime(new Date());
+    }, 1000); // update every second
+
+    return () => clearInterval(interval);
+  }, []);
+
   return (
-    <header className="border-b border-border bg-[#141452]  ">
-      <div className="mx-auto flex h-20 max-w-7xl items-center justify-between px-6">
-        
-           <Link href="/" className="flex items-center gap-2">
-            <Image
-              width={100}
-              height={100}
-              className="w-10"
-              src="/mountains.png"
-              alt="logo"
-            />
-            <h1 className="text-white font-extrabold tracking-wide text-xl">
-              SnowPredictor
-            </h1>
-          </Link>
+    <>
+      <header className="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
+        <div className="relative w-full max-w-7xl  backdrop-blur-xl">
+          <div className="flex justify-between items-center">
+            <div className="flex items-center gap-12">
+              <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tighter">
+                <div className="w-8 h-8 bg-white/20 backdrop-blur-md rounded-lg flex items-center justify-center border border-white/30">
+                  S
+                </div>
+                Snow Prediction
+              </Link>
 
-        <nav className="flex items-center gap-12">
-            <NavBar/>
-          <div className="min-w-16">
-           <ThemeToggle /></div>
-        </nav>
-      </div>
-    </header>
-  )
-}
+              <nav className="hidden md:flex gap-8 text-sm font-medium">
+                <a href="/">Home</a>
+                <a href="/about-us">About us</a>
+                <a href="/contact-us">contact us</a>
+                <a href="/faq">faq</a>
+              </nav>
+            </div>
+
+            <div className="flex items-center gap-6">
+              {/* Time */}
+              <div className="text-right">
+                {currentTime && (
+                  <p className="text-lg">
+                    {currentTime.toLocaleTimeString("en-US", {
+                      hour: "2-digit",
+                      minute: "2-digit",
+                      second: "2-digit",
+                    })}{" "}
+                    <span className="text-xs opacity-60 uppercase">Time</span>
+                  </p>
+                )}
+              </div>
+
+            <div className="h-8 w-[1px] bg-white/20" />
+              {/* Date */}
+              <div className="text-left">
+                {currentTime && (
+                  <p className="text-lg ">
+                    {currentTime.toLocaleDateString("en-US", {
+                      day: "2-digit",
+                      month: "short",
+                    })}{" "}
+                    <span className="text-xs opacity-60 uppercase">
+                      {currentTime.getFullYear()} Date
+                    </span>
+                  </p>
+                )}
+              </div>
+              <div className="flex items-center gap-3 bg-white/10 backdrop-blur-xl border border-white/20 rounded-full px-4 py-1.5">
+                <span className="text-sm">
+                  Light <span className="font-bold">/Dark</span>
+                </span>
+                <div className="min-w-9 min-h-9">
+                <ThemeToggle />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
+  );
+};
+
+export default Header;

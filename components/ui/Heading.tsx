@@ -30,7 +30,7 @@ export function Heading({ title }) {
         />
 
         {/* Radial fade */}
-        <div className="absolute inset-0 w-full h-full bg-transparent dark:bg-[#0A0A0A] [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
+        <div className="absolute inset-0 w-full h-full bg-transparent dark:bg-[#141516] [mask-image:radial-gradient(350px_200px_at_top,transparent_20%,white)]"></div>
       </div>
     </div>
   );

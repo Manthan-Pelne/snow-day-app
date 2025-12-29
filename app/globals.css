@@ -184,3 +184,103 @@ body {
     z-index: 1;
 }
 
+
+/* ///////////////////////////////////////// */
+
+
+@layer components {
+.typography {
+@apply text-foreground leading-relaxed;
+}
+
+/* Headings */
+.typography h1 {
+@apply scroll-m-20 text-4xl font-semibold tracking-tight mt-10 mb-4;
+}
+
+.typography h2 {
+@apply scroll-m-20 text-2xl font-semibold tracking-tight mt-10 mb-4 border-b pb-2;
+}
+
+.typography h3 {
+@apply scroll-m-20 text-xl font-semibold tracking-tight mt-8 mb-3;
+}
+
+/* Paragraphs */
+.typography p {
+@apply text-base leading-7 text-muted-foreground mt-4;
+}
+
+.typography p em strong {
+  @apply text-foreground/70;
+}
+
+/* Links */
+.typography a {
+@apply font-medium underline underline-offset-4 text-primary hover:opacity-80;
+}
+
+
+/* Lists */
+.typography ul {
+@apply my-6 ml-6 list-disc;
+}
+
+
+.typography ol {
+@apply my-6 ml-6 list-decimal;
+}
+
+
+.typography li {
+@apply mt-2;
+}
+
+.typography li {
+  @apply mt-2 text-foreground/60 leading-7;
+}
+
+.typography li strong {
+  @apply text-foreground/70;
+}
+/* Tables */
+.typography table {
+@apply w-full my-6 border-collapse;
+}
+
+
+.typography thead {
+@apply bg-muted;
+}
+
+.typography a {
+@apply text-[#9810FA];
+}
+
+
+.typography th {
+@apply border px-4 py-2 text-left font-medium;
+}
+
+
+.typography td {
+@apply border px-4 py-2 text-muted-foreground;
+}
+
+
+/* Strong & inline */
+.typography strong {
+@apply text-foreground font-semibold;
+}
+
+
+.typography code {
+@apply relative rounded bg-muted px-[0.3rem] py-[0.2rem] font-mono text-sm;
+}
+
+
+/* Blockquote */
+.typography blockquote {
+}
+
+}

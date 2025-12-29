@@ -1,298 +1,185 @@
 "use client";
 
-import { getWeatherData, searchLocations } from "@/app/actions/weather"; // Import the type we made earlier
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Loader2, MapPin, Snowflake, Sun } from "lucide-react";
-import React, { useState, useEffect, FormEvent } from "react";
-import "pattern.css";
-import { SnowDayResult } from "@/app/actions/weather";
-import { SparkleParticles } from "./lightswind/sparkle-particles";
+import dynamic from 'next/dynamic';
+import React from "react";
+import Image from "next/image";
+import { Thermometer, Snowflake, Wind } from "lucide-react";
+import {MeteorsDemo} from "./hero-card"
+import Search from "./inputSection"
+import GridPattern from "./GridPattern"
+// import {PlaceholdersAndVanishInputDemo} from "./searchbox"
+const Snowfall = dynamic(() => import('./snowfall'));
+import { BorderBeam } from "@/components/lightswind/border-beam"; 
 
-// --- HELPERS ---
 
-const getGaugeColor = (chance: number): string => {
-  if (chance > 70) return "text-red-500 stroke-red-500";
-  if (chance > 40) return "text-orange-500 stroke-orange-500";
-  return "text-blue-500 stroke-blue-500";
-};
-
-const getStatusMessage = (chance: number): string => {
-  if (chance >= 80) return "🚨 100% Certified Pajama Day!";
-  if (chance >= 60) return "❄️ High Probability. Get the sleds out.";
-  if (chance >= 40) return "⚠️ Toss-up. Keep an eye on the news.";
-  if (chance >= 20) return "🕒 Delay possible. Set an early alarm.";
-  if (chance > 0) return "🌨️ Seeing flakes, but school is likely on.";
-  return "☀️ Clear skies. See you in class!";
-};
-
-const Hero: React.FC = () => {
-  // --- STATE ---
-  const [query, setQuery] = useState<string>("");
-  const [weather, setWeather] = useState<SnowDayResult["weather"] | null>(null);
-  const [loading, setLoading] = useState<boolean>(false);
-  const [locationName, setLocationName] = useState<string>("");
-  const [suggestions, setSuggestions] = useState<any[]>([]); // You can replace any with GeoResult interface
-  const [isTyping, setIsTyping] = useState<boolean>(false);
-  const [lockSuggestions, setLockSuggestions] = useState<boolean>(false);
-
-  // --- EFFECTS ---
-  useEffect(() => {
-    if (query.length < 3 || lockSuggestions) {
-      setIsTyping(false);
-      if (!lockSuggestions) setSuggestions([]);
-      setLockSuggestions(false);
-      return;
-    }
-
-    setIsTyping(true);
-    const delayDebounceFn = setTimeout(async () => {
-      const result = await searchLocations(query);
-      setSuggestions(result || []);
-      setIsTyping(false);
-    }, 500);
-
-    return () => clearTimeout(delayDebounceFn);
-  }, [query]);
-
-  // --- HANDLERS ---
-  const handleSearch = async (e: FormEvent | null, manualCity: string | null = null) => {
-    if (e) e.preventDefault();
-    const targetCity = manualCity || query;
-    if (!targetCity) return;
-
-    setLoading(true);
-    setSuggestions([]); 
-
-    const result: SnowDayResult = await getWeatherData(targetCity);
-
-    if (result.success && result.weather) {
-      setWeather(result.weather);
-      setLocationName(result.locationName || "");
-    } else {
-      alert(result.error || "Something went wrong");
-    }
-    setLoading(false);
-  };
-
+const Hero = () => {
   return (
-    <div className="w-full relative pb-10  bg-linear-to-tl from-white via-[#f1fffd] to-white dark:from-black dark:via-[#030359] dark:to-black pt-20">
-      <SparkleParticles className="absolute h-full w-full "/>
-    <div className="max-w-7xl m-auto  pt-14">
-      {/* Hero Text Section */}
-      <div className="mb-10  flex flex-col md:flex-row items-center justify-between gap-10">
-        <div className="relative z-50  w-2/3">
-          <div className="absolute top-30 -z-1 left-30 opacity-50 dark:opacity-65">
-            <div className="relative flex items-center justify-center rounded-xl">
-              <div className="absolute h-24 w-24 opacity-70 rounded-full border border-blue-800 dark:border-blue-100"></div>
-              <div className="absolute h-44 w-44 rounded-full opacity-80 border border-blue-600 dark:border-blue-200"></div>
-              <div className="absolute h-64 w-64 opacity-95 rounded-full border border-blue-400 dark:border-blue-200"></div>
-            </div>
-          </div>
-          <h1 className="text-[80px] z-50 font-extrabold text-[#141452] drop-shadow-xl dark:text-white">
-            Snow Day
-          </h1>
-         
-            <p className="text-black/50 dark:text-[#c9c1c1] ml-40 shadow-lg w-[400px]  bg-[blue]/5 border font-semibold border-[#bdc0c5] dark:border-[blue] m-auto p-4 rounded-lg backdrop-blur-lg">
-              Check your school closing probability with our specialized algorithm. 
-              We calculate snow totals and freeze factors to give you the most accurate prediction.
-            </p>
-         
-            <h1 className="border-dashed ml-72 border-white text-[80px] font-extrabold drop-shadow-xl text-[#141452] dark:text-white">
-              Predictor
-            </h1>
-        </div>
-
-
- {/* The Mobile Frame */}
-<div className="relative flex-1 flex justify-center items-center [perspective:1000px]">
-  
-  {/* The Mobile Frame with 3D Tilt */}
-  <div className="relative z-20 w-[280px] h-[420px] bg-[#141452] rounded-[3rem] p-3 border-[8px] border-[#5d5d82] shadow-xl overflow-hidden 
-    transform transition-transform duration-700
-    rotate-x-[20deg] rotate-y-[-15deg] rotate-z-[5deg] hover:rotate-x-0 hover:rotate-y-0 hover:scale-105"
-    style={{
-      transformStyle: 'preserve-3d',
-      transform: 'rotateX(10deg) rotateY(-15deg) rotateZ(5deg)'
-    }}
-  >
-    {/* Speaker/Notch */}
-    <div className="absolute top-0 left-1/2 -translate-x-1/2 w-32 h-6 bg-slate-800 rounded-b-2xl z-30" />
-    
-    {/* Inner Screen */}
-    <div className="w-full h-full rounded-[2rem] overflow-hidden bg-white">
-      <img 
-        src="calc.png" 
-        alt="Weather Calculator App"
-        className="w-full h-full object-cover"
-      />
-    </div>
-  </div>
-
-  {/* Optional: Add a subtle shadow underneath to anchor the 3D look */}
-  <div className="absolute -bottom-10 w-48 h-10 bg-black/20 blur-3xl rounded-[100%] scale-x-150 -z-10" />
-</div>
-      
-      </div>
-
-      <div className="max-w-6xl tracking-wider mx-auto mb-20">
-        {/* Search Bar */}
-        <form onSubmit={handleSearch} className="flex gap-2 mb-1 w-[600px] mx-auto bg-[gray]/10 shadow border border-[#d2d2ef] dark:border-[blue] rounded-xl py-2 px-2">
-          <div className="relative flex-1">
-            <Input
-              type="text"
-              placeholder="Enter city or zip code..."
-              value={query}
-              onChange={(e) => setQuery(e.target.value)}
-              className="flex-1 placeholder:text-black/60 font-semibold dark:placeholder:text-[#938f8f] bg-white text-black backdrop-blur-2xl rounded-md h-14 outline-none"
-            /> 
-            {isTyping && (
-              <div className="absolute right-3 top-4">
-                <Loader2 className="w-5 h-5 animate-spin text-black/40" />
-              </div>
-            )}
-          </div>
-          <Button type="submit" className="bg-[#26266e] z-50 h-14 text-white w-[120px] text-lg cursor-pointer border-[8px] border-[#1a1a66] hover:bg-[#2b2b92] rounded-lg font-bold">
-            {loading ? <Loader2 className="w-5 animate-spin" /> : "Search"}
-          </Button>
-        </form>
-
-        {/* Suggestions */}
-        {suggestions.length > 0 && (
-          <div className="w-[600px] m-auto mt-2 bg-blue-900/10 border border-white/20 rounded-xl backdrop-blur-xl overflow-hidden z-[100] shadow-md">
-            {suggestions.map((loc, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => {
-                  setLockSuggestions(true);
-                  setQuery(loc.name);
-                  setSuggestions([]);
-                  handleSearch(null, loc.name);
-                }}
-                className="w-full cursor-pointer flex items-center gap-3 p-4 text-left text-black hover:bg-blue-200/50 border-b border-white/10 last:border-0"
-              >
-                <MapPin className="w-4 h-4 text-blue-400" />
-                <div>
-                  <p className="font-bold">{loc.name}</p>
-                  <p className="text-xs text-black/50">{loc.admin1}, {loc.country}</p>
-                </div>
-              </button>
-            ))}
-          </div>
-        )}
-
-        {/* Results */}
-        {weather && (
-          <div className="space-y-12 mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
-          
-            {/* Gauge */}
-            <div className=" shadow-xl  bg-white/50 p-8 rounded-[30px] border border-blue-100 shadow-inner">
-               <h1 className="text-3xl text-black/80 font-light text-center mb-5">
-              Weather in <span className="font-bold italic underline underline-offset-7">{locationName}</span>
-            </h1>
-             <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-              <div className="relative w-48 h-48">
-                <svg className="w-full h-full" viewBox="0 0 100 100">
-                  <circle className="text-blue-100 stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
-                  <circle
-                    className={`${getGaugeColor(weather.daily[0].snowDayChance)} transition-all duration-1000 ease-out`}
-                    strokeWidth="10"
-                    strokeDasharray={251.2}
-                    strokeDashoffset={251.2 - (251.2 * weather.daily[0].snowDayChance) / 100}
-                    strokeLinecap="round"
-                    fill="transparent"
-                    r="40"
-                    cx="50"
-                    cy="50"
-                    style={{ transform: "rotate(-90deg)", transformOrigin: "50% 50%" }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-4xl font-black">{weather.daily[0].snowDayChance}%</span>
-                  <span className="text-[10px] uppercase font-bold opacity-50">Chance</span>
-                </div>
-              </div>
-
-              <div className="text-center md:text-left">
-                <p className="font-bold text-lg text-[#141452] mb-2">
-                  {getStatusMessage(weather.daily[0].snowDayChance)}
-                </p>
-                <h2 className="text-4xl font-black text-[#141452]">
-                  {weather.daily[0].snowDayChance > 50 ? "Grab the pajamas!" : "Keep the backpack ready."}
-                </h2>
-              </div>
-              </div>
-            </div>
-
-            {/* Hourly */}
-            <section>
-              <h3 className="text-sm border border-black w-max rounded-lg text-black p-2 font-bold uppercase tracking-widest mb-4 ml-2">
-                Hourly (Next 24h)
-              </h3>
-              <div className="flex gap-3 overflow-x-auto pb-6 no-scrollbar">
-                {weather.hourly.map((h, i) => (
-                  <div key={i} className="min-w-25 shadow-md bg-[blue]/5 border border-white/20 rounded-xl p-4 text-center backdrop-blur-md flex flex-col items-center gap-2">
-                    <p className="text-xs text-black font-semibold opacity-70">{h.time}</p>
-                    <div className="flex flex-col items-center">
-                      {h.isSnowing ? <Snowflake className="text-blue-400 my-1" /> : <Sun className="my-1 text-orange-400" />}
-                      {h.isSnowing ? (
-                        <span className="text-sm text-blue-500 font-bold mt-2">{h.snowAmount} cm</span>
-                      ) : (
-                        <p className="text-xl font-black text-black">{h.temp}°</p>
-                      )}
-                    </div>
+    <>
+        <div className="absolute top-0 left-0"> <Snowfall /></div>
+        <div className=" w-full relative overflow-hidden text-foreground ">
+            {/* Mobile Cloud */}
+            <div className="hidden">
+            <div className="max-w-3xl mx-auto text-center pt-5">
+              <div className="space-y-1">
+                    <h1 className="text-8xl font-medium tracking-tighter">
+                      Snow Day
+                    </h1>
+                    <h2 className="text-6xl tracking-tight text-blue-400">
+                      School Closure Predictor
+                    </h2>
                   </div>
-                ))}
-              </div>
-            </section>
 
-            {/* 7-Day Forecast */}
-            <section>
-              <h3 className="text-sm rounded-lg font-bold uppercase tracking-widest border border-black w-max p-2 text-black mb-4 ml-2">
-                7-Day Forecast
-              </h3>
-              <div className="grid grid-cols-1 gap-3">
-                <div className="grid grid-cols-2 md:grid-cols-7 gap-3">
-                  {weather.daily.map((d, i) => (
-                    <div key={i} className="bg-[blue]/5 rounded-2xl shadow-md p-4 text-center">
-                      <p className="text-[10px] font-black text-black opacity-60 uppercase mb-1">
-                        {new Date(d.date).toLocaleDateString("en-US", { weekday: "short" })}
-                      </p>
-                      <p className="text-xl flex items-center justify-center gap-2 text-black font-bold">
-                        {d.snowDayChance}% <Snowflake className="text-blue-400 text-sm" />
-                      </p>
-                    </div>
-                  ))}
+                  <p className="leading-relaxed mt-5 text-lg">
+                    Advanced snow analysis using live weather data, snowfall intensity,
+                    road conditions, and historical school closure trends to predict
+                    the chances of a snow day in your area.
+                  </p>
+            </div>
+            <div className="flex justify-center w-full ">
+              <Image
+                width={500}
+                height={180}
+                className="w-full max-w-[500px] drop-shadow-2xl relative z-10 dark:animate-pulse"
+                src="/cloud3.png"
+                alt="Snow Cloud"
+              />
+            </div>
+            </div>
+
+          <div className="relative z-10 p-6 md:p-10  flex flex-col justify-between">
+
+            {/* HERO CONTENT */}
+            <main className="grid grid-cols-5 gap-8 items-center">
+
+              {/* LEFT SECTION */}
+              <div className="col-span-2 space-y-6">
+                <div className="space-y-1">
+                  <h1 className="text-8xl font-medium tracking-tighter">
+                    Snow Day
+                  </h1>
+                  <h2 className="text-6xl tracking-tight text-blue-400">
+                    School Closure Predictor
+                  </h2>
                 </div>
-                <div className="grid grid-cols-2 md:grid-cols-7 gap-3 text-black">
-                  {weather.daily.map((d, i) => (
-                    <div key={i} className="bg-[blue]/5 border shadow-md border-white/30 rounded-2xl p-4 text-[11px] space-y-3">
-                      <div>
-                        <p className="opacity-40 uppercase">Max Temp</p>
-                        <p className="font-bold text-sm">{d.tempMax}°C</p>
-                      </div>
-                      <div className="h-px bg-black/10" />
-                      <div>
-                        <p className="opacity-40 uppercase">Precipitation</p>
-                        <p className="font-bold text-sm">{d.precip} mm</p>
-                      </div>
-                      <div className="h-px bg-black/10" />
-                      <div>
-                        <p className="opacity-40 uppercase">Wind Avg</p>
-                        <p className="font-bold text-sm">{d.wind} km/h</p>
-                      </div>
-                    </div>
-                  ))}
+
+                <p className="max-w-md text-sm leading-relaxed opacity-80">
+                  Advanced snow analysis using live weather data, snowfall intensity,
+                  road conditions, and historical school closure trends to predict
+                  the chances of a snow day in your area.
+                </p>
+
+              
+              </div>
+
+            <div className="col-span-3 grid grid-cols-2">
+              {/* CENTER VISUAL */}
+              <div className="col-span-1">
+                <Image
+                  width={500}
+                  height={180}
+                  className="w-full max-w-[450px] drop-shadow-2xl relative z-10 animate-pulse"
+                  src="/cloud2.png"
+                  alt="Snow Storm"
+                />
+              </div>
+
+              {/* RIGHT SECTION */}
+              <div className="col-span-1">
+
+                {/* MAIN SCORE */}
+                <div className="text-right">
+                  <h3 className="text-9xl leading-[0.8] tracking-tighter relative">
+                    98%
+                    <span className="absolute top-1/4 -right-12 text-4xl">
+                    
+                    </span>
+                  </h3>
+
+                  <div className="mt-4 space-y-1 text-xs uppercase font-bold tracking-widest opacity-80">
+                    <p>Accuracy</p>
+                    <p className="flex justify-end gap-2">
+                      <Snowflake className="w-4 h-4" /> Heavy Snowfall
+                    </p>
+                    <p className="flex justify-end gap-2">
+                      <Wind className="w-4 h-4" /> Poor Road Conditions
+                    </p>
+                    <p className="flex justify-end gap-2">
+                      <Thermometer className="w-4 h-4" /> Below Freezing
+                    </p>
+                  </div>
+                </div>
+
+                {/* CITY PROBABILITIES */}
+                <div className="flex gap-10 pt-10">
+                  <div>
+                    <p className="text-3xl">92%</p>
+                    <div className="w-12 h-1 bg-blue-400 rounded-full mt-1" />
+                    <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+                      Washington D.C.
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-3xl">68%</p>
+                    <div className="w-12 h-1 bg-yellow-400 rounded-full mt-1" />
+                    <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+                      Oklahoma City
+                    </p>
+                  </div>
+                  <div>
+                    <p className="text-3xl">85%</p>
+                    <div className="w-12 h-1 bg-cyan-400 rounded-full mt-1" />
+                    <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+                      Philadelphia
+                    </p>
+                  </div>
                 </div>
               </div>
-            </section>
+              {/* <div className="col-span-2 flex flex-col items-end space-y-8">
+
+        
+                <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-6 rounded-[2.5rem] w-full">
+                <PlaceholdersAndVanishInputDemo/>
+                </div>
+              </div> */}
+              </div>
+            </main>
+
+            
+
+            {/* BOTTOM TIMELINE */}
+            {/* <footer className="relative mt-14 flex items-end">
+              <div className="absolute inset-x-0 bottom-0 overflow-hidden pointer-events-none">
+                <svg
+                  viewBox="0 0 1440 320"
+                  className="w-full h-40 fill-transparent stroke-gray-300  dark:stroke-white/40 stroke-2"
+                >
+                  <path d="M0,160 C150,120 300,280 450,220 C600,160 750,240 900,200 C1050,160 1200,280 1440,240" />
+                </svg>
+              </div>
+
+              <div className="w-full flex justify-around text-[10px] font-bold uppercase tracking-[0.2em] pb-4 relative z-20">
+                <span>6 AM Low</span>
+                <span>8 AM Moderate</span>
+                <span>10 AM High</span>
+                <span>12 PM Very High</span>
+                <span>2 PM Peak</span>
+                <span>4 PM Closure</span>
+                <span>6 PM Unsafe</span>
+                <span>8 PM Clear</span>
+              </div>
+            </footer> */}
+
+                    <div className="relative w-full max-w-4xl mx-auto border  bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16">
+                    <BorderBeam />
+                      <GridPattern />
+                    </div>
+                    
+                    {/* <div className="max-w-4xl mx-auto  bg-white/10 backdrop-blur-2xl border border-white/20 rounded-3xl w-full p-6 mt-16">
+                      <Search/>
+                    </div> */}
           </div>
-        )}
-      </div>
-
-    </div>
-    </div>
+        </div>
+    </>
   );
 };
 

@@ -1,8 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import { Providers } from "@/components/themeProvider"
-import Header2 from "@/components/Header2"
-import Header3 from "@/components/header3"
+import Header from "@/components/header"
 import Footer from "@/components/footer"
 import "./globals.css";
 
@@ -33,7 +32,7 @@ export default function RootLayout({
       >
         <Providers>
         {/* <Header2/> */}
-        <Header3/>
+        <Header/>
         <div>
           
           {/* <div className="bg-[repeating-linear-gradient(45deg,_#00000066_0px,_#00000066_1px,_transparent_1px,_transparent_6px)] blur-[2px] dark:blur-[2px] dark:bg-[repeating-linear-gradient(45deg,_#ffffff66_0px,_#ffffff66_1px,_transparent_1px,_transparent_6px)] fixed h-full opacity-50 pointer-events-none right-0 top-0 w-full z-0"></div> */}
@@ -44,7 +43,7 @@ export default function RootLayout({
           {children}
 
         </div>
-        {/* <Footer/> */}
+        <Footer/>
         </Providers>
       </body>
     </html>
