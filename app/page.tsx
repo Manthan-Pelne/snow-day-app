@@ -1,8 +1,8 @@
 import React from 'react'
 import Image from "next/image";
 import Hero from "@/components/Hero"
-import WeatherDashboard from "@/components/Hero2"
 import Info from "@/components/Info"
+import Info2 from "@/components/Info2"
 const page = () => {
   return (
     <>
@@ -10,6 +10,7 @@ const page = () => {
         <Hero/>
           <div className="py-20">
             <Info/>
+            <Info2/>
           </div>
       </div>
     </>

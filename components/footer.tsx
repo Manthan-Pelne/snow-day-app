@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Github } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden">
+    <footer className="relative overflow-hidden mt-30">
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-3 gap-5 px-6 pt-10 md:grid-cols-5 md:gap-12 md:px-12">
 
         {/* Brand */}

@@ -44,22 +44,22 @@ const benefits = [
   
   return (
     <div>
-      <div className="max-w-7xl mx-auto mt-30">
+      <div className="max-w-6xl mx-auto mt-30">
         <div className="min-h-[75px] w-full py-[10px]  flex flex-col items-center justify-center">
           <div className="mb-[50px] mx-auto flex flex-col-reverse md:flex-row-reverse items-center justify-between max-w-[1320px] w-full gap-10 md:gap-0">
             {/* Image Section */}
-            <div className="relative pattern-dots-md w-full md:w-1/2">
+            <div className="relative pattern-dots-md w-[500px]">
               <img
-                className="w-full transform -translate-x-6 translate-y-6 h-auto rounded-[10px] drop-shadow-2xl"
+                className="w-full transform -translate-x-20 -translate-y-10 h-full drop-shadow-2xl"
                 src="/calc.png"
                 alt="Snow Day Calculator Interface"
               />
               <div
-                className="bg-[#141452] p-5 rounded-[10px] flex flex-col items-start max-w-[430px] 
+                className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82]  shadow-xl p-5 rounded-[10px] flex flex-col items-start max-w-[430px] 
                   static md:absolute md:bottom-[-55px] md:left-[-12%] 
                   mt-0 md:mt-0 z-10"
               >
-                <p className="text-white text-base leading-[22px] md:leading-[26px] mb-2.5">
+                <p className="font-bold text-white text-base leading-[22px] md:leading-[26px] mb-2.5">
                   Our algorithm analyzes real-time meteorological data to provide the most
                   accurate school closing predictions available.
                 </p>
@@ -73,20 +73,20 @@ const benefits = [
 
             {/* Content Section */}
             <div className="w-full md:w-[40%] flex flex-col items-start justify-start md:mr-10 py-0 pr-[15px] pl-0 mt-[100px] md:mt-0">
-              <h2 className="text-[#47478a] underline underline-offset-8 text-3xl font-extrabold leading-[30px] mb-6 p-0">
+              <h2 className=" dark:text-white underline underline-offset-8 text-3xl font-bold leading-[30px] mb-6 p-0">
                 About Calculator
               </h2>
-              <p className="text-[#6e6969] italic text-xl font-bold leading-7 md:leading-8 mb-2 p-0">
+              <p className="text-[#6e6969] dark:text-[#9c9999] italic text-xl font-bold leading-7 md:leading-8 mb-2 p-0">
                 Predicting the unpredictable with southern-state precision.
               </p>
-              <p className="text-[#746f6f] text-base font-semibold leading-[22px] md:leading-[26px] mb-[50px] p-0">
+              <p className="text-[#746f6f] dark:text-[#908b8b] text-base font-semibold leading-[22px] md:leading-[26px] mb-[50px] p-0">
                 Using a combination of morning commute snowfall totals, freeze factors, 
                 and ice warnings, our predictor is designed specifically for regions 
                 where even an inch of snow changes everything.
               </p>
               <a
                 href="#features"
-                className="inline-block text-[#666666] rounded-lg text-base font-semibold leading-7 border-2 border-[#666666] py-2 px-10 transition-colors duration-300 hover:bg-[#141452] hover:text-white hover:border-transparent cursor-pointer"
+                className="inline-block text-[#666666] dark:text-[#91c6f8] rounded-lg text-base font-semibold leading-7 border-2 border-[#666666] dark:border-[#9dcdfb] dark:bg-[#010d17] py-2 px-10 transition-colors duration-300 hover:bg-[#141452] hover:text-white hover:border-transparent cursor-pointer"
               >
                 View More
               </a>
@@ -96,10 +96,10 @@ const benefits = [
       </div>
 
       {/* Features Grid */}
-      <section id="features" className="max-w-7xl mx-auto mt-30 text-gray-200 bg-[#0a0a39] rounded-2xl font-sans">
+      <section id="features" className="max-w-7xl mx-auto mt-30 bg-[#f3fdff] dark:bg-white/5 border rounded-2xl font-sans">
         <div className="max-w-6xl mx-auto px-5 py-24 ">
           <div className="text-center mb-20">
-            <h1 className="text-5xl text-center mb-2 font-extrabold text-white">
+            <h1 className="text-5xl text-center mb-2 font-extrabold dark:text-white">
               Calculator Features
             </h1>
             <p className="w-2/3 m-auto text-center font-semibold text-[#8c8989]">
@@ -107,7 +107,7 @@ const benefits = [
               weather insights within seconds.
             </p>
             <div className="flex mt-6 justify-center">
-              <div className="w-16 h-1 rounded-full bg-[#3d3dfe] inline-flex"></div>
+              <div className="w-16 h-1 rounded-full bg-[#275f78] inline-flex"></div>
             </div>
           </div>
 
@@ -116,7 +116,7 @@ const benefits = [
             {[1, 2, 3].map((item) => (
               <div key={item} className="p-10 md:w-1/3 md:mb-0 mb-6 flex flex-col">
                 <div className="pattern-dots-md text-gray-100">
-                  <div className="bg-[#141452] transition-all rounded p-4 transform translate-x-6 -translate-y-6 hover:bg-[#141470] hover:translate-x-4 hover:-translate-y-4 duration-300">
+                  <div className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82] transition-all rounded-xl p-4 transform translate-x-6 -translate-y-6 hover:bg-[#141470] hover:translate-x-4 hover:-translate-y-4 duration-300">
                     <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-5 flex-shrink-0 p-2">
                       <svg
                         className="w-6 h-6"
@@ -131,7 +131,7 @@ const benefits = [
                       <h2 className="text-xl title-font font-medium mb-3">
                         {item === 1 ? "Highly Accurate" : item === 2 ? "Real-time Data" : "Localized Info"}
                       </h2>
-                      <p className="text-sm text-[#b3b3d7] font-semibold">
+                      <p className="text-sm text-[#d9d9ec] font-semibold">
                         Our model adjusts for ground temperature and local geography to ensure 
                         the snow day chance is relevant to your specific school district.
                       </p>
@@ -145,27 +145,27 @@ const benefits = [
       </section>
 
    {/* benefits section */}
-    <section className="relative mt-30 py-24 border-2 bg-gradient-to-b from-blue-100 to-white overflow-hidden">
+    <section className="relative mt-20 py-24 overflow-hidden">
       {/* Decorative Snowflakes */}
-      <div className="absolute top-10 left-10 text-blue-200/50 text-6xl animate-pulse">❄</div>
-      <div className="absolute bottom-10 right-10 text-blue-200/50 text-6xl animate-bounce">❄</div>
+      <div className="absolute top-10 left-10 text-cyan-400/50 text-6xl animate-pulse">❄</div>
+      <div className="absolute bottom-10 right-10 text-cyan-400/50 text-6xl animate-bounce">❄</div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-extrabold text-slate-900 tracking-tight mb-4">Beyond the Day Off</h2>
-          <p className="text-lg text-slate-500 max-w-2xl mx-auto">Empowering everyone to plan ahead for winter's unpredictability.</p>
+          <h2 className="text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">Beyond the Day Off</h2>
+          <p className="text-lg text-slate-500 dark:text-[gray] max-w-2xl mx-auto">Empowering everyone to plan ahead for winter's unpredictability.</p>
         </div>
 
         <div className="grid md:grid-cols-4 gap-6">
           {benefits.map((b, i) => (
-            <div key={i} className={`group relative p-8 rounded-3xl border-t-10 border-blue-500/30 bg-white backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
-              <div className={`absolute inset-0 bg-linear-to-tr from-blue-200/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl`} />
+            <div key={i} className={`group relative p-8 rounded-3xl border-t-10 border-blue-500/50 bg-white dark:bg-white/5 backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
+              <div className={`absolute inset-0 bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-blue-800/20 dark:to-black opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl`} />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-blue-400/10 rounded-2xl shadow-inner flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
                   {b.icon}
                 </div>
-                <h3 className="text-xl font-bold text-black mb-3">{b.title}</h3>
-                <p className="text-[#807070] text-sm leading-relaxed">{b.desc}</p>
+                <h3 className="text-xl font-bold text-black dark:text-white mb-3">{b.title}</h3>
+                <p className="text-[#807070] dark:text-[#adabab] text-sm leading-relaxed">{b.desc}</p>
               </div>
             </div>
           ))}
@@ -175,13 +175,13 @@ const benefits = [
 
 
      {/* calculation algorithm steps */}
-   <section className="py-20 mt-30 bg-[#0B1120] text-white px-6 overflow-hidden">
+   <section className=" mt-30  px-6 overflow-hidden">
       <div className="max-w-4xl mx-auto">
         <div className="text-center mb-16">
-          <h2 className="text-6xl pb-2 font-extrabold bg-clip-text text-transparent bg-gradient-to-r from-blue-400 to-blue-100">
+          <h2 className="text-6xl pb-2 font-extrabold bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-cyan-500">
             The Math Behind the Magic
           </h2>
-          <p className="text-slate-200 text-lg mt-2">How we turn raw weather data into your morning forecast.</p>
+          <p className=" text-[gray] text-lg mt-2">How we turn raw weather data into your morning forecast.</p>
         </div>
 
         <div className="relative">
@@ -192,18 +192,18 @@ const benefits = [
             {steps.map((step, i) => (
               <div key={i} className={`relative flex items-center justify-between md:justify-normal w-full group ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
                 
-                {/* Content Card */}
-                <div className="w-[calc(100%-3rem)] md:w-[45%] bg-slate-800/40 backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:border-blue-400/50 transition-all duration-300 shadow-xl group-hover:shadow-blue-900/20">
+                {/* Content Card */} 
+                <div className="w-[calc(100%-3rem)] md:w-[45%] bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82]  backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:border-blue-400/50 transition-all duration-300 shadow-xl group-hover:shadow-blue-900/20">
                   <div className="flex items-center gap-3 mb-2">
                     <span className="text-2xl">{step.icon}</span>
                     <span className="text-blue-400 font-mono text-xs font-bold tracking-widest uppercase">Step 0{i + 1}</span>
                   </div>
                   <h3 className="text-xl font-bold mb-2 text-white">{step.name}</h3>
-                  <p className="text-slate-400 text-sm leading-relaxed">{step.detail}</p>
+                  <p className="text-blue-100 text-sm leading-relaxed">{step.detail}</p>
                 </div>
 
                 {/* The Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-cyan-400 transform -translate-x-1/2 border-4 border-slate-900 z-10 shadow-[0_0_10px_#22d3ee] group-hover:scale-150 transition-transform hidden sm:block" />
+                <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-cyan-400 transform -translate-x-1/2 border-4 border-blue-500 z-10 shadow-[0_0_10px_#22d3ee] group-hover:scale-150 transition-transform hidden sm:block" />
 
                 {/* Spacer for Desktop Grid */}
                 <div className="hidden md:block w-[45%]" />
@@ -215,7 +215,7 @@ const benefits = [
     </section>
 
 
-    <section className=" mt-30 bg-white">
+    <section className=" mt-30">
       <div className="max-w-6xl mx-auto">
         <div className="flex flex-col lg:flex-row justify-between gap-16 items-center">
           
@@ -223,15 +223,15 @@ const benefits = [
           <div className="flex-1">
             <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
               Why 2 inches isn't <br /> 
-              <span className="text-blue-600 underline decoration-blue-200 underline-offset-8">always 2 inches.</span>
+              <span className="text-blue-500 underline decoration-blue-200 underline-offset-8">always 2 inches.</span>
             </h2>
-            <p className="text-slate-600 mb-8 leading-relaxed">
+            <p className="text-[#716c6c] dark:text-[#b6b5b5] mb-8 leading-relaxed">
               Our algorithm uses a <strong>Multi-Factor Weighted Index</strong>. While accumulation gets the headlines, the "Timing of Onset" and "Road Surface Temperature" are the true predictors of school closures.
             </p>
             
-            <div className="bg-blue-50 border-l-4 border-blue-500 p-6 rounded-r-2xl">
-              <h4 className="font-bold text-blue-900 mb-2 italic">Pro Insight: The "Refreeze"</h4>
-              <p className="text-sm text-blue-800/80">
+            <div className="bg-blue-50 dark:bg-blue-500/10 border-l-4 border-blue-500 p-6 rounded-r-2xl">
+              <h4 className="font-bold text-blue-500 mb-2 italic">Pro Insight: The "Refreeze"</h4>
+              <p className="text-sm text-blue-600/80 dark:text-blue-200">
                 A 40°F afternoon followed by a 20°F night creates "Black Ice." This often results in a 2-hour delay even if the sun is shining.
               </p>
             </div>
@@ -247,7 +247,7 @@ const benefits = [
                 <div 
                   key={i} 
                   className={`
-                    relative w-full max-w-md p-5 rounded-2xl border-2 border-slate-200 bg-white shadow-lg 
+                    relative w-full max-w-md p-5 rounded-2xl border-2 border-slate-200 dark:border-0 bg-white  dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82] shadow-lg 
                     transition-all duration-300 transform cursor-pointer
                     hover:rotate-0 hover:-translate-y-4 hover:z-50
                     ${rotation}
@@ -264,9 +264,9 @@ const benefits = [
                       }`}>
                         {item.impact} Impact
                       </span>
-                      <h4 className="font-bold text-slate-800 mt-1">{item.label}</h4>
+                      <h4 className="font-bold text-slate-800 dark:text-white mt-1">{item.label}</h4>
                     </div>
-                    <span className="text-2xl font-mono font-bold text-slate-400">{item.weight}%</span>
+                    <span className="text-2xl font-mono font-bold text-slate-400 dark:text-blue-200">{item.weight}%</span>
                   </div>
                   
                   {/* Progress Bar */}
@@ -276,7 +276,7 @@ const benefits = [
                       style={{ width: `${item.weight}%` }}
                     />
                   </div>
-                  <p className="mt-3 text-xs text-slate-500 leading-relaxed">{item.desc}</p>
+                  <p className="mt-3 text-xs text-slate-500 dark:text-blue-200 leading-relaxed">{item.desc}</p>
                 </div>
               );
             })}
