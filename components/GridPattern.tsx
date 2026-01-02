@@ -46,6 +46,13 @@ export default function GridPattern({
             onSubmit={onSubmit}
           />
 
+           {/* LOADING INDICATOR (Optional) */}
+          {isTyping && (
+            <div className="absolute top-[131%] max-w-xl m-auto left-1/2 right-0">
+               <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            </div>
+          )}
+
           {/* SUGGESTIONS DROPDOWN */}
           {suggestions.length > 0 && (
             <div className="absolute top-full max-w-xl m-auto left-0 right-0 mt-2 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg overflow-hidden z-100">
@@ -70,12 +77,6 @@ export default function GridPattern({
             </div>
           )}
 
-          {/* LOADING INDICATOR (Optional) */}
-          {isTyping && (
-            <div className="absolute right-4 top-1/2 -translate-y-1/2">
-               <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
-            </div>
-          )}
         </div>
       </div>
     </div>

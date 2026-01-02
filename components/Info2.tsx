@@ -2,31 +2,37 @@
 import React from 'react';
 // Ensure pattern.css has a corresponding declaration file if your linter complains
 import "pattern.css"; 
+import { Snowflake } from 'lucide-react';
+import { ScrollTimeline } from './lightswind/scroll-timeline';
 
 const Info2: React.FC = () => {
 
-const steps = [
-    { 
-      name: "Live Ingest", 
-      detail: "We pull real-time data from NOAA and local weather stations.",
-      icon: "🛰️" 
-    },
-    { 
-      name: "Timing Check", 
-      detail: "Snow between 4:00 AM and 8:00 AM is weighted 3x more heavily.",
-      icon: "⏰"
-    },
-    { 
-      name: "Road Logic", 
-      detail: "We factor in your city's snow-clearing budget and historical tolerance.",
-      icon: "🚜"
-    },
-    { 
-      name: "Final Odds", 
-      detail: "Our AI compares current data against 10 years of district closure patterns.",
-      icon: "❄️"
-    }
-  ];
+const events = [
+  {
+    year: "Step 01",
+    title: "Live Ingest",
+    subtitle: "Data Sourcing",
+    description: "We pull real-time data from NOAA and local weather stations to ensure the most accurate atmospheric readings."
+  },
+  {
+    year: "Step 02",
+    title: "Timing Check",
+    subtitle: "Peak Weighting",
+    description: "Snow between 4:00 AM and 8:00 AM is weighted 3x more heavily, as this window is critical for bus safety and school delays."
+  },
+  {
+    year: "Step 03",
+    title: "Road Logic",
+    subtitle: "Infrastructure Analysis",
+    description: "Our algorithm factors in your city's snow-clearing budget and historical tolerance for winter road conditions."
+  },
+  {
+    year: "Step 04",
+    title: "Final Odds",
+    subtitle: "AI Comparison",
+    description: "The AI engine compares current data against 10 years of district closure patterns to generate your final snow day percentage."
+  }
+];
 
 const benefits = [
     { title: "Parents", desc: "Plan childcare and work schedules without the morning-of stress.", icon: "🏠", color: "from-blue-400/20" },
@@ -41,14 +47,45 @@ const benefits = [
     { label: "Commute Timing", weight: 85, impact: "High", desc: "Snow falling between 3 AM and 7 AM is 2x more likely to cause a closure than evening snow." },
     { label: "Plough Readiness", weight: 40, impact: "Variable", desc: "Major cities clear roads faster; rural areas with dirt roads have much lower tolerance." }
   ];
+
+  const features = [
+  {
+    title: "Hyper-Local Precision",
+    desc: "Our model factors in elevation and coastal proximity to ensure the snow day chance is specific to your school district.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Real-Time Updates",
+    desc: "Connected directly to the Open-Meteo API, providing instant recalculations as soon as the winter storm warnings drop.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+      </svg>
+    ),
+  },
+  {
+    title: "Ground Temp Analysis",
+    desc: "Snow only sticks if the ground is cold enough. We track sub-surface data to predict accumulation and icy road conditions.",
+    icon: (
+      <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+      </svg>
+    ),
+  },
+];
   
   return (
     <div>
-      <div className="max-w-6xl mx-auto mt-30">
+      <div className="max-w-6xl mx-auto mt-16 md:mt-30 px-5">
         <div className="min-h-[75px] w-full py-[10px]  flex flex-col items-center justify-center">
           <div className="mb-[50px] mx-auto flex flex-col-reverse md:flex-row-reverse items-center justify-between max-w-[1320px] w-full gap-10 md:gap-0">
             {/* Image Section */}
-            <div className="relative pattern-dots-md w-[500px]">
+            <div className="relative pattern-dots-md  md:w-[500px]">
               <img
                 className="w-full transform -translate-x-20 -translate-y-10 h-full drop-shadow-2xl"
                 src="/calc.png"
@@ -72,7 +109,7 @@ const benefits = [
             </div>
 
             {/* Content Section */}
-            <div className="w-full md:w-[40%] flex flex-col items-start justify-start md:mr-10 py-0 pr-[15px] pl-0 mt-[100px] md:mt-0">
+            <div className="w-full md:w-[40%] flex flex-col items-start justify-start md:mr-10 py-0 pr-[15px] pl-0 ">
               <h2 className=" dark:text-white underline underline-offset-8 text-3xl font-bold leading-[30px] mb-6 p-0">
                 About Calculator
               </h2>
@@ -95,14 +132,15 @@ const benefits = [
         </div>
       </div>
 
+
       {/* Features Grid */}
-      <section id="features" className="max-w-7xl mx-auto mt-30 bg-[#f3fdff] dark:bg-white/5 border rounded-2xl font-sans">
-        <div className="max-w-6xl mx-auto px-5 py-24 ">
-          <div className="text-center mb-20">
-            <h1 className="text-5xl text-center mb-2 font-extrabold dark:text-white">
+      <section id="features" className="max-w-7xl mx-auto mt-6 md:mt-30 bg-[#f3fdff] dark:bg-white/5 border rounded-2xl font-sans">
+        <div className="max-w-6xl mx-auto px-5 py-12 md:py-24">
+          <div className="text-center mb-10 md:mb-20">
+            <h1 className="text-3xl md:text-5xl text-center mb-2 font-extrabold dark:text-white">
               Calculator Features
             </h1>
-            <p className="w-2/3 m-auto text-center font-semibold text-[#8c8989]">
+            <p className="md:w-2/3 m-auto text-center font-semibold text-[#8c8989]">
               Built with Next.js and Open-Meteo API to bring you high-fidelity 
               weather insights within seconds.
             </p>
@@ -111,44 +149,34 @@ const benefits = [
             </div>
           </div>
 
-          <div className="flex flex-wrap sm:-m-4 -mx-4 -mb-10 -mt-4">
-            {/* Feature Card Item (Repeated for each feature) */}
-            {[1, 2, 3].map((item) => (
-              <div key={item} className="p-10 md:w-1/3 md:mb-0 mb-6 flex flex-col">
-                <div className="pattern-dots-md text-gray-100">
-                  <div className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82] transition-all rounded-xl p-4 transform translate-x-6 -translate-y-6 hover:bg-[#141470] hover:translate-x-4 hover:-translate-y-4 duration-300">
-                    <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-blue-100 text-blue-500 mb-5 flex-shrink-0 p-2">
-                      <svg
-                        className="w-6 h-6"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                      </svg>
-                    </div>
-                    <div className="flex-grow">
-                      <h2 className="text-xl title-font font-medium mb-3">
-                        {item === 1 ? "Highly Accurate" : item === 2 ? "Real-time Data" : "Localized Info"}
-                      </h2>
-                      <p className="text-sm text-[#d9d9ec] font-semibold">
-                        Our model adjusts for ground temperature and local geography to ensure 
-                        the snow day chance is relevant to your specific school district.
-                      </p>
-                    </div>
+       <div className="grid grid-cols-1 md:grid-cols-3 sm:-m-4 -mx-4 -mb-10 -mt-4">
+          {features.map((f, idx) => (
+            <div key={idx} className="p-8 md:mb-0 mb-2 flex flex-col">
+              {/* Added text-blue-200 for visibility in light mode */}
+              <div className="pattern-dots-md">
+                <div className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:from-[#182e63] dark:to-[#127a82] transition-all rounded-xl p-6 transform md:translate-x-6 -translate-y-6 hover:translate-x-4 hover:-translate-y-4 duration-300 text-white">
+                  <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-white/20 mb-5 flex-shrink-0 p-2">
+                    {f.icon}
+                  </div>
+                  <div className="flex-grow">
+                    <h2 className="text-xl title-font font-bold mb-3">{f.title}</h2>
+                    <p className="text-sm text-[#d9d9ec] font-medium leading-relaxed">
+                      {f.desc}
+                    </p>
                   </div>
                 </div>
               </div>
-            ))}
-          </div>
+            </div>
+          ))}
+        </div>
         </div>
       </section>
 
    {/* benefits section */}
-    <section className="relative mt-20 py-24 overflow-hidden">
+    <section className="relative md:mt-20 py-24 overflow-hidden">
       {/* Decorative Snowflakes */}
-      <div className="absolute top-10 left-10 text-cyan-400/50 text-6xl animate-pulse">❄</div>
-      <div className="absolute bottom-10 right-10 text-cyan-400/50 text-6xl animate-bounce">❄</div>
+      <div className="absolute top-10 left-10 text-cyan-400/50 animate-pulse"><Snowflake/></div>
+      <div className="absolute bottom-10 right-10 text-cyan-400/50  animate-bounce  "><Snowflake className=''/></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
@@ -156,9 +184,9 @@ const benefits = [
           <p className="text-lg text-slate-500 dark:text-[gray] max-w-2xl mx-auto">Empowering everyone to plan ahead for winter's unpredictability.</p>
         </div>
 
-        <div className="grid md:grid-cols-4 gap-6">
+        <div className="grid  md:grid-cols-2 lg:grid-cols-4 gap-6">
           {benefits.map((b, i) => (
-            <div key={i} className={`group relative p-8 rounded-3xl border-t-10 border-blue-500/50 bg-white dark:bg-white/5 backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
+            <div key={i} className={`group relative p-8 rounded-3xl bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-blue-800/30 dark:to-black  border-t-10 border-blue-500/50 bg-white dark:bg-white/5 backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
               <div className={`absolute inset-0 bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-blue-800/20 dark:to-black opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl`} />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-blue-400/10 rounded-2xl shadow-inner flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
@@ -174,54 +202,28 @@ const benefits = [
     </section>
 
 
-     {/* calculation algorithm steps */}
-   <section className=" mt-30  px-6 overflow-hidden">
-      <div className="max-w-4xl mx-auto">
-        <div className="text-center mb-16">
-          <h2 className="text-6xl pb-2 font-extrabold bg-clip-text text-transparent bg-linear-to-r from-blue-600 to-cyan-500">
-            The Math Behind the Magic
-          </h2>
-          <p className=" text-[gray] text-lg mt-2">How we turn raw weather data into your morning forecast.</p>
-        </div>
-
-        <div className="relative">
-          {/* Vertical Line (The Path) */}
-          <div className="absolute left-4 md:left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-[#006eff] to-transparent transform md:-translate-x-1/2 hidden sm:block shadow-[0_0_15px_rgba(34,211,238,0.5)]" />
-
-          <div className="space-y-12">
-            {steps.map((step, i) => (
-              <div key={i} className={`relative flex items-center justify-between md:justify-normal w-full group ${i % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                
-                {/* Content Card */} 
-                <div className="w-[calc(100%-3rem)] md:w-[45%] bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82]  backdrop-blur-md border border-slate-700 p-6 rounded-2xl hover:border-blue-400/50 transition-all duration-300 shadow-xl group-hover:shadow-blue-900/20">
-                  <div className="flex items-center gap-3 mb-2">
-                    <span className="text-2xl">{step.icon}</span>
-                    <span className="text-blue-400 font-mono text-xs font-bold tracking-widest uppercase">Step 0{i + 1}</span>
-                  </div>
-                  <h3 className="text-xl font-bold mb-2 text-white">{step.name}</h3>
-                  <p className="text-blue-100 text-sm leading-relaxed">{step.detail}</p>
-                </div>
-
-                {/* The Timeline Dot */}
-                <div className="absolute left-4 md:left-1/2 w-4 h-4 rounded-full bg-cyan-400 transform -translate-x-1/2 border-4 border-blue-500 z-10 shadow-[0_0_10px_#22d3ee] group-hover:scale-150 transition-transform hidden sm:block" />
-
-                {/* Spacer for Desktop Grid */}
-                <div className="hidden md:block w-[45%]" />
-              </div>
-            ))}
-          </div>
-        </div>
-      </div>
-    </section>
+   <section className=" md:mt-20 px-6 overflow-hidden">
+      <div className="w-full :max-w-4xl mx-auto">
+      <ScrollTimeline
+      events={events}
+      title="The Math Behind the Magic"
+      subtitle="How we turn raw weather data into your morning forecast."
+      progressIndicator={true}
+      cardAlignment="alternating"
+      revealAnimation="fade"
+    />
+   </div>
+</section>
 
 
-    <section className=" mt-30">
-      <div className="max-w-6xl mx-auto">
+
+    <section className=" md:mt-20">
+      <div className="max-w-6xl mx-auto px-4">
         <div className="flex flex-col lg:flex-row justify-between gap-16 items-center">
           
           {/* Left Side: Textual Insight */}
           <div className="flex-1">
-            <h2 className="text-4xl font-bold text-slate-900 mb-6 leading-tight">
+            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
               Why 2 inches isn't <br /> 
               <span className="text-blue-500 underline decoration-blue-200 underline-offset-8">always 2 inches.</span>
             </h2>
@@ -238,7 +240,7 @@ const benefits = [
           </div>
 
          {/* Stack Container */}
-          <div className="flex-1 w-full py-12 px-4 flex flex-col items-center">
+          <div className="flex-1 w-full py-1 px-4 flex flex-col items-center">
             {analytics.map((item, i) => {
               // Alternate rotation: 3 degrees is usually the "sweet spot" for this look
               const rotation = i % 2 === 0 ? 'rotate-2' : '-rotate-2';

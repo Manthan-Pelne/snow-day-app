@@ -4,7 +4,7 @@ import { GlowingEffect } from "@/components/ui/glowing-effect";
 
 export function FeatureEffect() {
   return (
-    <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 max-w-6xl mx-auto xl:grid-rows-2">
+    <ul className="grid grid-cols-1 grid-rows-none gap-4 md:grid-cols-12 md:grid-rows-3 lg:gap-4 max-w-6xl mx-auto xl:grid-rows-2 px-4 mt-4">
       <GridItem
         area="md:[grid-area:1/1/2/7] xl:[grid-area:1/1/2/5]"
         icon={<Box className="h-4 w-4 text-black dark:text-neutral-400" />}

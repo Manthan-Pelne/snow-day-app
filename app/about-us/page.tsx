@@ -63,15 +63,15 @@ const page = () => {
    <div className="absolute translate-y-2/2 left-[-20px] w-64 h-64 bg-blue-400 rotate-12 opacity-20 rounded-3xl"></div>
 </section>
   
-<div className="relative  mt-20 w-11/12 md:max-w-4xl m-auto p-12 rounded-3xl border border-slate-200 bg-linear-to-b from-blue-200 via-white shadow-xl overflow-hidden">
+<div className="relative  mt-20 w-11/12 md:max-w-4xl m-auto p-12 rounded-3xl border border-slate-200 dark:border-[#4c4a4a] bg-linear-to-b from-blue-200 via-white dark:bg-linear-to-b dark:from-black dark:via-black dark:to-black shadow-xl overflow-hidden">
   <SparkleParticles className='absolute top-0 w-full'/>
   {/* Content (Z-index ensures text stays on top) */}
   <div className="relative z-10">
-    <h2 className="text-2xl font-bold text-slate-800 mb-6">
+    <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, excepturi.
     </h2>
     
-    <div className="space-y-4 text-slate-600 leading-relaxed">
+    <div className="space-y-4 text-slate-600 dark:text-[#b9b5b5] leading-relaxed">
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus dolore voluptatum quae, 
         quam odio quos dicta voluptatibus, itaque, accusantium rerum quidem!
@@ -94,10 +94,10 @@ const page = () => {
    <div className="absolute bottom-[-20px] left-[-20px] w-40 h-40 bg-blue-400 rounded-[50px] opacity-20"></div>
   </div>
 
-  <div className="relative max-w-4xl mx-auto p-10 md:p-16 rounded-[40px] bg-white/60 dark:bg-black/30 backdrop-blur-xl border border-white shadow-2xl overflow-hidden">
+  <div className="relative max-w-4xl mx-auto p-10 md:p-16 rounded-[40px] bg-white/60 dark:bg-black/30 backdrop-blur-xl border border-gray-100 dark:border-[#4c4a4a] shadow-2xl overflow-hidden">
     
     {/* Subtle Geometric "Object" behind text */}
-    <div className="absolute top-[-10%] right-[-5%] w-64 h-64 border-[16px] border-blue-100 rounded-full -z-10" />
+    <div className="absolute top-[-10%] right-[-5%] w-64 h-64 border-[16px] border-blue-100 dark:border-cyan-300/40 rounded-full -z-10" />
     
     <div className="relative z-10 text-center">
       <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-8 tracking-tight">
@@ -107,18 +107,18 @@ const page = () => {
         </span>
       </h2>
 
-      <div className="space-y-6 text-slate-600 text-lg leading-relaxed max-w-2xl mx-auto">
+      <div className="space-y-6 text-slate-600 dark:text-[#b9b5b5] text-lg leading-relaxed max-w-2xl mx-auto">
         <p>
-          At <span className="font-bold text-slate-800">SnowDay Calc</span>, we don’t just look at the sky; we look at the data. Founded on the belief that "2 inches isn't just snow—it's a lifestyle change," we’ve built a predictor specifically for regions where every degree matters.
+          At <span className="font-bold text-slate-800 dark:text-white">SnowDay Calc</span>, we don’t just look at the sky; we look at the data. Founded on the belief that "2 inches isn't just snow—it's a lifestyle change," we’ve built a predictor specifically for regions where every degree matters.
         </p>
         
-        <p className="font-medium italic text-slate-500">
+        <p className="font-medium italic text-slate-500 dark:text-blue-300">
           "We merge high-fidelity meteorological data with local district logic to tell you if the school bus is coming, before the first snowflake hits the ground."
         </p>
 
         <div className="pt-8 flex flex-wrap justify-center gap-4 text-sm font-bold uppercase tracking-widest">
-          <span className="px-4 py-2 bg-blue-50 text-blue-600 rounded-full border border-blue-100">75% Weight: Commute Window</span>
-          <span className="px-4 py-2 bg-slate-50  text-slate-700 rounded-full border border-slate-300">AI Driven Logic</span>
+          <span className="px-4 py-2 bg-blue-50 dark:bg-black text-blue-600 rounded-full border border-blue-100">75% Weight: Commute Window</span>
+          <span className="px-4 py-2 bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:from-[#182e63] dark:to-[#127a82] text-white rounded-full border border-slate-300">AI Driven Logic</span>
         </div>
       </div>
     </div>

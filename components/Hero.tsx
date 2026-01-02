@@ -99,134 +99,96 @@ const Hero: React.FC = () => {
 
   return (
     <>
-        <div className="absolute top-0 left-0"> <Snowfall /></div>
+        <div className="absolute top-0 left-0"><Snowfall/></div>
         <div className=" w-full relative text-foreground ">
-            {/* Mobile Cloud */}
-            <div className="hidden">
-            <div className="max-w-3xl mx-auto text-center pt-5">
-              <div className="space-y-1">
-                    <h1 className="text-8xl font-medium tracking-tighter">
-                      Snow Day
-                    </h1>
-                    <h2 className="text-6xl tracking-tight text-blue-400">
-                      School Closure Predictor
-                    </h2>
-                  </div>
-
-                  <p className="leading-relaxed mt-5 text-lg">
-                    Advanced snow analysis using live weather data, snowfall intensity,
-                    road conditions, and historical school closure trends to predict
-                    the chances of a snow day in your area.
-                  </p>
-            </div>
-            <div className="flex justify-center w-full ">
-              <Image
-                width={500}
-                height={180}
-                className="w-full max-w-[500px] drop-shadow-2xl relative z-10 dark:animate-pulse"
-                src="/cloud3.png"
-                alt="Snow Cloud"
-              />
-            </div>
-            </div>
-
-          <div className="relative z-10 p-6 md:p-10  flex flex-col justify-between">
+      
+          <div className="relative z-10 p-3 md:p-10  flex flex-col justify-between">
 
             {/* HERO CONTENT */}
-            <main className="grid grid-cols-5 gap-8 items-center">
+          <main className="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-12 items-center px-4 mt-5  ">
 
-              {/* LEFT SECTION */}
-              <div className="col-span-2 space-y-6">
-                <div className="space-y-1">
-                  <h1 className="text-8xl font-medium tracking-tighter">
-                    Snow Day
-                  </h1>
-                  <h2 className="text-6xl tracking-tight text-blue-400">
-                    School Closure Predictor
-                  </h2>
-                </div>
+  {/* LEFT SECTION - Stacked on mobile, 2 columns on Desktop */}
+  <div className="order-1 col-span-1 lg:col-span-2 space-y-6 text-center lg:text-left">
+    <div className="space-y-2">
+      <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tighter">
+        Snow Day
+      </h1>
+      <h2 className="text-3xl md:text-5xl lg:text-6xl tracking-tight text-blue-400">
+        School Closure Predictor
+      </h2>
+    </div>
 
-                <p className="max-w-md text-sm leading-relaxed opacity-80">
-                  Advanced snow analysis using live weather data, snowfall intensity,
-                  road conditions, and historical school closure trends to predict
-                  the chances of a snow day in your area.
-                </p>
+    <p className="max-w-md mx-auto lg:mx-0 text-sm md:text-base leading-relaxed opacity-80">
+      Advanced snow analysis using live weather data, snowfall intensity,
+      road conditions, and historical school closure trends to predict
+      the chances of a snow day in your area.
+    </p>
+  </div>
 
-              
-              </div>
+  {/* RIGHT WRAPPER - Stays as a sub-grid but handles spacing better */}
+  <div className="order-1 lg:order-2 col-span-1 lg:col-span-3  gap-2 items-center">
+    
+    {/* CENTER VISUAL (Cloud) */}
+    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+      <Image
+        width={500}
+        height={180}
+        className="w-full max-w-[300px] md:max-w-[450px] drop-shadow-2xl relative z-10 animate-pulse"
+        src="/cloud2.png"
+        alt="Snow Storm"
+      />
+    </div>
 
-            <div className="col-span-3 grid grid-cols-2">
-              {/* CENTER VISUAL */}
-              <div className="col-span-1">
-                <Image
-                  width={500}
-                  height={180}
-                  className="w-full max-w-[450px] drop-shadow-2xl relative z-10 animate-pulse"
-                  src="/cloud2.png"
-                  alt="Snow Storm"
-                />
-              </div>
+    {/* RIGHT SECTION (Stats) */}
+    <div className="flex flex-col justify-center items-center lg:items-end text-center lg:text-right">
+      {/* MAIN SCORE */}
+      <div className='flex items-center gap-5'>
+        <h3 className="text-4xl md:text-6xl lg:text-9xl leading-[0.8] tracking-tighter relative inline-block">
+          98%
+          <span className="hidden lg:block absolute top-1/4 -right-12 text-4xl"></span>
+        </h3>
 
-              {/* RIGHT SECTION */}
-              <div className="col-span-1">
+        <div className="mt-6 space-y-2 text-[10px] md:text-xs uppercase font-bold tracking-widest opacity-80">
+          <p>Accuracy</p>
+          <p className="flex justify-center lg:justify-end gap-2 items-center">
+            <Snowflake className="w-4 h-4" /> Heavy Snowfall
+          </p>
+          <p className="flex justify-center lg:justify-end gap-2 items-center">
+            <Wind className="w-4 h-4" /> Poor Road Conditions
+          </p>
+          <p className="flex justify-center lg:justify-end gap-2 items-center">
+            <Thermometer className="w-4 h-4" /> Below Freezing
+          </p>
+        </div>
+      </div>
 
-                {/* MAIN SCORE */}
-                <div className="text-right">
-                  <h3 className="text-9xl leading-[0.8] tracking-tighter relative">
-                    98%
-                    <span className="absolute top-1/4 -right-12 text-4xl">
-                    
-                    </span>
-                  </h3>
-
-                  <div className="mt-4 space-y-1 text-xs uppercase font-bold tracking-widest opacity-80">
-                    <p>Accuracy</p>
-                    <p className="flex justify-end gap-2">
-                      <Snowflake className="w-4 h-4" /> Heavy Snowfall
-                    </p>
-                    <p className="flex justify-end gap-2">
-                      <Wind className="w-4 h-4" /> Poor Road Conditions
-                    </p>
-                    <p className="flex justify-end gap-2">
-                      <Thermometer className="w-4 h-4" /> Below Freezing
-                    </p>
-                  </div>
-                </div>
-
-                {/* CITY PROBABILITIES */}
-                <div className="flex gap-10 pt-10">
-                  <div>
-                    <p className="text-3xl">92%</p>
-                    <div className="w-12 h-1 bg-blue-400 rounded-full mt-1" />
-                    <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
-                      Washington D.C.
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-3xl">68%</p>
-                    <div className="w-12 h-1 bg-yellow-400 rounded-full mt-1" />
-                    <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
-                      Oklahoma City
-                    </p>
-                  </div>
-                  <div>
-                    <p className="text-3xl">85%</p>
-                    <div className="w-12 h-1 bg-cyan-400 rounded-full mt-1" />
-                    <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
-                      Philadelphia
-                    </p>
-                  </div>
-                </div>
-              </div>
-              {/* <div className="col-span-2 flex flex-col items-end space-y-8">
-
-        
-                <div className="bg-white/10 backdrop-blur-2xl border border-white/20 p-6 rounded-[2.5rem] w-full">
-                <PlaceholdersAndVanishInputDemo/>
-                </div>
-              </div> */}
-              </div>
-            </main>
+      {/* CITY PROBABILITIES - Scrollable on very small screens */}
+      <div className="flex  justify-center lg:justify-end gap-6 md:gap-10 pt-10">
+        <div className="text-center lg:text-left">
+          <p className="text-2xl md:text-3xl">92%</p>
+          <div className="w-12 h-1 bg-blue-400 rounded-full mt-1 mx-auto lg:mx-0" />
+          <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+            Washington D.C.
+          </p>
+        </div>
+        <div className="text-center lg:text-left">
+          <p className="text-2xl md:text-3xl">68%</p>
+          <div className="w-12 h-1 bg-yellow-400 rounded-full mt-1 mx-auto lg:mx-0" />
+          <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+            Oklahoma City
+          </p>
+        </div>
+        <div className="text-center lg:text-left">
+          <p className="text-2xl md:text-3xl">85%</p>
+          <div className="w-12 h-1 bg-cyan-400 rounded-full mt-1 mx-auto lg:mx-0" />
+          <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+            Philadelphia
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
 
 
 
@@ -248,17 +210,20 @@ const Hero: React.FC = () => {
              />
           </div>
 
-                         {/* Results */}
+       </div>
+    </div>
+
+        {/* Results */}
         {weather && (
-          <div className="space-y-12 text-foreground mt-12 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="space-y-12 p-4 text-foreground mt-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
           
             {/* Gauge */}
             <div className=" bg-blue-100/30 dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 rounded-[30px] ">
-               <h1 className="text-3xl text-black/80 dark:text-white font-light text-center mb-5">
+               <h1 className="text-xl md:text-3xl text-black/80 dark:text-white font-light text-center mb-5">
               Weather in <span className="font-bold italic underline underline-offset-7">{locationName}</span>
             </h1>
-             <div className="flex flex-col md:flex-row items-center justify-center gap-10">
-              <div className="relative w-48 h-48">
+             <div className="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-10">
+              <div className="relative w-40 h-40 md:h-48 md:w-48">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
                   <circle className="text-blue-100 stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
                   <circle
@@ -275,7 +240,7 @@ const Hero: React.FC = () => {
                   />
                 </svg>
                 <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-4xl font-black">{weather.daily[0].snowDayChance}%</span>
+                  <span className="text-4xl mb-1 font-semibold">{weather.daily[0].snowDayChance} %</span>
                   <span className="text-[10px] uppercase font-bold opacity-50">Chance</span>
                 </div>
               </div>
@@ -284,7 +249,7 @@ const Hero: React.FC = () => {
                 <p className="font-bold text-lg text-[#50A2FF] italic dark:text-white mb-2">
                   {getStatusMessage(weather.daily[0].snowDayChance)}
                 </p>
-                <h2 className="text-4xl font-bold text-[#4190e9] dark:text-[#d9d3ff]">
+                <h2 className="text-3xl md:tex-4xl font-bold text-[#4190e9] dark:text-[#d9d3ff]">
                   {weather.daily[0].snowDayChance > 50 ? "Grab the pajamas!" : "Keep the backpack ready."}
                 </h2>
               </div>
@@ -300,14 +265,14 @@ const Hero: React.FC = () => {
 
                 <Carousel
                     plugins={[plugin.current]}
-                    className="w-[93%] m-auto" // Increased width to fit more cards
+                    className="w-[80%] md:[90%] m-auto" // Increased width to fit more cards
 
                   >
                     <CarouselContent>
                       {weather.hourly.map((h, i) => (
                         // basis-1/5 shows 5 cards, basis-1/6 shows 6 cards
                         // Use md: and lg: for responsiveness
-                        <CarouselItem key={i} className="md:basis-1/3 lg:basis-1/7">
+                        <CarouselItem key={i} className=" basis-1/2 sm:basis-1/3 lg:basis-1/7">
                           <div className="p-1">
                             <Card className='flex aspect-square items-center shadow-md bg-blue-100/30 dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c] justify-center  rounded-xl p-2 text-center  flex-col gap-4'>
                               <CardContent className="">
@@ -391,8 +356,7 @@ const Hero: React.FC = () => {
           </div>
         )}
 
-          </div>
-        </div>
+    
     </>
   );
 };

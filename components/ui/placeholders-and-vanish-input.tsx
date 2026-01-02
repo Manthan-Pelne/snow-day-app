@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 export function PlaceholdersAndVanishInput({
   placeholders,
   onChange,
-  onSubmit,
+  onSubmit
 }: {
   placeholders: string[];
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;

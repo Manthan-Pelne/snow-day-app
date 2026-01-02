@@ -6,9 +6,9 @@ import Info2 from "@/components/Info2"
 const page = () => {
   return (
     <>
-      <div className="pt-20 max-w-7xl mx-auto">
+      <div className="pt-16 md:pt-20 max-w-7xl mx-auto">
         <Hero/>
-          <div className="py-20">
+          <div className="pt-20">
             <Info/>
             <Info2/>
           </div>
