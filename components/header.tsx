@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
-      <div className="relative w-[97%] m-auto md:max-w-7xl backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
+      <div className="relative w-[90%] lg:max-w-7xl m-auto backdrop-blur-xl bg-white/5 border border-white/10 rounded-2xl overflow-hidden">
         <div className="flex justify-between items-center p-2 lg:px-8">
           {/* Logo Section */}
           <div className="flex items-center gap-8">

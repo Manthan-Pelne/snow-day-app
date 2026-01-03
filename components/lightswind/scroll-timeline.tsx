@@ -229,13 +229,13 @@ export const ScrollTimeline = ({
       )}
     >
       <div className="text-center py-16 px-4">
-                <h2 className="text-3xl md:text-6xl pb-2 font-extrabold">
+                <h2 className="text-3xl md:text-5xl pb-2 font-extrabold">
             {title}
           </h2>
           <p className=" text-[gray] md:text-lg mt-2">{subtitle}</p>
       </div>
 
-      <div className="relative max-w-6xl mx-auto px-4 pb-24">
+      <div className="relative max-w-6xl mx-auto px-4">
         <div className="relative mx-auto">
           <div
             className={cn(getConnectorClasses(), "h-full absolute top-0 z-10")}
@@ -255,7 +255,7 @@ export const ScrollTimeline = ({
                   transform: "translateX(-50%)",
                   borderRadius:
                     progressLineCap === "round" ? "9999px" : "0px",
-                  background: `linear-gradient(to bottom, #22d3ee, #6366f1, #a855f7)`,
+                  background: `linear-gradient(to bottom, #22d3ee, #6366f1,#6366f1)`,
                   // Enhanced shadow for a constant glow effect along the path
                   boxShadow: `
                     0 0 15px rgba(99,102,241,0.5),

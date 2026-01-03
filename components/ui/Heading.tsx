@@ -5,7 +5,7 @@ import { SparkleParticles } from "../lightswind/sparkle-particles";
 export function Heading({ title }) {
   return (
     <div className="w-full  flex flex-col items-center justify-center overflow-hidden rounded-md relative">
-      <div className="md:w-[40rem] h-32 md:h-20 relative">
+      <div className="md:w-[40rem] h-24 md:h-20 relative">
         <h2 className="text-2xl md:text-3xl text-md font-bold text-center dark:text-white relative mb-2 font-secondary">
           {title.name}
         </h2>

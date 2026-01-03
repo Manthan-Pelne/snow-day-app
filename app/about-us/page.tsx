@@ -16,29 +16,29 @@ const page = () => {
 
   return (
     <>
-      <div className="pt-20 max-w-7xl mx-auto">
+      <div className="pt-20 max-w-7xl mx-auto px-4 lg:px-0">
         <div className="absolute top-0 left-0"> <Snowfall /></div>
         <div className=" w-full relative overflow-hidden text-foreground ">
             {/* Mobile Cloud */}
             <div className="mt-10">
             <div className="max-w-3xl mx-auto text-center">
               <div className="space-y-1">
-                    <h1 className="text-6xl font-medium tracking-tighter">
+                    <h1 className="text-4xl md:text-6xl font-medium tracking-tighter">
                      About
                     </h1>
-                    <h2 className="text-4xl tracking-tight text-blue-400">
+                    <h2 className="text-2xl md:text-4xl tracking-tight text-blue-400">
                       Snow Day calculator
                     </h2>
                   </div>
 
-                  <p className="leading-relaxed mt-2">
+                  <p className="leading-relaxed mt-2 text-sm">
                     Advanced snow analysis using live weather data, snowfall intensity,
                     road conditions, and historical school closure trends to predict
                     the chances of a snow day in your area.
                   </p>
             </div>
-            <div className="min-w-2xl w-full grid place-content-center relative">
-               <div className="flex justify-center w-full ">
+            <div className=" m-auto pt-20 relative">
+               <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
               <Image
                 width={300}
                 height={180}
@@ -47,13 +47,8 @@ const page = () => {
                 alt="Snow Cloud"
               />
               </div>
-
             </div>
-           
-
-           
             </div>
-
         </div>
       </div>
 
@@ -63,11 +58,11 @@ const page = () => {
    <div className="absolute translate-y-2/2 left-[-20px] w-64 h-64 bg-blue-400 rotate-12 opacity-20 rounded-3xl"></div>
 </section>
   
-<div className="relative  mt-20 w-11/12 md:max-w-4xl m-auto p-12 rounded-3xl border border-slate-200 dark:border-[#4c4a4a] bg-linear-to-b from-blue-200 via-white dark:bg-linear-to-b dark:from-black dark:via-black dark:to-black shadow-xl overflow-hidden">
-  <SparkleParticles className='absolute top-0 w-full'/>
+<div className="relative  mt-10 w-11/12 md:max-w-4xl m-auto py-10 rounded-3xl border border-slate-200 dark:border-[#4c4a4a] bg-linear-to-b from-blue-200 via-white dark:bg-linear-to-b dark:from-black dark:via-black dark:to-black shadow-xl overflow-hidden">
+  <SparkleParticles className='absolute top-0 w-full h-full opacity-50'/>
   {/* Content (Z-index ensures text stays on top) */}
-  <div className="relative z-10">
-    <h2 className="text-2xl font-bold text-slate-800 dark:text-white mb-6">
+  <div className="relative z-10 px-4 md:px-10">
+    <h2 className="text-xl md:text-2xl font-bold text-slate-800 dark:text-white mb-6">
       Lorem, ipsum dolor sit amet consectetur adipisicing elit. Blanditiis, excepturi.
     </h2>
     
@@ -90,24 +85,24 @@ const page = () => {
   {/* Background Decorative Objects */}
   <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full max-w-4xl h-full">
     <div className="absolute -top-10 -left-10 w-64 h-64 bg-blue-400/10 rounded-full blur-3xl" />
-    <div className="absolute bottom-0 -right-10 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl" />
+    <div className="absolute bottom-0 right-0 md:-right-10 w-80 h-80 bg-indigo-400/10 rounded-full blur-3xl" />
    <div className="absolute bottom-[-20px] left-[-20px] w-40 h-40 bg-blue-400 rounded-[50px] opacity-20"></div>
   </div>
 
-  <div className="relative max-w-4xl mx-auto p-10 md:p-16 rounded-[40px] bg-white/60 dark:bg-black/30 backdrop-blur-xl border border-gray-100 dark:border-[#4c4a4a] shadow-2xl overflow-hidden">
+  <div className="relative max-w-4xl mx-auto p-4 md:p-16 rounded-3xl md:rounded-[40px] bg-white/60 dark:bg-black/30 backdrop-blur-xl border border-gray-100 dark:border-[#4c4a4a] shadow-2xl overflow-hidden">
     
     {/* Subtle Geometric "Object" behind text */}
-    <div className="absolute top-[-10%] right-[-5%] w-64 h-64 border-[16px] border-blue-100 dark:border-cyan-300/40 rounded-full -z-10" />
+    <div className="absolute top-[-10%] right-[-5%] w-64 h-64 border-[16px] border-blue-100 dark:border-blue-300/20 rounded-full -z-10" />
     
     <div className="relative z-10 text-center">
       <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-8 tracking-tight">
         Precision in every flake. <br/>
-        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-cyan-500">
+        <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-700 to-blue-500">
           Peace of mind for parents.
         </span>
       </h2>
 
-      <div className="space-y-6 text-slate-600 dark:text-[#b9b5b5] text-lg leading-relaxed max-w-2xl mx-auto">
+      <div className="space-y-6 text-slate-600 dark:text-[#b9b5b5] md:text-lg leading-relaxed max-w-2xl mx-auto">
         <p>
           At <span className="font-bold text-slate-800 dark:text-white">SnowDay Calc</span>, we don’t just look at the sky; we look at the data. Founded on the belief that "2 inches isn't just snow—it's a lifestyle change," we’ve built a predictor specifically for regions where every degree matters.
         </p>

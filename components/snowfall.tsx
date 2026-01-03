@@ -15,7 +15,7 @@ const Snowfall: React.FC = () => {
     let particles: Particle[] = [];
     
     // REDUCED COUNT: 30 particles is usually perfect for a subtle look
-    const particleCount = 10; 
+    const particleCount = 15; 
 
     const resize = () => {
       canvas.width = window.innerWidth;

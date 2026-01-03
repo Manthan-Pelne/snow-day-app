@@ -129,7 +129,7 @@ const Hero: React.FC = () => {
   <div className="order-1 lg:order-2 col-span-1 lg:col-span-3  gap-2 items-center">
     
     {/* CENTER VISUAL (Cloud) */}
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
       <Image
         width={500}
         height={180}
@@ -140,9 +140,9 @@ const Hero: React.FC = () => {
     </div>
 
     {/* RIGHT SECTION (Stats) */}
-    <div className="flex flex-col justify-center items-center lg:items-end text-center lg:text-right">
+    <div className="flex flex-col mt-5 justify-center items-center lg:items-end text-center lg:text-right">
       {/* MAIN SCORE */}
-      <div className='flex items-center gap-5'>
+      <div className='flex flex-col items-center'>
         <h3 className="text-4xl md:text-6xl lg:text-9xl leading-[0.8] tracking-tighter relative inline-block">
           98%
           <span className="hidden lg:block absolute top-1/4 -right-12 text-4xl"></span>

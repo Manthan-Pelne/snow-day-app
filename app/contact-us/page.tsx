@@ -12,17 +12,17 @@ export const metadata = {
 export default function Page() {
   return (
     <>
-          <div className="pt-20 max-w-7xl mx-auto">
+          <div className="pt-20 max-w-7xl mx-auto px-4">
             <div className="absolute top-0 left-0"> <Snowfall /></div>
             <div className=" w-full relative overflow-hidden text-foreground ">
                 {/* Mobile Cloud */}
                 <div className="mt-10">
                 <div className="max-w-3xl mx-auto text-center">
                   <div className="space-y-1">
-                        <h1 className="text-4xl font-medium tracking-tighter">
+                        <h1 className="text-4xl md:text-6xl font-medium tracking-tighter">
                          Get in Touch with
                         </h1>
-                        <h2 className="text-5xl tracking-tight text-blue-400">
+                        <h2 className="text-2xl md:text-4xl tracking-tight text-blue-400">
                           Snow day Prediction
                         </h2>
                       </div>
@@ -31,21 +31,17 @@ export default function Page() {
                        Have a question, found a bug, or want to share feedback? We’re always happy to hear from you. Our team aims to respond as quickly as possible.
                       </p>
                 </div>
-                <div className="min-w-2xl w-full grid place-content-center relative">
-                   <div className="flex justify-center w-full ">
-                  <Image
-                    width={300}
-                    height={180}
-                    className="w-full max-w-[300px] drop-shadow-2xl relative z-10 dark:animate-pulse"
-                    src="/cloud3.png"
-                    alt="Snow Cloud"
-                  />
-                  </div>
-    
-                </div>
-               
-    
-               
+               <div className=" m-auto pt-20 relative">
+                             <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                            <Image
+                              width={300}
+                              height={180}
+                              className="w-full max-w-[300px] drop-shadow-2xl relative z-10 dark:animate-pulse"
+                              src="/cloud3.png"
+                              alt="Snow Cloud"
+                            />
+                            </div>
+                 </div>
                 </div>
     
             </div>
@@ -53,7 +49,7 @@ export default function Page() {
             <section className="">
               <div className="max-w-2xl mx-auto">
                 {/* FORM CARD */}
-                <div className="rounded-2xl  backdrop-blur-xl shadow-xl p-6 md:p-8">
+                <div className="rounded-2xl  backdrop-blur-xl shadow-xl p-1 md:p-8">
                   <ContactForm />
                 </div>
 

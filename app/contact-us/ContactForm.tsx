@@ -133,7 +133,7 @@ export default function ContactForm() {
               )}
             />
 
-            <Button className="herobtn-primary cursor-pointer max-w-60 w-full m-auto" type="submit" disabled={status === "sending"}>
+            <Button className="herobtn-primary cursor-pointer  w-full m-auto" type="submit" disabled={status === "sending"}>
               {status === "sending" ? "Sending..." : "Submit"}
             </Button>
           </form>

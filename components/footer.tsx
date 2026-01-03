@@ -3,7 +3,7 @@ import { Facebook, Twitter, Instagram, Github } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden mt-30">
+    <footer className="relative overflow-hidden bg-linear-to-b from-white via-white to-[#beddfc] dark:bg-linear-to-b dark:from-black dark:via-black dark:to-[#072a4c] ">
       <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-3 gap-5 px-6 pt-10 md:grid-cols-5 md:gap-12 md:px-12">
 
         {/* Brand */}
@@ -24,27 +24,27 @@ export default function Footer() {
 
         {/* Navigation */}
         <div>
-          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground dark:border-neutral-500 md:text-lg">
+          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground dark:border-neutral-500 ">
             Explore
           </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
-              <Link href="/" className="transition-colors hover:text-primary">
+              <Link href="/" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 Home
               </Link>
             </li>
             <li>
-              <Link href="/how-it-works" className="transition-colors hover:text-primary">
+              <Link href="/how-it-works" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 How It Works
               </Link>
             </li>
             <li>
-              <Link href="/about-us" className="transition-colors hover:text-primary">
+              <Link href="/about-us" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 About Snow Day Calculator
               </Link>
             </li>
             <li>
-              <Link href="/faq" className="transition-colors hover:text-primary">
+              <Link href="/faq" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 FAQs
               </Link>
             </li>
@@ -53,22 +53,22 @@ export default function Footer() {
 
         {/* Legal */}
         <div>
-          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground dark:border-neutral-500 md:text-lg">
+          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground dark:border-neutral-500">
             Legal
           </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
             <li>
-              <Link href="/privacy-policy" className="transition-colors hover:text-primary">
+              <Link href="/privacy-policy" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 Privacy Policy
               </Link>
             </li>
             <li>
-              <Link href="/terms-and-conditions" className="transition-colors hover:text-primary">
+              <Link href="/terms-and-conditions" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 Terms & Conditions
               </Link>
             </li>
             <li>
-              <Link href="/cookie-policy" className="transition-colors hover:text-primary">
+              <Link href="/cookie-policy" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
                 Cookie Policy
               </Link>
             </li>

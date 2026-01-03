@@ -64,17 +64,17 @@ export default function Page() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   return (
     <>
-          <div className="pt-20 max-w-7xl mx-auto p-10">
+          <div className="pt-20 max-w-7xl mx-auto px-4">
             <div className="absolute top-0 left-0"> <Snowfall /></div>
-            <div className=" w-full relative overflow-hidden text-foreground ">
+            <div className=" w-full relative overflow-hidden text-foreground mb-10">
                 {/* Mobile Cloud */}
                 <div className="mt-10">
                 <div className="max-w-3xl mx-auto text-center">
                   <div className="space-y-1">
-                        <h1 className="text-4xl font-medium tracking-tighter">
+                        <h1 className="text-4xl md:text-6xl font-medium tracking-tighter">
                          Frequently
                         </h1>
-                        <h2 className="text-5xl tracking-tight text-blue-400">
+                        <h2 className="text-4xl tracking-tight text-blue-400">
                           Asked Questions
                         </h2>
                       </div>
@@ -85,27 +85,23 @@ export default function Page() {
                       weather hits.
                     </p>
                 </div>
-                <div className="min-w-2xl w-full grid place-content-center relative">
-                   <div className="flex justify-center w-full ">
-                  <Image
-                    width={300}
-                    height={180}
-                    className="w-full max-w-[300px] drop-shadow-2xl relative z-10 dark:animate-pulse"
-                    src="/cloud3.png"
-                    alt="Snow Cloud"
-                  />
+                <div className=" m-auto pt-20 relative">
+                              <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                             <Image
+                               width={300}
+                               height={180}
+                               className="w-full max-w-[300px] drop-shadow-2xl relative z-10 dark:animate-pulse"
+                               src="/cloud3.png"
+                               alt="Snow Cloud"
+                             />
+                             </div>
                   </div>
-    
-                </div>
-               
-    
-               
                 </div>
     
             </div>
 
              {/* FAQ List */}
-           <div className="space-y-4 relative z-10 mt-10">
+           <div className="space-y-4 relative z-10 ">
   {faqs.map((faq, index) => (
     <div
       key={index}

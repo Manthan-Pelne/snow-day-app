@@ -4,6 +4,7 @@ import React from 'react';
 import "pattern.css"; 
 import { Snowflake } from 'lucide-react';
 import { ScrollTimeline } from './lightswind/scroll-timeline';
+import Link from 'next/link';
 
 const Info2: React.FC = () => {
 
@@ -81,19 +82,19 @@ const benefits = [
   
   return (
     <div>
-      <div className="max-w-6xl mx-auto mt-16 md:mt-30 px-5">
+      <div className="max-w-6xl mx-auto mt-16 md:mt-40 px-5">
         <div className="min-h-[75px] w-full py-[10px]  flex flex-col items-center justify-center">
           <div className="mb-[50px] mx-auto flex flex-col-reverse md:flex-row-reverse items-center justify-between max-w-[1320px] w-full gap-10 md:gap-0">
             {/* Image Section */}
             <div className="relative pattern-dots-md  md:w-[500px]">
               <img
                 className="w-full transform -translate-x-20 -translate-y-10 h-full drop-shadow-2xl"
-                src="/calc.png"
+                src="/calc_white.png"
                 alt="Snow Day Calculator Interface"
               />
               <div
                 className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82]  shadow-xl p-5 rounded-[10px] flex flex-col items-start max-w-[430px] 
-                  static md:absolute md:bottom-[-55px] md:left-[-12%] 
+                  static md:absolute md:bottom-[-55px] md:left-[-32%] 
                   mt-0 md:mt-0 z-10"
               >
                 <p className="font-bold text-white text-base leading-[22px] md:leading-[26px] mb-2.5">
@@ -121,12 +122,12 @@ const benefits = [
                 and ice warnings, our predictor is designed specifically for regions 
                 where even an inch of snow changes everything.
               </p>
-              <a
-                href="#features"
+              <Link
+                href="/about-us"
                 className="inline-block text-[#666666] dark:text-[#91c6f8] rounded-lg text-base font-semibold leading-7 border-2 border-[#666666] dark:border-[#9dcdfb] dark:bg-[#010d17] py-2 px-10 transition-colors duration-300 hover:bg-[#141452] hover:text-white hover:border-transparent cursor-pointer"
               >
                 View More
-              </a>
+              </Link>
             </div>
           </div>
         </div>
@@ -134,8 +135,8 @@ const benefits = [
 
 
       {/* Features Grid */}
-      <section id="features" className="max-w-7xl mx-auto mt-6 md:mt-30 bg-[#f3fdff] dark:bg-white/5 border rounded-2xl font-sans">
-        <div className="max-w-6xl mx-auto px-5 py-12 md:py-24">
+      <section id="features" className="max-w-7xl  mx-auto mt-6 md:mt-30 bg-[#f3fdff] dark:bg-white/5 border md:rounded-2xl font-sans">
+        <div className="max-w-6xl mx-auto px-5">
           <div className="text-center mb-10 md:mb-20">
             <h1 className="text-3xl md:text-5xl text-center mb-2 font-extrabold dark:text-white">
               Calculator Features
@@ -149,12 +150,12 @@ const benefits = [
             </div>
           </div>
 
-       <div className="grid grid-cols-1 md:grid-cols-3 sm:-m-4 -mx-4 -mb-10 -mt-4">
+       <div className="grid grid-cols-1 lg:grid-cols-3 sm:-m-4 -mx-4 -mb-10 -mt-4">
           {features.map((f, idx) => (
-            <div key={idx} className="p-8 md:mb-0 mb-2 flex flex-col">
+            <div key={idx} className="lg:w-[350px] p-8 md:mb-0 mb-2 flex flex-col">
               {/* Added text-blue-200 for visibility in light mode */}
               <div className="pattern-dots-md">
-                <div className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:from-[#182e63] dark:to-[#127a82] transition-all rounded-xl p-6 transform md:translate-x-6 -translate-y-6 hover:translate-x-4 hover:-translate-y-4 duration-300 text-white">
+                <div className=" bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:from-[#182e63] dark:to-[#127a82] transition-all rounded-xl p-6 transform md:translate-x-6 -translate-y-6 hover:translate-x-4 hover:-translate-y-4 duration-300 text-white">
                   <div className="w-12 h-12 inline-flex items-center justify-center rounded-full bg-white/20 mb-5 flex-shrink-0 p-2">
                     {f.icon}
                   </div>
@@ -173,20 +174,20 @@ const benefits = [
       </section>
 
    {/* benefits section */}
-    <section className="relative md:mt-20 py-24 overflow-hidden">
+    <section className="relative mt-20  overflow-hidden">
       {/* Decorative Snowflakes */}
       <div className="absolute top-10 left-10 text-cyan-400/50 animate-pulse"><Snowflake/></div>
       <div className="absolute bottom-10 right-10 text-cyan-400/50  animate-bounce  "><Snowflake className=''/></div>
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <h2 className="text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">Beyond the Day Off</h2>
+          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">Beyond the Day Off</h2>
           <p className="text-lg text-slate-500 dark:text-[gray] max-w-2xl mx-auto">Empowering everyone to plan ahead for winter's unpredictability.</p>
         </div>
 
         <div className="grid  md:grid-cols-2 lg:grid-cols-4 gap-6">
           {benefits.map((b, i) => (
-            <div key={i} className={`group relative p-8 rounded-3xl bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-blue-800/30 dark:to-black  border-t-10 border-blue-500/50 bg-white dark:bg-white/5 backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
+            <div key={i} className={`group relative p-8 rounded-3xl bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-[#163865] dark:to-black  border-t-10 border-blue-500/50 bg-white dark:bg-white/5 backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
               <div className={`absolute inset-0 bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-blue-800/20 dark:to-black opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl`} />
               <div className="relative z-10">
                 <div className="w-14 h-14 bg-blue-400/10 rounded-2xl shadow-inner flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
@@ -223,7 +224,7 @@ const benefits = [
           
           {/* Left Side: Textual Insight */}
           <div className="flex-1">
-            <h2 className="text-3xl md:text-4xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
+            <h2 className="text-3xl md:text-5xl font-bold text-slate-900 dark:text-white mb-6 leading-tight">
               Why 2 inches isn't <br /> 
               <span className="text-blue-500 underline decoration-blue-200 underline-offset-8">always 2 inches.</span>
             </h2>
