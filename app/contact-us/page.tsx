@@ -54,7 +54,7 @@ export default function Page() {
       
 
                       {/* The Form Container */}
-                      <div className="relative z-10 w-full max-w-4xl grid md:grid-cols-2 border  backdrop-blur-2xl rounded-xl shadow-2xl overflow-hidden">
+                      <div className="relative z-10 w-full max-w-4xl grid md:grid-cols-2 border  backdrop-blur-2xl rounded-xl shadow-xl overflow-hidden">
                         {/* Left Side: Info */}
                         <div className="p-8 md:p-10 bg-[#D6E8ED] dark:bg-blue-800/20 flex flex-col justify-between">
                           <div>

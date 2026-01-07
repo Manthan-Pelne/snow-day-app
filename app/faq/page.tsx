@@ -109,7 +109,7 @@ export default function Page() {
     return (
       <div
         key={index}
-        className="rounded-xl border border-border dark:border-none  bg-background/80 backdrop-blur shadow-sm transition-all hover:shadow-md overflow-hidden bg-linear-to-b from-white via-white to-[#eef6ff] dark:bg-linear-to-b dark:from-black dark:via-black dark:to-[#0e2325]"
+        className="rounded-xl border border-border dark:border-none  bg-background/80 backdrop-blur shadow-sm transition-all hover:shadow-md overflow-hidden bg-linear-to-b from-white via-white to-[#eef6ff] dark:bg-linear-to-b dark:from-black dark:via-black dark:to-[#031b33]"
       >
         <button
           onClick={() => setOpenIndex(isOpen ? null : index)}

@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import React, { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import { Thermometer, Snowflake, Wind, Sun } from "lucide-react";
+import { Thermometer, Snowflake, Wind, Sun, Cross, ArrowBigLeft } from "lucide-react";
 import {MeteorsDemo} from "./hero-card"
 import Search from "./inputSection"
 import GridPattern from "./GridPattern"
@@ -23,6 +23,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { Button } from './ui/button';
 
 
 
@@ -97,6 +98,12 @@ const Hero: React.FC = () => {
     setLoading(false);
   };
 
+
+const handleBackClick = () => {
+  setWeather(null);   // This hides the results section
+  setQuery("");      // Optional: Clears the search bar for a fresh start
+  setSuggestions([]); // Clears any leftover suggestions
+};
 
   return (
     <>
@@ -192,9 +199,9 @@ const Hero: React.FC = () => {
             
             </main>
 
-
-            <div className="relative w-[90%] md:max-w-4xl mx-auto border  bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16">
-                    <BorderBeam />
+          {!weather ? 
+          <div className="relative w-[90%] md:max-w-4xl mx-auto border bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16 animate-in fade-in duration-500">
+                 <BorderBeam />
                  <GridPattern 
                 value={query}
                 onChange={(e:any) => setQuery(e.target.value)}
@@ -206,20 +213,24 @@ const Hero: React.FC = () => {
                 setQuery(cityName);
                 setSuggestions([]);
                 handleSearch(null, cityName);
-                
                   }}
              />
-          </div>
+          </div> : null
+        }           
+          
 
        </div>
     </div>
 
         {/* Results */}
         {weather && (
-          <div className="space-y-12 p-4 text-foreground mt-4 animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div className="space-y-12 mt-10 p-4 text-foreground animate-in fade-in slide-in-from-bottom-4 duration-700">
           
             {/* Gauge */}
-            <div className=" bg-blue-100/30 dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 rounded-[30px] ">
+            <div className=" bg-blue-100/30 relative dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 rounded-[30px] ">
+              
+                <Button onClick={handleBackClick} className='flex items-center bg-blue-400 dark:bg-[#29292a] text-white cursor-pointer hover:bg-blue-500 transition-all duration-200 active:scale-90 active:shadow-none dark:hover:bg-black shadow-xl tracking-wider '>BACK<ArrowBigLeft className='rotate-45 dark:text-blue-500 mt-0.5'/> </Button>
+
                <h1 className="text-xl md:text-3xl text-black/80 dark:text-white font-light text-center mb-5">
               Weather in <span className="font-bold italic underline underline-offset-7">{locationName}</span>
             </h1>
@@ -256,6 +267,14 @@ const Hero: React.FC = () => {
               </div>
               </div>
             </div>
+
+         {/* GRAPH */}
+            <section className="px-2">
+              <h3 className="text-sm border border-black dark:border-white dark:text-white w-max rounded-lg text-black p-2 font-bold uppercase tracking-widest mb-4">
+                Atmospheric Trends
+              </h3>
+              <WeatherChart data={weather.hourly} />
+            </section>
 
 
             {/* Hourly */}
@@ -317,13 +336,7 @@ const Hero: React.FC = () => {
 
         
                  
-           {/* GRAPH */}
-            <section className="px-2">
-              <h3 className="text-sm border border-black dark:border-white dark:text-white w-max rounded-lg text-black p-2 font-bold uppercase tracking-widest mb-4">
-                Atmospheric Trends
-              </h3>
-              <WeatherChart data={weather.hourly} />
-            </section>
+          
 
 
 

@@ -4,7 +4,7 @@ export function Heading({ title }) {
   return (
     <div className="w-full flex flex-col items-center justify-center overflow-hidden rounded-md relative">
       <div className="md:w-[40rem] h-24 md:h-20 relative">
-        <h2 className="text-2xl md:text-3xl font-bold text-center dark:text-white relative z-20 mb-2 font-secondary">
+        <h2 className="text-2xl md:text-3xl font-bold text-center dark:text-white relative  mb-2 font-secondary">
           {title.name}
         </h2>
 

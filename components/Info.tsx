@@ -5,7 +5,7 @@ import Feature from "@/components/feature"
 const Info = () => {
   return (
     <>
-        <div className="px-4">
+        <div className="px-4 ">
           <Heading title={{ name: "Befinits of snow day prediction" }} />
         </div>
         <Feature/>
