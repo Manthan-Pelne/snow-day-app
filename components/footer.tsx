@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Facebook, Twitter, Instagram, Github } from "lucide-react"
+import { Facebook, Twitter, Instagram, Github, Snowflake } from "lucide-react"
 
 export default function Footer() {
   return (
@@ -18,7 +18,7 @@ export default function Footer() {
           <p className="mt-3 max-w-sm text-sm leading-relaxed text-muted-foreground">
             Predict the chances of a school snow day using real-time weather
             data, snowfall forecasts, and historical patterns. Fast, free,
-            and student-friendly ❄️
+            and student-friendly <Snowflake className="w-5 text-blue-400"/>
           </p>
         </div>
 

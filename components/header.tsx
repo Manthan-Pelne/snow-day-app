@@ -3,10 +3,14 @@ import Link from "next/link";
 import React, { useEffect, useState } from "react";
 import { ThemeToggle } from "@/components/theme-toggle";
 import { Menu, X } from "lucide-react"; // Install lucide-react if you haven't
+import { usePathname } from "next/navigation";
+import clsx from "clsx";
 
 const Header = () => {
   const [currentTime, setCurrentTime] = useState<Date | null>(null);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  const pathname = usePathname()
 
   useEffect(() => {
     setCurrentTime(new Date());
@@ -16,10 +20,12 @@ const Header = () => {
 
   const navLinks = [
     { name: "Home", href: "/" },
-    { name: "About us", href: "/about-us" },
-    { name: "Contact us", href: "/contact-us" },
+    { name: "About Us", href: "/about-us" },
+    { name: "Contact Us", href: "/contact-us" },
     { name: "FAQ's", href: "/faq" },
   ];
+
+
 
   return (
     <header className="fixed top-5 inset-x-0 z-50 flex justify-center px-4">
@@ -36,11 +42,34 @@ const Header = () => {
 
             {/* Desktop Navigation */}
             <nav className="hidden lg:flex gap-8 text-sm font-medium">
-              {navLinks.map((link) => (
-                <a key={link.name} href={link.href} className="hover:opacity-70 transition-opacity">
-                  {link.name}
-                </a>
-              ))}
+              
+              {navLinks.map((item) => {
+        const isActive = pathname === item.href
+
+        return (
+          <Link
+            key={item.href}
+            href={item.href}
+            aria-current={isActive ? "page" : undefined}
+            className={clsx(
+              "relative group font-semibold capitalize transition-colors",
+              isActive
+                ? "text-blue-500 dark:text-blue-400"
+                : "text-gray-800 hover:text-black dark:text-[#eceaea] dark:hover:text-white"
+            )}
+          >
+            {item.name}
+
+            {/* underline */}
+            <span
+              className={clsx(
+                "absolute -bottom-1 left-0 h-0.5 bg-[#72D4FF] transition-all duration-300",
+                isActive ? "w-full" : "w-0 group-hover:w-full"
+              )}
+            />
+          </Link>
+        )
+      })}
             </nav>
           </div>
 

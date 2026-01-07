@@ -37,7 +37,7 @@ export default function Navbar({
             className={clsx(
               "relative group font-semibold capitalize transition-colors",
               isActive
-                ? "text-white"
+                ? "text-blue-500"
                 : "text-gray-200 hover:text-white"
             )}
           >

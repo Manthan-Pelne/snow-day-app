@@ -284,3 +284,14 @@ body {
 }
 
 }
+
+
+.recharts-wrapper:focus, 
+.recharts-surface:focus, 
+.recharts-sector:focus, 
+.recharts-curve:focus, 
+.recharts-rectangle:focus {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}

@@ -28,14 +28,14 @@ export default function GridPattern({
   ];
 
   return (
-    <div className="p-10 group/file block rounded-lg w-full relative">
+    <div className="p-5 md:p-10 group/file block rounded-lg w-full relative">
       {/* Background Pattern */}
       <div className="absolute inset-0 [mask-image:radial-gradient(ellipse_at_center,white,transparent)]">
         <GridPatternBox />
       </div>
 
       <div className="flex flex-col items-center justify-center relative z-20">
-        <h2 className="font-sans font-bold text-neutral-700 dark:text-neutral-300 text-3xl mb-5">
+        <h2 className="font-sans font-bold text-neutral-700 dark:text-neutral-300 text-xl md:text-3xl mb-5">
           Search Zip or City
         </h2>
         
@@ -54,7 +54,7 @@ export default function GridPattern({
           )}
 
           {/* SUGGESTIONS DROPDOWN */}
-          {suggestions.length > 0 && (
+          {suggestions.length > 0  && (
             <div className="absolute top-full max-w-xl m-auto left-0 right-0 mt-2 bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl shadow-lg overflow-hidden z-100">
               {suggestions.map((loc, i) => (
                 <button

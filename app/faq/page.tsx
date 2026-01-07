@@ -6,6 +6,7 @@ const Snowfall = dynamic(() => import('@/components/snowfall'));
 
 import { useState } from "react"
 import { ChevronDown } from "lucide-react"
+import { AnimatePresence, motion } from 'framer-motion';
 
 const faqs = [
   {
@@ -64,7 +65,7 @@ export default function Page() {
   const [openIndex, setOpenIndex] = useState<number | null>(null)
   return (
     <>
-          <div className="pt-20 max-w-7xl mx-auto px-4">
+          <div className="pt-20 max-w-4xl mx-auto px-4">
             <div className="absolute top-0 left-0"> <Snowfall /></div>
             <div className=" w-full relative overflow-hidden text-foreground mb-10">
                 {/* Mobile Cloud */}
@@ -79,7 +80,7 @@ export default function Page() {
                         </h2>
                       </div>
     
-                     <p className="leading-relaxed mt-2 text-muted-foreground">
+                     <p className="leading-relaxed mt-2 dark:text-[#d2d1d1]">
                       Find answers to common questions about how the Snow Day Calculator works,
                       how predictions are made, and how to use it effectively before winter
                       weather hits.
@@ -101,38 +102,48 @@ export default function Page() {
             </div>
 
              {/* FAQ List */}
-           <div className="space-y-4 relative z-10 ">
-  {faqs.map((faq, index) => (
-    <div
-      key={index}
-      className="rounded-xl border border-border bg-background/80 backdrop-blur shadow-sm transition-all hover:shadow-md"
-    >
-      <button
-        onClick={() =>
-          setOpenIndex(openIndex === index ? null : index)
-        }
-        className="flex w-full items-center justify-between gap-4 px-5 py-4 text-left"
+         <div className="space-y-4 relative z-10">
+  {faqs.map((faq, index) => {
+    const isOpen = openIndex === index;
+
+    return (
+      <div
+        key={index}
+        className="rounded-xl border border-border dark:border-none  bg-background/80 backdrop-blur shadow-sm transition-all hover:shadow-md overflow-hidden bg-linear-to-b from-white via-white to-[#eef6ff] dark:bg-linear-to-b dark:from-black dark:via-black dark:to-[#0e2325]"
       >
-        <span className="text-base font-medium text-foreground">
-          {faq.question}
-        </span>
+        <button
+          onClick={() => setOpenIndex(isOpen ? null : index)}
+          className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left "
+        >
+          <span className="text-base font-medium text-foreground">
+            {faq.question}
+          </span>
+          <ChevronDown
+            className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
+              isOpen ? "rotate-180 text-primary" : ""
+            }`}
+          />
+        </button>
 
-        <ChevronDown
-          className={`h-5 w-5 shrink-0 text-muted-foreground transition-transform duration-300 ${
-            openIndex === index ? "rotate-180 text-primary" : ""
-          }`}
-        />
-      </button>
-
-      {openIndex === index && (
-        <div className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">
-          {faq.answer}
-        </div>
-      )}
-    </div>
-  ))}
+        <AnimatePresence initial={false}>
+          {isOpen && (
+            <motion.div
+              initial={{ height: 0, opacity: 0 }}
+              animate={{ height: "auto", opacity: 1 }}
+              exit={{ height: 0, opacity: 0 }}
+              transition={{ duration: 0.3, ease: [0.04, 0.62, 0.23, 0.98] }}
+            >
+              <div className="px-5 pb-5 text-sm leading-relaxed text-muted-foreground">
+                {faq.answer}
+              </div>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </div>
+    );
+  })}
 </div>
-          </div>
+         </div>
     </>
   )
 }

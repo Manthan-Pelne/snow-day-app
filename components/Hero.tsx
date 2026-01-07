@@ -11,6 +11,7 @@ import GridPattern from "./GridPattern"
 const Snowfall = dynamic(() => import('./snowfall'));
 import { BorderBeam } from "@/components/lightswind/border-beam"; 
 import { getWeatherData, searchLocations, SnowDayResult } from '@/app/actions/weather';
+const WeatherChart = dynamic(() => import('../components/weatherChart'), { ssr: false });
 
 import Autoplay from "embla-carousel-autoplay"
 
@@ -102,97 +103,97 @@ const Hero: React.FC = () => {
         <div className="absolute top-0 left-0"><Snowfall/></div>
         <div className=" w-full relative text-foreground ">
       
-          <div className="relative z-10 p-3 md:p-10  flex flex-col justify-between">
+          <div className="relative z-10  mt-10 md:mt-8  md:px-10  flex flex-col justify-between">
 
             {/* HERO CONTENT */}
-          <main className="grid grid-cols-1 lg:grid-cols-5 gap-5 lg:gap-12 items-center px-4 mt-5  ">
+          <main className="flex flex-col md:flex-row gap-5 lg:gap-12 items-center justify-between px-4 ">
 
-  {/* LEFT SECTION - Stacked on mobile, 2 columns on Desktop */}
-  <div className="order-1 col-span-1 lg:col-span-2 space-y-6 text-center lg:text-left">
-    <div className="space-y-2">
-      <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-medium tracking-tighter">
-        Snow Day
-      </h1>
-      <h2 className="text-3xl md:text-5xl lg:text-6xl tracking-tight text-blue-400">
-        School Closure Predictor
-      </h2>
-    </div>
+              {/* LEFT SECTION - Stacked on mobile, 2 columns on Desktop */}
+              <div className="order-1 col-span-2 lg:col-span-2 space-y-6 text-center md:text-left">
+                <div className="space-y-2">
+                  <h1 className="text-4xl sm:text-6xl xl:text-8xl font-medium tracking-tighter">
+                    Snow Day
+                  </h1>
+                  <h2 className="text-3xl md:text-5xl xl:text-7xl tracking-tight text-blue-400">
+                    School <br/> Closure Predictor
+                  </h2>
+                </div>
 
-    <p className="max-w-md mx-auto lg:mx-0 text-sm md:text-base leading-relaxed opacity-80">
-      Advanced snow analysis using live weather data, snowfall intensity,
-      road conditions, and historical school closure trends to predict
-      the chances of a snow day in your area.
-    </p>
-  </div>
+                <p className="max-w-md mx-auto lg:mx-0 text-sm md:text-base leading-relaxed opacity-80">
+                  Advanced snow analysis using live weather data, snowfall intensity,
+                  road conditions, and historical school closure trends to predict
+                  the chances of a snow day in your area.
+                </p>
+              </div>
 
-  {/* RIGHT WRAPPER - Stays as a sub-grid but handles spacing better */}
-  <div className="order-1 lg:order-2 col-span-1 lg:col-span-3  gap-2 items-center">
-    
-    {/* CENTER VISUAL (Cloud) */}
-    <div className="absolute top-1/3 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <Image
-        width={500}
-        height={180}
-        className="w-full max-w-[300px] md:max-w-[450px] drop-shadow-2xl relative z-10 animate-pulse"
-        src="/cloud2.png"
-        alt="Snow Storm"
-      />
-    </div>
+              {/* RIGHT WRAPPER - Stays as a sub-grid but handles spacing better */}
+              <div className="order-1 lg:order-2 col-span-1 lg:col-span-3  gap-2 items-center">
+                
+                {/* CENTER VISUAL (Cloud) */}
+                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+                  <Image
+                    width={500}
+                    height={180}
+                    className="w-full max-w-[300px] md:max-w-[450px] drop-shadow-2xl relative z-10 animate-pulse"
+                    src="/cloud2.png"
+                    alt="Snow Storm"
+                  />
+                </div>
 
-    {/* RIGHT SECTION (Stats) */}
-    <div className="flex flex-col mt-5 justify-center items-center lg:items-end text-center lg:text-right">
-      {/* MAIN SCORE */}
-      <div className='flex flex-col items-center'>
-        <h3 className="text-4xl md:text-6xl lg:text-9xl leading-[0.8] tracking-tighter relative inline-block">
-          98%
-          <span className="hidden lg:block absolute top-1/4 -right-12 text-4xl"></span>
-        </h3>
+                {/* RIGHT SECTION (Stats) */}
+                <div className="flex flex-col md:mt-5 justify-center items-center lg:items-end text-center lg:text-right">
+                  {/* MAIN SCORE */}
+                  <div className='flex md:flex-col items-center'>
+                    <h3 className="text-4xl md:text-6xl xl:text-9xl leading-[0.8] tracking-tighter relative inline-block">
+                      98%
+                      <span className="hidden lg:block absolute top-1/4 -right-12 text-4xl"></span>
+                    </h3>
 
-        <div className="mt-6 space-y-2 text-[10px] md:text-xs uppercase font-bold tracking-widest opacity-80">
-          <p>Accuracy</p>
-          <p className="flex justify-center lg:justify-end gap-2 items-center">
-            <Snowflake className="w-4 h-4" /> Heavy Snowfall
-          </p>
-          <p className="flex justify-center lg:justify-end gap-2 items-center">
-            <Wind className="w-4 h-4" /> Poor Road Conditions
-          </p>
-          <p className="flex justify-center lg:justify-end gap-2 items-center">
-            <Thermometer className="w-4 h-4" /> Below Freezing
-          </p>
-        </div>
-      </div>
+                    <div className="mt-6 space-y-2 text-[10px] md:text-xs uppercase font-bold tracking-widest opacity-80">
+                      <p>Accuracy</p>
+                      <p className="flex justify-center lg:justify-end gap-2 items-center">
+                        <Snowflake className="w-4 h-4" /> Heavy Snowfall
+                      </p>
+                      <p className="flex justify-center lg:justify-end gap-2 items-center">
+                        <Wind className="w-4 h-4" /> Poor Road Conditions
+                      </p>
+                      <p className="flex justify-center lg:justify-end gap-2 items-center">
+                        <Thermometer className="w-4 h-4" /> Below Freezing
+                      </p>
+                    </div>
+                  </div>
 
-      {/* CITY PROBABILITIES - Scrollable on very small screens */}
-      <div className="flex  justify-center lg:justify-end gap-6 md:gap-10 pt-10">
-        <div className="text-center lg:text-left">
-          <p className="text-2xl md:text-3xl">92%</p>
-          <div className="w-12 h-1 bg-blue-400 rounded-full mt-1 mx-auto lg:mx-0" />
-          <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
-            Washington D.C.
-          </p>
-        </div>
-        <div className="text-center lg:text-left">
-          <p className="text-2xl md:text-3xl">68%</p>
-          <div className="w-12 h-1 bg-yellow-400 rounded-full mt-1 mx-auto lg:mx-0" />
-          <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
-            Oklahoma City
-          </p>
-        </div>
-        <div className="text-center lg:text-left">
-          <p className="text-2xl md:text-3xl">85%</p>
-          <div className="w-12 h-1 bg-cyan-400 rounded-full mt-1 mx-auto lg:mx-0" />
-          <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
-            Philadelphia
-          </p>
-        </div>
-      </div>
-    </div>
-  </div>
-</main>
+                  {/* CITY PROBABILITIES - Scrollable on very small screens */}
+                  <div className="flex  justify-center lg:justify-end gap-6 xl:gap-10 pt-10">
+                    <div className="text-center lg:text-left">
+                      <p className="text-2xl xl:text-3xl">92%</p>
+                      <div className="w-12 h-1 bg-blue-400 rounded-full mt-1 mx-auto lg:mx-0" />
+                      <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+                        Washington D.C.
+                      </p>
+                    </div>
+                    <div className="text-center lg:text-left">
+                      <p className="text-2xl xl:text-3xl">88%</p>
+                      <div className="w-12 h-1 bg-yellow-400 rounded-full mt-1 mx-auto lg:mx-0" />
+                      <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+                        Oklahoma City
+                      </p>
+                    </div>
+                    <div className="text-center lg:text-left">
+                      <p className="text-2xl xl:text-3xl">85%</p>
+                      <div className="w-12 h-1 bg-cyan-400 rounded-full mt-1 mx-auto lg:mx-0" />
+                      <p className="text-[10px] mt-2 font-bold uppercase tracking-widest">
+                        Philadelphia
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            
+            </main>
 
 
-
-            <div className="relative w-full max-w-4xl mx-auto border  bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16">
+            <div className="relative w-[90%] md:max-w-4xl mx-auto border  bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16">
                     <BorderBeam />
                  <GridPattern 
                 value={query}
@@ -225,7 +226,7 @@ const Hero: React.FC = () => {
              <div className="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-10">
               <div className="relative w-40 h-40 md:h-48 md:w-48">
                 <svg className="w-full h-full" viewBox="0 0 100 100">
-                  <circle className="text-blue-100 stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
+                  <circle className="text-blue-100 dark:text-[#363638] stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
                   <circle
                     className={`${getGaugeColor(weather.daily[0].snowDayChance)} transition-all duration-1000 ease-out`}
                     strokeWidth="10"
@@ -249,23 +250,24 @@ const Hero: React.FC = () => {
                 <p className="font-bold text-lg text-[#50A2FF] italic dark:text-white mb-2">
                   {getStatusMessage(weather.daily[0].snowDayChance)}
                 </p>
-                <h2 className="text-3xl md:tex-4xl font-bold text-[#4190e9] dark:text-[#d9d3ff]">
+                <h2 className="text-3xl md:tex-4xl font-bold text-[#4190e9]">
                   {weather.daily[0].snowDayChance > 50 ? "Grab the pajamas!" : "Keep the backpack ready."}
                 </h2>
               </div>
               </div>
             </div>
 
+
             {/* Hourly */}
             <section>
               <h3 className="text-sm border border-black dark:border-white dark:text-white w-max rounded-lg text-black p-2 font-bold uppercase tracking-widest mb-4 ml-2">
                 Hourly (Next 24h)
               </h3>
-              <div className="flex gap-3  pb-6 ">
+              <div className="flex gap-3 pb-6 ">
 
                 <Carousel
                     plugins={[plugin.current]}
-                    className="w-[80%] md:[90%] m-auto" // Increased width to fit more cards
+                    className="w-[80%] 2xl:w-full m-auto" // Increased width to fit more cards
 
                   >
                     <CarouselContent>
@@ -312,6 +314,18 @@ const Hero: React.FC = () => {
                 ))} */}
               </div>
             </section>
+
+        
+                 
+           {/* GRAPH */}
+            <section className="px-2">
+              <h3 className="text-sm border border-black dark:border-white dark:text-white w-max rounded-lg text-black p-2 font-bold uppercase tracking-widest mb-4">
+                Atmospheric Trends
+              </h3>
+              <WeatherChart data={weather.hourly} />
+            </section>
+
+
 
             {/* 7-Day Forecast */}
             <section>

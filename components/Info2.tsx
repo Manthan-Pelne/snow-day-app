@@ -1,5 +1,5 @@
-
-import React from 'react';
+"use client"
+import React, { useState } from 'react';
 // Ensure pattern.css has a corresponding declaration file if your linter complains
 import "pattern.css"; 
 import { Snowflake } from 'lucide-react';
@@ -88,13 +88,18 @@ const benefits = [
             {/* Image Section */}
             <div className="relative pattern-dots-md  md:w-[500px]">
               <img
-                className="w-full transform -translate-x-20 -translate-y-10 h-full drop-shadow-2xl"
+                className="w-full block dark:hidden transform lg:-translate-x-20 -translate-y-10 h-full drop-shadow-2xl"
                 src="/calc_white.png"
+                alt="Snow Day Calculator Interface"
+              />
+                  <img
+                className="w-full hidden dark:block transform lg:-translate-x-20 -translate-y-10 h-full drop-shadow-2xl"
+                src="/calc.png"
                 alt="Snow Day Calculator Interface"
               />
               <div
                 className="bg-linear-to-r from-[#3b5eaf] to-[#57b0b6] dark:bg-linear-to-r dark:from-[#182e63] dark:to-[#127a82]  shadow-xl p-5 rounded-[10px] flex flex-col items-start max-w-[430px] 
-                  static md:absolute md:bottom-[-55px] md:left-[-32%] 
+                  static md:absolute md:bottom-[-55px] md:left-[-12%] lg:left-[-32%] 
                   mt-0 md:mt-0 z-10"
               >
                 <p className="font-bold text-white text-base leading-[22px] md:leading-[26px] mb-2.5">
@@ -117,14 +122,14 @@ const benefits = [
               <p className="text-[#6e6969] dark:text-[#9c9999] italic text-xl font-bold leading-7 md:leading-8 mb-2 p-0">
                 Predicting the unpredictable with southern-state precision.
               </p>
-              <p className="text-[#746f6f] dark:text-[#908b8b] text-base font-semibold leading-[22px] md:leading-[26px] mb-[50px] p-0">
+              <p className="text-[#746f6f] dark:text-[#908b8b] text-base font-semibold leading-[22px] md:leading-[26px] mb-5 md:mb-[50px] p-0">
                 Using a combination of morning commute snowfall totals, freeze factors, 
                 and ice warnings, our predictor is designed specifically for regions 
                 where even an inch of snow changes everything.
               </p>
               <Link
                 href="/about-us"
-                className="inline-block text-[#666666] dark:text-[#91c6f8] rounded-lg text-base font-semibold leading-7 border-2 border-[#666666] dark:border-[#9dcdfb] dark:bg-[#010d17] py-2 px-10 transition-colors duration-300 hover:bg-[#141452] hover:text-white hover:border-transparent cursor-pointer"
+                className="inline-block mb-10 md:mb-0 text-[#666666] dark:text-[#91c6f8] rounded-lg text-base font-semibold leading-7 border-2 border-[#666666] dark:border-[#9dcdfb] dark:bg-[#010d17] py-2 px-10 transition-colors duration-300 hover:bg-[#3b5eaf] hover:text-white hover:border-transparent cursor-pointer"
               >
                 View More
               </Link>
@@ -135,7 +140,7 @@ const benefits = [
 
 
       {/* Features Grid */}
-      <section id="features" className="max-w-7xl  mx-auto mt-6 md:mt-30 bg-[#f3fdff] dark:bg-white/5 border md:rounded-2xl font-sans">
+      <section id="features" className="max-w-7xl py-10  mx-auto mt-6 md:mt-30 bg-[#f3fdff] dark:bg-white/5 border md:rounded-2xl font-sans">
         <div className="max-w-6xl mx-auto px-5">
           <div className="text-center mb-10 md:mb-20">
             <h1 className="text-3xl md:text-5xl text-center mb-2 font-extrabold dark:text-white">
@@ -146,7 +151,7 @@ const benefits = [
               weather insights within seconds.
             </p>
             <div className="flex mt-6 justify-center">
-              <div className="w-16 h-1 rounded-full bg-[#275f78] inline-flex"></div>
+              <div className="w-16 h-1 rounded-full bg-[#3b5eaf] inline-flex"></div>
             </div>
           </div>
 
@@ -173,37 +178,10 @@ const benefits = [
         </div>
       </section>
 
-   {/* benefits section */}
-    <section className="relative mt-20  overflow-hidden">
-      {/* Decorative Snowflakes */}
-      <div className="absolute top-10 left-10 text-cyan-400/50 animate-pulse"><Snowflake/></div>
-      <div className="absolute bottom-10 right-10 text-cyan-400/50  animate-bounce  "><Snowflake className=''/></div>
-
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
-        <div className="text-center mb-16">
-          <h2 className="text-3xl md:text-5xl font-extrabold text-slate-900 dark:text-white tracking-tight mb-4">Beyond the Day Off</h2>
-          <p className="text-lg text-slate-500 dark:text-[gray] max-w-2xl mx-auto">Empowering everyone to plan ahead for winter's unpredictability.</p>
-        </div>
-
-        <div className="grid  md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {benefits.map((b, i) => (
-            <div key={i} className={`group relative p-8 rounded-3xl bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-[#163865] dark:to-black  border-t-10 border-blue-500/50 bg-white dark:bg-white/5 backdrop-blur-md  shadow-lg hover:shadow-2xl hover:border-none transition-all duration-300 hover:-translate-y-2`}>
-              <div className={`absolute inset-0 bg-linear-to-tr from-blue-200/50 to-transparent dark:bg-linear-to-tr dark:from-blue-800/20 dark:to-black opacity-0 group-hover:opacity-100 transition-opacity rounded-3xl`} />
-              <div className="relative z-10">
-                <div className="w-14 h-14 bg-blue-400/10 rounded-2xl shadow-inner flex items-center justify-center text-3xl mb-6 group-hover:scale-110 transition-transform">
-                  {b.icon}
-                </div>
-                <h3 className="text-xl font-bold text-black dark:text-white mb-3">{b.title}</h3>
-                <p className="text-[#807070] dark:text-[#adabab] text-sm leading-relaxed">{b.desc}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+ 
 
 
-   <section className=" md:mt-20 px-6 overflow-hidden">
+   <section className=" mt-5 md:mt-20 px-6 overflow-hidden">
       <div className="w-full :max-w-4xl mx-auto">
       <ScrollTimeline
       events={events}
@@ -218,9 +196,9 @@ const benefits = [
 
 
 
-    <section className=" md:mt-20">
+    <section className="mt-5 md:mt-20">
       <div className="max-w-6xl mx-auto px-4">
-        <div className="flex flex-col lg:flex-row justify-between gap-16 items-center">
+        <div className="flex flex-col lg:flex-row justify-between gap-10 md:gap-16 items-center">
           
           {/* Left Side: Textual Insight */}
           <div className="flex-1">
@@ -241,7 +219,7 @@ const benefits = [
           </div>
 
          {/* Stack Container */}
-          <div className="flex-1 w-full py-1 px-4 flex flex-col items-center">
+          <div className="flex-1 w-full py-1 px-4 flex flex-col items-center gap-5">
             {analytics.map((item, i) => {
               // Alternate rotation: 3 degrees is usually the "sweet spot" for this look
               const rotation = i % 2 === 0 ? 'rotate-2' : '-rotate-2';
