@@ -10,6 +10,7 @@ import {
   ResponsiveContainer,
   ComposedChart,
   Bar,
+  Legend,
 } from 'recharts';
 
 interface WeatherChartProps {
@@ -66,6 +67,16 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
           
           <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#888888" opacity={0.1} />
           
+
+{/* LEGEND: This adds the clear labels at the top */}
+          <Legend 
+            verticalAlign="top" 
+            align="right" 
+            height={36}
+            iconType="circle"
+            wrapperStyle={{ fontSize: '12px', paddingBottom: '15px', textTransform: 'uppercase', fontWeight: 'semibold' }}
+          />
+
           <XAxis 
             dataKey="time" 
             tick={<CustomXAxisTick />} 
@@ -74,8 +85,8 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
             tickLine={false}
           />
           
-          <YAxis yAxisId="left" stroke="currentColor" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}°`} />
-          <YAxis yAxisId="right" orientation="right" stroke="#60a5fa" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}cm`} />
+          <YAxis yAxisId="left" stroke="currentColor" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}°C`} />
+          <YAxis yAxisId="right" stroke="currentColor" orientation="right" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v} cm`} />
 
           <Tooltip 
             /* 2. Disables the focusable vertical line (cursor) */
@@ -93,6 +104,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
           <Area
             yAxisId="left"
             type="monotone"
+            name='Temperature'
             dataKey="temp"
             stroke="#3b82f6"
             strokeWidth={3}
@@ -106,6 +118,7 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
           <Bar 
             yAxisId="right" 
             dataKey="snow" 
+            name="Snowfall"
             fill="#60a5fa" 
             radius={[4, 4, 0, 0]} 
             barSize={12}

@@ -58,7 +58,7 @@ const page = () => {
    <div className="absolute translate-y-2/2 left-[-20px] w-64 h-64 bg-blue-400 rotate-12 opacity-20 rounded-3xl"></div>
 </section>
   
-<div className="relative mt-10 w-11/12 md:max-w-4xl m-auto py-12 px-1 rounded-[2.5rem] border border-white/20 dark:border-slate-800 bg-white/50 dark:bg-black/20 backdrop-blur-xl shadow-xl overflow-hidden group">
+<div className="relative mt-10 w-11/12 md:max-w-4xl m-auto py-5 md:py-10 px-1 rounded-[2.5rem] border border-white/20 dark:border-slate-800 bg-white/50 dark:bg-black/20 backdrop-blur-xl shadow-xl overflow-hidden group">
   
   {/* 1. Animated Spotlight (The "Graphic" element) */}
   <div className="absolute -top-[30%] -left-[10%] w-[70%] h-[70%] rounded-full bg-blue-400/20 dark:bg-blue-600/10 blur-[120px] pointer-events-none group-hover:bg-blue-400/30 transition-colors duration-700" />
@@ -68,21 +68,21 @@ const page = () => {
   <div className="absolute top-0 inset-x-0 h-px bg-linear-to-r from-transparent via-blue-500/50 to-transparent" />
 
   {/* 3. The Content Layer */}
-  <div className="relative z-10 px-6 md:px-12">
+  <div className="relative z-10 px-4 md:px-12">
     {/* Small Accent Tag */}
     <div className="mb-4 inline-flex items-center gap-2 px-3 py-1 rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 text-xs font-semibold tracking-wide uppercase">
       <span className="relative flex h-2 w-2">
         <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-blue-400 opacity-75"></span>
         <span className="relative inline-flex rounded-full h-2 w-2 bg-blue-500"></span>
       </span>
-      Featured Update
+      About Us
     </div>
 
     <h2 className="text-2xl md:text-4xl font-extrabold tracking-tight text-slate-900 dark:text-white mb-6 leading-tight">
       Lorem ipsum <span className="text-transparent bg-clip-text bg-linear-to-r from-[#519efd] to-[#55a0fd] dark:from-blue-400 dark:to-blue-500">Digital Experience</span>
     </h2>
     
-    <div className="space-y-6 text-lg text-slate-600 dark:text-slate-400 leading-relaxed max-w-2xl">
+    <div className="space-y-1 md:text-lg text-black/80 dark:text-[#b9b5b5] leading-relaxed md:max-w-2xl">
       <p>
         Lorem, ipsum dolor sit amet consectetur adipisicing elit. Natus dolore voluptatum quae, 
         quam odio quos dicta voluptatibus, itaque, accusantium rerum quidem!
@@ -92,6 +92,8 @@ const page = () => {
         quibusdam provident molestias itaque ad repellat.
       </p>
     </div>
+                <div className="absolute bottom-10 right-10 w-24 h-24 border-[6px] border-blue-100 dark:border-blue-300/10 rounded-[30px] -z-10"></div>
+        <div className="absolute bottom-0 right-20 w-24 h-24 border-[6px] border-blue-100 dark:border-blue-300/10 rounded-[30px] -z-10"></div>
   </div>
 
   {/* 4. Subtle Grid Pattern Background */}
@@ -113,7 +115,7 @@ const page = () => {
   <div className="relative max-w-4xl mx-auto p-4 md:p-16 rounded-3xl md:rounded-[40px] bg-white/60 dark:bg-black/30 backdrop-blur-xl border border-gray-100 dark:border-[#4c4a4a] shadow-xl overflow-hidden">
     
     {/* Subtle Geometric "Object" behind text */}
-    <div className="absolute top-[-10%] right-[-5%] w-64 h-64 border-[16px] border-blue-100 dark:border-blue-300/20 rounded-full -z-10" />
+    <div className="absolute top-[-10%] right-[-5%] w-64 h-64 border-[16px] border-blue-100 dark:border-blue-300/20 rounded-full -z-10"></div>
     
     <div className="relative z-10 text-center">
       <h2 className="text-4xl md:text-5xl font-black text-slate-900 dark:text-white mb-8 tracking-tight">

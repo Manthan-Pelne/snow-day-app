@@ -115,7 +115,7 @@ export default function Page() {
           onClick={() => setOpenIndex(isOpen ? null : index)}
           className="flex w-full cursor-pointer items-center justify-between gap-4 px-5 py-4 text-left "
         >
-          <span className="text-base font-medium text-foreground">
+          <span className="text-sm md:text-base font-medium text-foreground">
             {faq.question}
           </span>
           <ChevronDown

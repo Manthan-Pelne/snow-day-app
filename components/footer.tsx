@@ -3,8 +3,8 @@ import { Facebook, Twitter, Instagram, Github, Snowflake } from "lucide-react"
 
 export default function Footer() {
   return (
-    <footer className="relative overflow-hidden bg-linear-to-b from-white via-white to-[#beddfc] dark:bg-linear-to-b dark:from-black dark:via-black dark:to-[#072a4c] ">
-      <div className="relative z-10 mx-auto grid max-w-7xl grid-cols-3 gap-5 px-6 pt-10 md:grid-cols-5 md:gap-12 md:px-12">
+    <footer className="relative overflow-hidden border bg-linear-to-b from-white via-white to-[#beddfc] dark:bg-linear-to-b dark:from-black dark:via-black dark:to-[#072a4c] ">
+      <div className="relative mx-auto grid max-w-7xl grid-cols-3 gap-5 px-6 pt-10 md:grid-cols-5 md:gap-12 md:px-12">
 
         {/* Brand */}
         <div className="col-span-3 md:col-span-3">
@@ -24,7 +24,7 @@ export default function Footer() {
 
         {/* Navigation */}
         <div>
-          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground dark:border-neutral-500 ">
+          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground border-neutral-200 dark:border-neutral-800 ">
             Explore
           </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">
@@ -53,7 +53,7 @@ export default function Footer() {
 
         {/* Legal */}
         <div>
-          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground dark:border-neutral-500">
+          <h4 className="mb-3 border-b pb-1.5 text-sm font-semibold text-foreground border-neutral-200 dark:border-neutral-800">
             Legal
           </h4>
           <ul className="space-y-2 text-sm text-muted-foreground">

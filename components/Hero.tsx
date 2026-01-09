@@ -229,7 +229,7 @@ const handleBackClick = () => {
             {/* Gauge */}
             <div className=" bg-blue-100/30 relative dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 rounded-[30px] ">
               
-                <Button onClick={handleBackClick} className='flex items-center bg-blue-400 dark:bg-[#29292a] text-white cursor-pointer hover:bg-blue-500 transition-all duration-200 active:scale-90 active:shadow-none dark:hover:bg-black shadow-xl tracking-wider '>BACK<ArrowBigLeft className='rotate-45 dark:text-blue-500 mt-0.5'/> </Button>
+                <Button onClick={handleBackClick} className='flex items-center bg-blue-400 dark:bg-[#29292a] text-white cursor-pointer hover:bg-blue-500 transition-all duration-200 active:scale-90 active:shadow-none dark:hover:bg-black shadow-xl tracking-wider mb-3 md:mb-0'>BACK<ArrowBigLeft className='rotate-45 dark:text-blue-500 mt-0.5'/> </Button>
 
                <h1 className="text-xl md:text-3xl text-black/80 dark:text-white font-light text-center mb-5">
               Weather in <span className="font-bold italic underline underline-offset-7">{locationName}</span>

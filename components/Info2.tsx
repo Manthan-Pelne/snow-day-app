@@ -185,7 +185,7 @@ const benefits = [
       <div className="w-full :max-w-4xl mx-auto">
       <ScrollTimeline
       events={events}
-      title="The Math Behind the Magic"
+      title="How It Works."
       subtitle="How we turn raw weather data into your morning forecast."
       progressIndicator={true}
       cardAlignment="alternating"
