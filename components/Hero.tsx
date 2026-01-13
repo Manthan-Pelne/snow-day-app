@@ -98,6 +98,8 @@ const Hero: React.FC = () => {
     setLoading(false);
   };
 
+ 
+
 
 const handleBackClick = () => {
   setWeather(null);   // This hides the results section
@@ -286,36 +288,73 @@ const handleBackClick = () => {
 
                 <Carousel
                     plugins={[plugin.current]}
-                    className="w-[80%] 2xl:w-full m-auto" // Increased width to fit more cards
+                    className="w-[99%] sm:w-[90%] md:w-[90%] 2xl:w-full m-auto" // Increased width to fit more cards
 
                   >
                     <CarouselContent>
                       {weather.hourly.map((h, i) => (
                         // basis-1/5 shows 5 cards, basis-1/6 shows 6 cards
                         // Use md: and lg: for responsiveness
-                        <CarouselItem key={i} className=" basis-1/2 sm:basis-1/3 lg:basis-1/7">
+                        <CarouselItem key={i} className=" basis-1/2 sm:basis-1/4 lg:basis-1/5 xl:basis-1/7">
                           <div className="p-1">
                             <Card className='flex aspect-square items-center shadow-md bg-blue-100/30 dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c] justify-center  rounded-xl p-2 text-center  flex-col gap-4'>
-                              <CardContent className="">
-                        
-                                    <p className="text-xs text-black dark:text-white font-semibold opacity-70">{h.time}</p>
-                                    <div className="flex flex-col items-center">
-                                      {h.isSnowing ? <Snowflake className="text-blue-400 my-1" /> : <Sun className="my-3 text-orange-400" />}
-                                      {h.isSnowing ? (
-                                        <span className="text-sm text-blue-500 font-bold mt-2">{h.snowAmount} cm</span>
-                                      ) : (
-                                        <p className="text-xl font-semibold text-black dark:text-white">{h.temp}°</p>
-                                      )}
-                                    </div>
-                                  
-                              </CardContent>
+                          <CardContent className="
+                            /* Responsive Container: smaller padding/height on mobile */
+                            p-4 sm:p-6 
+                            min-h-[160px] sm:min-h-[200px] 
+                            flex flex-col justify-between 
+                          transition-all
+                          ">
+                            
+                            {/* TOP: Icon - smaller on mobile */}
+                            <div className="flex justify-between items-start">
+                              {h.isSnowing ? (
+                                <Snowflake className="text-blue-400 size-5 sm:size-7" />
+                              ) : (
+                                <Sun className="text-yellow-400 size-5 sm:size-7" />
+                              )}
+                            </div>
+                              {/* Condition Text - hidden on very small cards or just made smaller */}
+                              <div className="pb-1">
+                              <span className={`text-sm font-semibold whitespace-nowrap ${h.isSnowing ? 'text-blue-600' : 'text-yellow-600'}`}>
+                                {h.isSnowing ? "Snowing" : "Sunny"}
+                              </span>
+                              </div>
+
+                            <hr  className='my-1'/>
+
+                            {/* MIDDLE: Main Data - dynamic text sizing */}
+                            <div className="flex items-end justify-between gap-2">
+                              <div className="space-y-0"> 
+                                {h.isSnowing ? (
+                                  <h2 className="text-2xl sm:text-3xl font-semibold tracking-tighter text-black/80 dark:text-white leading-none">
+                                    {h.snowAmount}<span className="text-base sm:text-xl ml-0.5"> cm</span>
+                                  </h2>
+                                ) : (
+                                  <h2 className="text-2xl sm:text-3xl font-semibold tracking-tighter dark:text-white leading-none">
+                                    {h.temp}°<span className="text-base sm:text-xl ml-0.5"> C</span>
+                                  </h2>
+                                )}
+                                
+                                <p className='mt-1 text-sm dark:text-[#b8b5b5] font-semibold'>{h.time}</p>
+                                <p className="text-[10px] text-xs font-medium text-zinc-500 mt-1">
+                                 {h.isSnowing ? "Feels like a snowy day" : "Feels like a sunny day"}
+                            
+                                </p>
+                              </div>
+
+                            
+                            </div>
+
+
+                          </CardContent>
                             </Card>
                           </div>
                         </CarouselItem>
                       ))}
                     </CarouselContent>
-                    <CarouselPrevious />
-                    <CarouselNext />
+                    <CarouselPrevious  className='hidden sm:block w-max p-1.5'/>
+                    <CarouselNext className='hidden sm:block w-max p-1.5' />
                   </Carousel>
 
                 {/* {weather.hourly.map((h, i) => (

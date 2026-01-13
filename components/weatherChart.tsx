@@ -46,16 +46,24 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
     snow: h.isSnowing ? parseFloat(h.snowAmount) : 0,
   }));
 
+  // This function forces the text to use the CSS classes for light/dark mode
+  const renderColorfulLegendText = (value: string) => {
+    return (
+      <span className="text-black dark:text-white font-semibold text-[12px] ml-1">
+        {value}
+      </span>
+    );
+  };
+
   return (
     <div 
-      className="w-full h-[300px] md:h-[400px] mt-8 bg-blue-100/30 dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c] rounded-[30px] p-2 md:p-6 backdrop-blur-sm overflow-hidden outline-none select-none"
+      className="w-full h-[300px] md:h-[400px] mt-8 bg-blue-200/90 dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c] rounded-[30px] p-2 md:p-6 backdrop-blur-sm overflow-hidden outline-none select-none"
       style={{ WebkitTapHighlightColor: 'transparent' }}
     >
       <ResponsiveContainer width="100%" height="100%">
         <ComposedChart 
           data={chartData} 
-          margin={{ top: 20, right: 10, bottom: 40, left: -20 }}
-          /* 1. Removes the outline from the internal SVG */
+          margin={{ top: 2, right: 10, bottom: 20, left: -10 }}
           style={{ outline: 'none' }} 
         >
           <defs>
@@ -65,16 +73,23 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
             </linearGradient>
           </defs>
           
-          <CartesianGrid strokeDasharray="3 3" vertical={false} stroke="#888888" opacity={0.1} />
-          
+          <CartesianGrid 
+            strokeDasharray="3 3" 
+            vertical={false} 
+            stroke="currentColor" 
+            opacity={0.15} 
+          />
 
-{/* LEGEND: This adds the clear labels at the top */}
           <Legend 
             verticalAlign="top" 
             align="right" 
             height={36}
             iconType="circle"
-            wrapperStyle={{ fontSize: '12px', paddingBottom: '15px', textTransform: 'uppercase', fontWeight: 'semibold' }}
+            formatter={renderColorfulLegendText} // This is the key fix
+            wrapperStyle={{ 
+              paddingBottom: '15px', 
+              outline: 'none'
+            }}
           />
 
           <XAxis 
@@ -85,11 +100,10 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
             tickLine={false}
           />
           
-          <YAxis yAxisId="left" stroke="currentColor" fontSize={12} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}°C`} />
+          <YAxis yAxisId="left" stroke="currentColor" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v}° C`} />
           <YAxis yAxisId="right" stroke="currentColor" orientation="right" fontSize={10} tickLine={false} axisLine={false} tickFormatter={(v) => `${v} cm`} />
 
           <Tooltip 
-            /* 2. Disables the focusable vertical line (cursor) */
             cursor={false}
             contentStyle={{ 
               backgroundColor: 'rgba(23, 23, 23, 0.9)', 
@@ -104,26 +118,25 @@ const WeatherChart: React.FC<WeatherChartProps> = ({ data }) => {
           <Area
             yAxisId="left"
             type="monotone"
-            name='Temperature'
+            name='Temperature (°C)'
             dataKey="temp"
             stroke="#3b82f6"
             strokeWidth={3}
             fillOpacity={1}
             fill="url(#colorTemp)"
             animationDuration={1500}
-            /* 3. Disables the border/highlight on the dot when tapped */
             activeDot={{ r: 4, strokeWidth: 0 }}
           />
 
           <Bar 
             yAxisId="right" 
             dataKey="snow" 
-            name="Snowfall"
-            fill="#60a5fa" 
+            name="Snowfall (cm)"
+            fill='#ffffff'
+            minPointSize={3}
             radius={[4, 4, 0, 0]} 
             barSize={12}
-            /* 4. Prevents the bar from showing a border/different color on tap */
-            activeBar={{ stroke: 'none', fill: '#60a5fa' }}
+            activeBar={{ stroke: 'none', fill: 'white', opacity: 0.8 }}
           />
         </ComposedChart>
       </ResponsiveContainer>
