@@ -6,7 +6,7 @@ const Info = () => {
   return (
     <>
         <div className="px-4 ">
-          <Heading title={{ name: "Befinits of snow day prediction" }} />
+          <Heading title={{ name: "Benefits of snow day prediction" }} />
         </div>
         <Feature/>
     </>

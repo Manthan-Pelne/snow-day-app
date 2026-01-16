@@ -3,7 +3,7 @@
 import dynamic from 'next/dynamic';
 import React, { FormEvent, useEffect, useState } from "react";
 import Image from "next/image";
-import { Thermometer, Snowflake, Wind, Sun, Cross, ArrowBigLeft } from "lucide-react";
+import { Thermometer, Snowflake, Wind, Sun, Cross, ArrowBigLeft, CloudSun, CloudSnow } from "lucide-react";
 import {MeteorsDemo} from "./hero-card"
 import Search from "./inputSection"
 import GridPattern from "./GridPattern"
@@ -12,6 +12,7 @@ const Snowfall = dynamic(() => import('./snowfall'));
 import { BorderBeam } from "@/components/lightswind/border-beam"; 
 import { getWeatherData, searchLocations, SnowDayResult } from '@/app/actions/weather';
 const WeatherChart = dynamic(() => import('../components/weatherChart'), { ssr: false });
+import GaugeChart from "react-gauge-chart"
 
 import Autoplay from "embla-carousel-autoplay"
 
@@ -26,12 +27,6 @@ import {
 import { Button } from './ui/button';
 
 
-
-const getGaugeColor = (chance: number): string => {
-  if (chance > 70) return "text-red-500 stroke-red-400";
-  if (chance > 40) return "text-orange-500 stroke-orange-400";
-  return "text-blue-500 stroke-blue-400";
-};
 
 const getStatusMessage = (chance: number): string => {
   if (chance >= 80) return "🚨 100% Certified Pajama Day!";
@@ -120,10 +115,10 @@ const handleBackClick = () => {
               {/* LEFT SECTION - Stacked on mobile, 2 columns on Desktop */}
               <div className="order-1 col-span-2 lg:col-span-2 space-y-6 text-center md:text-left">
                 <div className="space-y-2">
-                  <h1 className="text-4xl sm:text-6xl xl:text-8xl font-medium tracking-tighter">
+                  <h1 className="text-4xl sm:text-6xl xl:text-8xl  tracking-tighter">
                     Snow Day
                   </h1>
-                  <h2 className="text-3xl md:text-5xl xl:text-7xl tracking-tight text-blue-400">
+                  <h2 className="text-3xl md:text-5xl xl:text-6xl tracking-tight text-blue-400">
                     School <br/> Closure Predictor
                   </h2>
                 </div>
@@ -153,7 +148,7 @@ const handleBackClick = () => {
                 <div className="flex flex-col md:mt-5 justify-center items-center lg:items-end text-center lg:text-right">
                   {/* MAIN SCORE */}
                   <div className='flex md:flex-col items-center'>
-                    <h3 className="text-4xl md:text-6xl xl:text-9xl leading-[0.8] tracking-tighter relative inline-block">
+                    <h3 className="text-4xl md:text-6xl xl:text-8xl leading-[0.8] tracking-tighter relative inline-block">
                       98%
                       <span className="hidden lg:block absolute top-1/4 -right-12 text-4xl"></span>
                     </h3>
@@ -225,48 +220,44 @@ const handleBackClick = () => {
     </div>
 
         {/* Results */}
+       
         {weather && (
           <div className="space-y-12 mt-10 p-4 text-foreground animate-in fade-in slide-in-from-bottom-4 duration-700">
           
             {/* Gauge */}
-            <div className=" bg-blue-100/30 relative dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 rounded-[30px] ">
-              
-                <Button onClick={handleBackClick} className='flex items-center bg-blue-400 dark:bg-[#29292a] text-white cursor-pointer hover:bg-blue-500 transition-all duration-200 active:scale-90 active:shadow-none dark:hover:bg-black shadow-xl tracking-wider mb-3 md:mb-0'>BACK<ArrowBigLeft className='rotate-45 dark:text-blue-500 mt-0.5'/> </Button>
+            <div className=" bg-blue-100/30 relative dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 lg:p-16 rounded-[30px] ">
+            
+                <Button onClick={handleBackClick} className='flex absolute left-3 top-3 sm:left-6 sm:top-6 items-center bg-blue-400 dark:bg-[#29292a] text-white cursor-pointer hover:bg-blue-500 transition-all duration-200 active:scale-90 active:shadow-none dark:hover:bg-black shadow-xl tracking-wider mb-3 md:mb-0'>BACK<ArrowBigLeft className='rotate-45 dark:text-blue-500 mt-0.5'/> </Button>
 
-               <h1 className="text-xl md:text-3xl text-black/80 dark:text-white font-light text-center mb-5">
-              Weather in <span className="font-bold italic underline underline-offset-7">{locationName}</span>
-            </h1>
-             <div className="flex flex-col md:flex-row items-center justify-center gap-5 md:gap-10">
-              <div className="relative w-40 h-40 md:h-48 md:w-48">
-                <svg className="w-full h-full" viewBox="0 0 100 100">
-                  <circle className="text-blue-100 dark:text-[#363638] stroke-current" strokeWidth="10" fill="transparent" r="40" cx="50" cy="50" />
-                  <circle
-                    className={`${getGaugeColor(weather.daily[0].snowDayChance)} transition-all duration-1000 ease-out`}
-                    strokeWidth="10"
-                    strokeDasharray={251.2}
-                    strokeDashoffset={251.2 - (251.2 * weather.daily[0].snowDayChance) / 100}
-                    strokeLinecap="round"
-                    fill="transparent"
-                    r="40"
-                    cx="50"
-                    cy="50"
-                    style={{ transform: "rotate(-90deg)", transformOrigin: "50% 50%" }}
-                  />
-                </svg>
-                <div className="absolute inset-0 flex flex-col items-center justify-center">
-                  <span className="text-4xl mb-1 font-semibold">{weather.daily[0].snowDayChance} %</span>
-                  <span className="text-[10px] uppercase font-bold opacity-50">Chance</span>
-                </div>
-              </div>
-
-              <div className="text-center md:text-left">
-                <p className="font-bold text-lg text-[#50A2FF] italic dark:text-white mb-2">
-                  {getStatusMessage(weather.daily[0].snowDayChance)}
-                </p>
-                <h2 className="text-3xl md:tex-4xl font-bold text-[#4190e9]">
-                  {weather.daily[0].snowDayChance > 50 ? "Grab the pajamas!" : "Keep the backpack ready."}
-                </h2>
-              </div>
+             <div className="flex flex-col lg:flex-row items-center justify-center gap-5 md:gap-10">
+      
+             {/* --- NEW GAUGE CHART --- */}
+                  <div className="w-64 md:w-72">
+                    <GaugeChart
+                      id="snow-chance-gauge"
+                      nrOfLevels={20} // Higher number makes the gradient smoother
+                      colors={[ "#93c5fd","#60a5fa", "#3b82f6"]} // Using Blue shades for snow aesthetic
+                      arcWidth={0.2}
+                      percent={weather.daily[0].snowDayChance / 100}
+                      textColor={'currentColor'} // Inherits from dark/light mode
+                      needleColor="#4190e9"
+                      needleBaseColor="#4190e9"
+                      animate={true}
+                      formatTextValue={(value : any) => value + '%'}
+                    />
+                  </div>
+        
+                  <div className="text-center lg:text-left">
+                    <h1 className="text-xl  md:text-3xl text-black/80 dark:text-white font-light text-center mb-5 md:mb-8">
+                  Weather in <span className="font-bold italic underline underline-offset-7">{locationName}</span>
+                </h1>
+                    <p className="font-bold text-lg text-[#50A2FF] italic dark:text-white mb-2">
+                      {getStatusMessage(weather.daily[0].snowDayChance)}
+                    </p>
+                    <h2 className="text-xl sm:text-3xl md:tex-4xl font-bold text-[#4190e9]">
+                      {weather.daily[0].snowDayChance > 50 ? "Grab the pajamas!" : "Keep the backpack ready."}
+                    </h2>
+                  </div>
               </div>
             </div>
 
@@ -282,7 +273,7 @@ const handleBackClick = () => {
             {/* Hourly */}
             <section>
               <h3 className="text-sm border border-black dark:border-white dark:text-white w-max rounded-lg text-black p-2 font-bold uppercase tracking-widest mb-4 ml-2">
-                Hourly (Next 24h)
+                Today's Weather
               </h3>
               <div className="flex gap-3 pb-6 ">
 
@@ -332,7 +323,7 @@ const handleBackClick = () => {
                                   </h2>
                                 ) : (
                                   <h2 className="text-2xl sm:text-3xl font-semibold tracking-tighter dark:text-white leading-none">
-                                    {h.temp}°<span className="text-base sm:text-xl ml-0.5"> C</span>
+                                    {h.temp}°<span className="text-base sm:text-xl ml-0.5">C</span>
                                   </h2>
                                 )}
                                 
@@ -341,12 +332,8 @@ const handleBackClick = () => {
                                  {h.isSnowing ? "Feels like a snowy day" : "Feels like a sunny day"}
                             
                                 </p>
-                              </div>
-
-                            
+                              </div>                           
                             </div>
-
-
                           </CardContent>
                             </Card>
                           </div>
@@ -357,26 +344,8 @@ const handleBackClick = () => {
                     <CarouselNext className='hidden sm:block w-max p-1.5' />
                   </Carousel>
 
-                {/* {weather.hourly.map((h, i) => (
-                  <div key={i} className="min-w-25 shadow-md bg-[blue]/5 border border-white/20 dark:border-[blue] rounded-xl p-4 text-center  flex flex-col items-center gap-2">
-                    <p className="text-xs text-black dark:text-white font-semibold opacity-70">{h.time}</p>
-                    <div className="flex flex-col items-center">
-                      {h.isSnowing ? <Snowflake className="text-blue-400 my-1" /> : <Sun className="my-1 text-orange-400" />}
-                      {h.isSnowing ? (
-                        <span className="text-sm text-blue-500 font-bold mt-2">{h.snowAmount} cm</span>
-                      ) : (
-                        <p className="text-xl font-semibold text-black dark:text-white">{h.temp}°</p>
-                      )}
-                    </div>
-                  </div>
-                ))} */}
               </div>
             </section>
-
-        
-                 
-          
-
 
 
             {/* 7-Day Forecast */}
@@ -391,6 +360,7 @@ const handleBackClick = () => {
                       <p className="text-[10px] font-black text-black dark:text-white opacity-60 uppercase mb-1">
                         {new Date(d.date).toLocaleDateString("en-US", { weekday: "short" })}
                       </p>
+                      <p className='text-[gray] mb-2 text-sm'>Snow chances</p>
                       <p className="text-xl flex items-center justify-center gap-2 text-black dark:text-white font-semibold">
                         {d.snowDayChance}% <Snowflake className="text-blue-400 text-sm" />
                       </p>

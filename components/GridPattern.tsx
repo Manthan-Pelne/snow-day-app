@@ -48,8 +48,8 @@ export default function GridPattern({
 
            {/* LOADING INDICATOR (Optional) */}
           {isTyping && (
-            <div className="absolute top-[131%] max-w-xl m-auto left-1/2 right-0">
-               <div className="w-4 h-4 border-2 border-blue-500 border-t-transparent rounded-full animate-spin"></div>
+            <div className="absolute top-[121%] max-w-xl m-auto left-1/2 right-0">
+               <div className="w-4 h-4 border-2 border-gray-500 border-t-transparent rounded-full animate-spin"></div>
             </div>
           )}
 
