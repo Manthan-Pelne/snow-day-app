@@ -1,6 +1,17 @@
 import React from 'react'
 import { Typography } from "@/components/typography";
 
+export const metadata = {
+  title: "Terms and Conditions",
+  description:
+    "Review the terms of service and rules for using the Snow Day Predictor website and our weather analysis tools.",
+  // Robots tag ensures Google doesn't prioritize legal pages over your main tool
+  robots: {
+    index: true,
+    follow: true,
+  },
+};
+
 const page = () => {
   return (
     <>

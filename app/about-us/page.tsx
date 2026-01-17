@@ -1,4 +1,4 @@
-"use client";
+
 
 import dynamic from 'next/dynamic';
 import React from "react";
@@ -10,6 +10,12 @@ import {SearchBox} from "@/components/searchbox"
 const Snowfall = dynamic(() => import('@/components/snowfall'));
 import { BorderBeam } from "@/components/lightswind/border-beam"; 
 import { SparkleParticles } from '@/components/lightswind/sparkle-particles';
+
+export const metadata = {
+  title: "About Us - Snow Day Prediction",
+  description:
+    "Learn about the technology and data behind our snow day prediction algorithm. We use live weather data to provide accurate school closure estimates.",
+};
 
 
 const page = () => {

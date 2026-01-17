@@ -1,7 +1,7 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import React, { Suspense, useEffect, useState } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
 import { getWeatherData, SnowDayResult } from "@/app/actions/weather";
 import { Button } from "@/components/ui/button";
 import { ArrowBigLeft, Snowflake, Sun, CloudSnow, XCircle } from "lucide-react";
@@ -12,10 +12,16 @@ import { Card, CardContent } from "@/components/ui/card";
 import Autoplay from "embla-carousel-autoplay";
 // ... Import your other components (Carousel, Card, etc.)
 
-export default function PredictionPage() {
-  const params = useParams();
-  const router = useRouter();
-  const city = decodeURIComponent(params.city as string);
+
+
+
+function PredictionContent() {
+  const searchParams = useSearchParams();
+  const router = useRouter()
+const lat = searchParams.get("lat");
+const lon = searchParams.get("lon");
+const city = searchParams.get("city");
+
   
   const [weather, setWeather] = useState<SnowDayResult["weather"] | null>(null);
 const [locationName, setLocationName] = useState("");
@@ -35,27 +41,33 @@ const [locationName, setLocationName] = useState("");
         return "☀️ Clear skies. See you in class!";
       };
       
+      
 
-  useEffect(() => {
-    async function fetchWeather() {
-   try {
-        setLoading(true);
-        setError(false);
-        const result = await getWeatherData(city);
-        if (result.success && result.weather) {
-          setWeather(result.weather);
-          setLocationName(result.locationName || "");
-        } else {
-          setError(true);
-        }
-      } catch (e) {
+useEffect(() => {
+  async function fetchWeather() {
+    try {
+      setLoading(true);
+      
+      // Clean the city name just in case we are searching by name
+      const cleanCityName = city ? decodeURIComponent(city).replace(/-/g, ' ') : "";
+
+      // Update your getWeatherData call to accept lat/lon
+      const result = await getWeatherData(cleanCityName, lat || undefined, lon || undefined);
+
+      if (result.success) {
+        setWeather(result.weather);
+        setLocationName(result.locationName);
+      } else {
         setError(true);
-      } finally {
-        setLoading(false);
       }
+    } catch (e) {
+      setError(true);
+    } finally {
+      setLoading(false);
     }
-    fetchWeather();
-  }, [city]);
+  }
+  fetchWeather();
+}, [city, lat, lon]);
   
 
 if (loading) {
@@ -90,6 +102,8 @@ if (loading) {
 
   return (
     <section className="max-w-screen-2xl relative mx-auto pt-32 px-4">
+
+
     <div className="container max-w-7xl mx-auto  space-y-12 animate-in fade-in duration-700">
       {/* --- GAUGE SECTION --- */}
       <div className="bg-blue-100/30 relative dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c] shadow-sm backdrop-blur-2xl p-8 lg:p-16 rounded-[30px] overflow-hidden">
@@ -99,7 +113,7 @@ if (loading) {
           onClick={() => router.push('/')} 
           className='flex absolute left-3 top-3 sm:left-6 sm:top-6 items-center bg-blue-400 hover:bg-blue-500 cursor-pointer transition-all duration-200 dark:bg-black/10 dark:hover:bg-black/20 border dark:border-white/10  text-white'
         >
-          <ArrowBigLeft className='rotate-45 mr-2'/> BACK
+          <ArrowBigLeft className='rotate-45'/>BACK
         </Button>
 
         <div className="flex flex-col lg:flex-row items-center justify-center gap-10">
@@ -258,6 +272,16 @@ if (loading) {
                   </section>
 
     </div>
+
+
     </section>
+  );
+}
+
+export default function PredictionPage() {
+  return (
+    <Suspense fallback={<div className="p-20 text-center">Loading Prediction...</div>}>
+      <PredictionContent />
+    </Suspense>
   );
 }

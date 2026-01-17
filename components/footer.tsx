@@ -34,9 +34,6 @@ export default function Footer() {
               </Link>
             </li>
             <li>
-              <Link href="/how-it-works" className="transition-all hover:text-blue-500 hover:font-bold duration-100">
-                How It Works
-              </Link>
             </li>
             <li>
               <Link href="/about-us" className="transition-all hover:text-blue-500 hover:font-bold duration-100">

@@ -27,6 +27,9 @@ export default function GridPattern({
     "Enter City... Wardha",
   ];
 
+
+
+
   return (
     <div className="p-5 md:p-10 group/file block rounded-lg w-full relative">
       {/* Background Pattern */}
@@ -60,7 +63,7 @@ export default function GridPattern({
                 <button
                   key={i}
                   type="button"
-                  onClick={() => onSuggestionClick(loc.name)}
+                  onClick={() => onSuggestionClick(loc)}
                   className="w-full cursor-pointer flex items-center gap-3 p-4 text-left hover:bg-blue-50 dark:hover:bg-blue-900/20 transition-colors border-b border-neutral-100 dark:border-neutral-800 last:border-0"
                 >
                   <MapPin className="w-4 h-4 text-blue-500" />

@@ -1,6 +1,16 @@
 import React from 'react'
 import { Typography } from "@/components/typography";
 
+export const metadata = {
+  title: "Privacy Policy",
+  description:
+    "Read our Privacy Policy to understand how Snow Day Predictor collects, uses, and protects your personal data and location information.",
+  openGraph: {
+    title: "Privacy Policy | Snow Day Predictor",
+    description: "Your data privacy is important to us.",
+  },
+};
+
 const page = () => {
   return (
     <>

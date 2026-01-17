@@ -43,18 +43,30 @@ const Hero: React.FC = () => {
     return () => clearTimeout(delayDebounceFn);
   }, [query]);
 
-  // --- HANDLERS ---
-  const handleSearch = async (e: FormEvent | null, manualCity: string | null = null) => {
-    if (e) e.preventDefault();
-    const targetCity = manualCity || query;
-    if (!targetCity) return;
 
-   startTransition(() => {
-    const formattedCity = targetCity.toLowerCase().trim().replace(/\s+/g, '-');
-    router.push(`/predict/${encodeURIComponent(formattedCity)}`);
+
+  // --- HANDLERS ---
+const handleSearch = async (
+  e: FormEvent | null, 
+  manualCity: string | null = null,
+  lat?: number,
+  lon?: number
+) => {
+  if (e) e.preventDefault();
+  const targetCity = manualCity || query; 
+  if (!targetCity) return;
+
+  startTransition(() => {
+    // If we have coordinates, use them!
+    if (lat && lon) {
+      router.push(`/predict?lat=${lat}&lon=${lon}&city=${encodeURIComponent(targetCity)}`);
+    } else {
+      // Fallback for when user just presses "Enter" without clicking a suggestion
+      const cleanCity = targetCity.replace(/,/g, '').replace(/\s+/g, '-');
+      router.push(`/predict?city=${encodeURIComponent(cleanCity)}`);
+    }
   });
-    
-  };
+};
 
  
 
@@ -167,20 +179,23 @@ const Hero: React.FC = () => {
 
           {!weather ? 
           <div className="relative w-[90%] md:max-w-4xl mx-auto border bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16 animate-in fade-in duration-500">
-                 <BorderBeam />
-                 <GridPattern 
+              <BorderBeam />
+              <GridPattern 
                 value={query}
                 onChange={(e:any) => setQuery(e.target.value)}
                 onSubmit={(e:any) => handleSearch(e)}
                 suggestions={suggestions}
                 isTyping={isTyping}
-                onSuggestionClick={(cityName:any) => {
-                setLockSuggestions(true);
-                setQuery(cityName);
-                setSuggestions([]);
-                handleSearch(null, cityName);
-                  }}
-             />
+                onSuggestionClick={(loc: any) => { // Change cityName to loc object
+                 setLockSuggestions(true);
+              const specificName = `${loc.name}, ${loc.country}`; 
+              setQuery(specificName);
+              setSuggestions([]);
+              
+              // Pass the coordinates directly here!
+              handleSearch(null, specificName, loc.latitude, loc.longitude);
+                }}
+              />
           </div> : null
         }           
   

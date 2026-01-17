@@ -1,6 +1,12 @@
 import React from 'react'
 import { Typography } from "@/components/typography";
 
+export const metadata = {
+  title: "Cookie Policy",
+  description:
+    "Learn how we use cookies and similar technologies to improve your experience on Snow Day Predictor.",
+};
+
 const page = () => {
   return (
     <> 

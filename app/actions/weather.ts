@@ -59,21 +59,42 @@ export async function searchLocations(query: string): Promise<GeoResult[]> {
   }
 }
 
-export async function getWeatherData(query: string): Promise<SnowDayResult> {
-  if (!query || query.length < 3) return { success: false, error: "Query is required" };
-  const cleanQuery = query.trim().toLowerCase();
+export async function getWeatherData(
+  query: string, 
+  lat?: string | null, 
+  lon?: string | null
+): Promise<SnowDayResult> {
+  
+  if (!query && (!lat || !lon)) return { success: false, error: "Query or coordinates required" };
 
   try {
-    const geoRes = await fetch(
-      `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleanQuery)}&count=1&language=en&format=json`,
-      { next: { revalidate: 604800 } }
-    );
-    const geoData = await geoRes.json();
-    
-    if (!geoData.results?.[0]) throw new Error("Location not found");
+    let latitude: number;
+    let longitude: number;
+    let name: string;
+    let admin1: string | undefined;
 
-    const { latitude, longitude, name, admin1 }: GeoResult = geoData.results[0];
-    //console.log(latitude,longitude)
+    // --- NEW LOGIC: If we have lat/lon, use them directly ---
+    if (lat && lon) {
+      latitude = parseFloat(lat);
+      longitude = parseFloat(lon);
+      // We decode the query for the display name
+      name = decodeURIComponent(query).replace(/-/g, ' '); 
+    } else {
+      // FALLBACK: If no lat/lon, perform the geocoding search
+      const cleanQuery = query.trim().toLowerCase().replace(/-/g, ' ');
+      const geoRes = await fetch(
+        `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cleanQuery)}&count=1&language=en&format=json`,
+        { next: { revalidate: 604800 } }
+      );
+      const geoData = await geoRes.json();
+      
+      if (!geoData.results?.[0]) throw new Error("Location not found");
+
+      latitude = geoData.results[0].latitude;
+      longitude = geoData.results[0].longitude;
+      name = geoData.results[0].name;
+      admin1 = geoData.results[0].admin1;
+    }
 
     const res = await fetch(
       `https://api.open-meteo.com/v1/forecast?latitude=${latitude}&longitude=${longitude}&hourly=temperature_2m,precipitation,snowfall,wind_speed_10m&timezone=auto`,
@@ -137,7 +158,7 @@ export async function getWeatherData(query: string): Promise<SnowDayResult> {
 
   return {
     success: true,
-    locationName: `${name}, ${admin1 || ""}`,
+   locationName: admin1 ? `${name}, ${admin1}` : name,
     weather: { hourly, daily }
   };
   } catch (error: any) {
