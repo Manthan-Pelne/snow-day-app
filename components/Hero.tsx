@@ -1,7 +1,7 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { Thermometer, Snowflake, Wind, Sun, Cross, ArrowBigLeft, CloudSun, CloudSnow } from "lucide-react";
 import {MeteorsDemo} from "./hero-card"
@@ -39,7 +39,9 @@ const getStatusMessage = (chance: number): string => {
 
 const Hero: React.FC = () => {
 
+
     // --- STATE ---
+
   const [query, setQuery] = useState<string>("");
   const [weather, setWeather] = useState<SnowDayResult["weather"] | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
@@ -48,6 +50,7 @@ const Hero: React.FC = () => {
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [lockSuggestions, setLockSuggestions] = useState<boolean>(false);
 
+  const resultsRef = useRef<HTMLDivElement>(null); // Create the ref
 
       const plugin = React.useRef(
       Autoplay({ delay: 2000, stopOnInteraction: true })
@@ -101,6 +104,19 @@ const handleBackClick = () => {
   setQuery("");      // Optional: Clears the search bar for a fresh start
   setSuggestions([]); // Clears any leftover suggestions
 };
+
+
+//for smooth scroll to result
+useEffect(() => {
+  if (weather && resultsRef.current) {
+    const yOffset =  -90; // Adjust this to leave space at the top
+    const element = resultsRef.current;
+    const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: 'smooth' });
+  }
+}, [weather]);
+
 
   return (
     <>
@@ -222,7 +238,7 @@ const handleBackClick = () => {
         {/* Results */}
        
         {weather && (
-          <div className="space-y-12 mt-10 p-4 text-foreground animate-in fade-in slide-in-from-bottom-4 duration-700">
+          <div ref={resultsRef} className="space-y-12 mt-10 p-4 text-foreground animate-in fade-in slide-in-from-bottom-4 duration-700">
           
             {/* Gauge */}
             <div className=" bg-blue-100/30 relative dark:bg-blue-100/5 border border-white/20 dark:border-[#453c3c]  shadow-sm backdrop-blur-2xl p-8 lg:p-16 rounded-[30px] ">
