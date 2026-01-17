@@ -35,7 +35,7 @@ export default function GridPattern({
       </div>
 
       <div className="flex flex-col items-center justify-center relative z-20">
-        <h2 className="font-sans font-bold text-neutral-700 dark:text-neutral-300 text-xl md:text-3xl mb-5">
+        <h2 className="font-sans font-bold text-neutral-800 dark:text-white text-xl md:text-3xl mb-5">
           Search Zip or City
         </h2>
         

@@ -102,7 +102,7 @@ const benefits = [
                   static md:absolute md:bottom-[-55px] md:left-[-12%] lg:left-[-32%] 
                   mt-0 md:mt-0 z-10"
               >
-                <p className="font-bold text-white text-base leading-[22px] md:leading-[26px] mb-2.5">
+                <p className="font-semibold text-white text-base leading-[22px] md:leading-[26px] mb-2.5">
                   Our algorithm analyzes real-time meteorological data to provide the most
                   accurate school closing predictions available.
                 </p>
@@ -117,7 +117,7 @@ const benefits = [
             {/* Content Section */}
             <div className="w-full md:w-[40%] flex flex-col items-start justify-start md:mr-10 py-0 pr-[15px] pl-0 ">
               <h2 className=" dark:text-white underline underline-offset-8 text-3xl font-bold leading-[30px] mb-6 p-0">
-                About Calculator
+                About Predictor
               </h2>
               <p className="text-[#6e6969] dark:text-[#9c9999] italic text-xl font-bold leading-7 md:leading-8 mb-2 p-0">
                 Predicting the unpredictable with southern-state precision.
@@ -143,7 +143,7 @@ const benefits = [
       <section id="features" className="max-w-7xl py-10  mx-auto mt-6 md:mt-30 bg-[#f3fdff] dark:bg-white/5 border md:rounded-2xl font-sans">
         <div className="max-w-6xl mx-auto px-5">
           <div className="text-center mb-10 md:mb-20">
-            <h1 className="text-3xl md:text-5xl text-center mb-2 font-extrabold dark:text-white">
+            <h1 className="text-3xl md:text-5xl text-center mb-2 font-bold dark:text-white">
               Calculator Features
             </h1>
             <p className="md:w-2/3 m-auto text-center font-semibold text-[#8c8989]">
