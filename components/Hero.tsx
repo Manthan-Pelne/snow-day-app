@@ -1,32 +1,15 @@
 "use client";
 
 import dynamic from 'next/dynamic';
-import React, { FormEvent, useEffect, useState } from "react";
+import React, { FormEvent, useEffect, useState, useTransition } from "react";
 import Image from "next/image";
-import { Thermometer, Snowflake, Wind, Sun, Cross, ArrowBigLeft, CloudSun, CloudSnow } from "lucide-react";
-import {MeteorsDemo} from "./hero-card"
-import Search from "./inputSection"
+import { Thermometer, Snowflake, Wind, Loader2, Loader2Icon} from "lucide-react";
 import GridPattern from "./GridPattern"
-// import {PlaceholdersAndVanishInputDemo} from "./searchbox"
 const Snowfall = dynamic(() => import('./snowfall'));
 import { BorderBeam } from "@/components/lightswind/border-beam"; 
-import { getWeatherData, searchLocations, SnowDayResult } from '@/app/actions/weather';
-const WeatherChart = dynamic(() => import('../components/weatherChart'), { ssr: false });
-import GaugeChart from "react-gauge-chart"
+import {  searchLocations, SnowDayResult } from '@/app/actions/weather';
 
-import Autoplay from "embla-carousel-autoplay"
-
-import { Card, CardContent } from "@/components/ui/card"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "@/components/ui/carousel"
-import { Button } from './ui/button';
 import { useRouter } from 'next/navigation';
-
 
 
 const Hero: React.FC = () => {
@@ -37,7 +20,7 @@ const Hero: React.FC = () => {
   const [suggestions, setSuggestions] = useState<any[]>([]); // You can replace any with GeoResult interface
   const [isTyping, setIsTyping] = useState<boolean>(false);
   const [lockSuggestions, setLockSuggestions] = useState<boolean>(false);
-
+  const [isPending, startTransition] = useTransition();
 
     const router = useRouter()
 
@@ -66,12 +49,10 @@ const Hero: React.FC = () => {
     const targetCity = manualCity || query;
     if (!targetCity) return;
 
-    const formattedCity = targetCity
-    .toLowerCase()
-    .trim()
-    .replace(/\s+/g, '-');
-
+   startTransition(() => {
+    const formattedCity = targetCity.toLowerCase().trim().replace(/\s+/g, '-');
     router.push(`/predict/${encodeURIComponent(formattedCity)}`);
+  });
     
   };
 
@@ -79,7 +60,19 @@ const Hero: React.FC = () => {
 
   return (
     <>
+      
         <div className="absolute top-0 left-0"><Snowfall/></div>
+
+        {/* 4. The Loader Overlay */}
+      {isPending && (
+        <div className="fixed inset-0 z-[100] flex flex-col items-center justify-center bg-black/10 backdrop-blur-[2px] pointer-events-none">
+           <div className="flex flex-col items-center animate-in fade-in zoom-in duration-300">
+              <Snowflake className="w-10 h-10 text-blue-500 animate-spin mb-4" />
+           </div>
+        </div>
+      )}
+         
+       <div className={`transition-all duration-700 ease-in-out ${isPending ? "opacity-30 grayscale-[50%] pointer-events-none scale-[0.98]" : "opacity-100"}`}>
         <div className=" w-full relative text-foreground ">
       
           <div className="relative z-10  mt-10 md:mt-8  md:px-10  flex flex-col justify-between">
@@ -170,6 +163,7 @@ const Hero: React.FC = () => {
               </div>
             
             </main>
+            
 
           {!weather ? 
           <div className="relative w-[90%] md:max-w-4xl mx-auto border bg-white dark:bg-neutral-700 border-neutral-200 dark:border-neutral-800 rounded-lg mt-16 animate-in fade-in duration-500">
@@ -189,10 +183,10 @@ const Hero: React.FC = () => {
              />
           </div> : null
         }           
-          
-
+  
        </div>
-    </div>
+        </div>
+      </div>
 
     </>
   );

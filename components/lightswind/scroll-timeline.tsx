@@ -229,7 +229,7 @@ export const ScrollTimeline = ({
       )}
     >
       <div className="text-center py-16 px-4">
-                <h2 className="text-3xl md:text-5xl pb-2 font-extrabold">
+                <h2 className="text-3xl md:text-5xl pb-2 font-bold">
             {title}
           </h2>
           <p className=" text-[gray] md:text-lg mt-2">{subtitle}</p>
